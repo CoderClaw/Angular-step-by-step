@@ -1,167 +1,167 @@
-# Lesson 18 Guide: Capstone Customer Success Hub
+# Guia de la Leccion 18: Capstone Customer Success Hub
 
-This lesson is the capstone of the series.
+Esta leccion es el capstone de la serie.
 
-Its purpose is not to introduce only one new Angular feature. Instead, it shows how several important ideas from earlier lessons work together inside one coherent application.
+Su proposito no es introducir solo una funcionalidad nueva de Angular. En su lugar, muestra como varias ideas importantes de lecciones anteriores trabajan juntas dentro de una sola aplicacion coherente.
 
-## Why a Capstone Matters
+## Por que importa un capstone
 
-Learning topics one by one is useful, but real applications combine them.
+Aprender temas uno por uno es util, pero las aplicaciones reales los combinan.
 
-That means the final skill is not just knowing each concept in isolation. It is knowing how they fit together.
+Eso significa que la habilidad final no consiste solo en conocer cada concepto de forma aislada. Consiste en saber como encajan entre si.
 
-This capstone combines:
+Este capstone combina:
 
 - routing
-- layout and feature structure
-- HTTP infrastructure
-- an interceptor
-- a signals-based shared store
-- reactive forms
-- persisted user preferences
+- layout y estructura por features
+- infraestructura HTTP
+- un interceptor
+- un store compartido basado en signals
+- formularios reactivos
+- preferencias persistidas del usuario
 
-That combination is much closer to real Angular work.
+Esa combinacion se parece mucho mas al trabajo real con Angular.
 
-## What the App Is Modeling
+## Que modela la app
 
-The customer success hub is a small operational workspace.
+El customer success hub es un pequeno workspace operativo.
 
-It includes:
+Incluye:
 
-- a dashboard
-- a queue view
-- a preferences area
-- shared summary information
-- mock API-loaded data
+- un dashboard
+- una vista de cola
+- un area de preferencias
+- informacion de resumen compartida
+- datos cargados desde una API simulada
 
-This makes it a good capstone because it mixes several frontend concerns without becoming too large to study.
+Esto lo convierte en un buen capstone porque mezcla varias preocupaciones frontend sin hacerse demasiado grande para estudiarlo.
 
-## How the Pieces Fit Together
+## Como encajan las piezas
 
-### Routing and Layout
+### Routing y layout
 
-Routing defines the major feature areas, and the shell gives them a consistent frame.
+El routing define las principales areas por feature, y el shell les da un marco consistente.
 
-This continues the architecture ideas from Lessons 5 and 16.
+Esto continua las ideas de arquitectura de las Lecciones 5 y 16.
 
-The app is not one long page. It is a workspace composed of navigable features.
+La app no es una sola pagina larga. Es un workspace compuesto por features navegables.
 
-### API Service and Interceptor
+### Servicio de API e interceptor
 
-The API service expresses what data the app wants.
+El servicio de API expresa que datos quiere la app.
 
-The interceptor handles shared HTTP concerns such as URL rewriting and headers.
+El interceptor maneja preocupaciones HTTP compartidas como reescritura de URLs y cabeceras.
 
-This continues the infrastructure ideas from Lessons 6 and 14.
+Esto continua las ideas de infraestructura de las Lecciones 6 y 14.
 
-### Signals Store
+### Store con signals
 
-The store acts as the shared state owner.
+El store actua como propietario del estado compartido.
 
-It tracks:
+Hace seguimiento de:
 
-- raw snapshot data
-- loading and error state
-- filters
-- preferences
-- computed results such as filtered work items and urgent counts
+- datos crudos del snapshot
+- estado de carga y de error
+- filtros
+- preferencias
+- resultados computados como elementos de trabajo filtrados y conteos urgentes
 
-This continues the state ideas from Lessons 8 and 9.
+Esto continua las ideas de estado de las Lecciones 8 y 9.
 
-### Reactive Forms
+### Formularios reactivos
 
-The queue page uses a reactive form to drive shared filter state.
+La pagina de cola usa un formulario reactivo para impulsar el estado compartido de filtros.
 
-This continues the form ideas from Lesson 3.
+Esto continua las ideas de formularios de la Leccion 3.
 
-### Persisted Preferences
+### Preferencias persistidas
 
-The preferences page updates shared settings that affect other parts of the app.
+La pagina de preferencias actualiza ajustes compartidos que afectan a otras partes de la app.
 
-This reinforces the idea that some state is local to one screen, while other state should be shared across the workspace.
+Esto refuerza la idea de que parte del estado es local a una pantalla, mientras que otra parte deberia compartirse en todo el workspace.
 
-## The Most Important Architectural Lesson
+## La leccion arquitectonica mas importante
 
-The capstone is really about responsibility boundaries.
+El capstone trata realmente de limites de responsabilidad.
 
-Each layer should have a clear job:
+Cada capa deberia tener un trabajo claro:
 
-- components render and react to user interaction
-- feature pages organize one feature's UI
-- the store owns shared state and derived state
-- the API service owns data access intent
-- the interceptor owns shared HTTP behavior
+- los componentes renderizan y reaccionan a la interaccion del usuario
+- las paginas de feature organizan la UI de una sola feature
+- el store posee el estado compartido y el estado derivado
+- el servicio de API posee la intencion de acceso a datos
+- el interceptor posee el comportamiento HTTP compartido
 
-When these boundaries are clear, the app becomes easier to extend.
+Cuando estos limites estan claros, la app se vuelve mas facil de extender.
 
-## Why This Is Still a Small App
+## Por que sigue siendo una app pequena
 
-This capstone is intentionally modest in size.
+Este capstone es intencionadamente moderado en tamano.
 
-That is a good teaching decision.
+Esa es una buena decision didactica.
 
-If the app were much larger, it would be harder to see the structure clearly. The goal here is to study integration, not overwhelm you with surface area.
+Si la app fuera mucho mayor, seria mas dificil ver la estructura con claridad. La meta aqui es estudiar integracion, no abrumarte con demasiado alcance.
 
-## How to Study the Capstone
+## Como estudiar el capstone
 
-Use this order:
+Usa este orden:
 
-1. Read `app.routes.ts` to understand the feature map.
-2. Read the shell and identify what is global vs feature-specific.
-3. Read the store and identify source state, computed state, and persisted state.
-4. Read the API service and interceptor together.
-5. Read the queue page and see how the reactive form updates shared store filters.
-6. Read the preferences page and observe how one feature affects another.
+1. Lee `app.routes.ts` para entender el mapa de features.
+2. Lee el shell e identifica que es global frente a que es especifico de una feature.
+3. Lee el store e identifica estado fuente, estado computado y estado persistido.
+4. Lee juntos el servicio de API y el interceptor.
+5. Lee la pagina de cola y observa como el formulario reactivo actualiza los filtros del store compartido.
+6. Lee la pagina de preferencias y observa como una feature afecta a otra.
 
-That sequence mirrors the app's architecture.
+Esa secuencia refleja la arquitectura de la app.
 
-## What This Lesson Proves
+## Lo que demuestra esta leccion
 
-If you can understand this capstone, you are no longer only learning isolated Angular syntax.
+Si puedes entender este capstone, ya no estas aprendiendo solo sintaxis aislada de Angular.
 
-You are learning how to design a real Angular application with multiple moving parts.
+Estas aprendiendo a disenar una aplicacion Angular real con multiples piezas en movimiento.
 
-That is a major step.
+Ese es un paso importante.
 
-## Good Final Exercises
+## Buenos ejercicios finales
 
-1. Add a new feature page.
-2. Add another preference that affects queue rendering.
-3. Add another computed value to the shared store.
-4. Add another API endpoint that uses the same interceptor behavior.
-5. Add tests for another feature page.
+1. Anade una nueva pagina de feature.
+2. Anade otra preferencia que afecte al renderizado de la cola.
+3. Anade otro valor computado al store compartido.
+4. Anade otro endpoint de API que use el mismo comportamiento del interceptor.
+5. Anade pruebas para otra pagina de feature.
 
-## Looking Back Across the Series
+## Mirando atras en toda la serie
 
-By the end of this lesson, you have worked through:
+Al final de esta leccion, has recorrido:
 
-- Angular foundations
-- components
-- forms
-- services and dependency injection
+- fundamentos de Angular
+- componentes
+- formularios
+- servicios e inyeccion de dependencias
 - routing
 - HTTP
 - RxJS
 - signals
-- shared state
-- advanced templates
-- directives and pipes
-- performance patterns
-- auth and guards
+- estado compartido
+- plantillas avanzadas
+- directivas y pipes
+- patrones de rendimiento
+- auth y guards
 - interceptors
 - testing
-- feature architecture
-- advanced UI integration
-- a final integrated capstone
+- arquitectura por features
+- integracion avanzada de UI
+- un capstone final integrado
 
-That is a strong practical progression.
+Esa es una progresion practica muy solida.
 
-## After the Series
+## Despues de la serie
 
-If you want to keep improving after this lesson, focus on three things:
+Si quieres seguir mejorando despues de esta leccion, enfocate en tres cosas:
 
-1. Build one small app of your own without following the tutorial directly.
-2. Revisit the capstone and refactor one part of it.
-3. Add more tests and more edge-case handling.
+1. Construye una app pequena propia sin seguir directamente el tutorial.
+2. Vuelve al capstone y refactoriza una de sus partes.
+3. Anade mas pruebas y mas manejo de casos limite.
 
-Those exercises will turn tutorial knowledge into working experience.
+Esos ejercicios convertiran el conocimiento del tutorial en experiencia real de trabajo.

@@ -1,94 +1,94 @@
-# Lesson 19 Guide: NgRx State Management
+# Guia de la Leccion 19: Gestion de estado con NgRx
 
-This lesson introduces NgRx as a formal state-management architecture for Angular.
+Esta leccion introduce NgRx como una arquitectura formal de gestion de estado para Angular.
 
-It builds directly on the earlier shared-state lesson, but adds more explicit structure.
+Se apoya directamente en la leccion anterior sobre estado compartido, pero anade una estructura mas explicita.
 
-## Why NgRx Exists
+## Por que existe NgRx
 
-A simple store service works well for many applications.
+Un servicio store sencillo funciona bien para muchas aplicaciones.
 
-But as applications grow, teams often need stronger conventions around:
+Pero a medida que las aplicaciones crecen, los equipos suelen necesitar convenciones mas fuertes sobre:
 
-- how state can change
-- where async work happens
-- how derived data is exposed
-- how to reason about event history
+- como puede cambiar el estado
+- donde ocurre el trabajo asincrono
+- como se expone la informacion derivada
+- como razonar sobre el historial de eventos
 
-NgRx answers that need with a clearer data-flow model.
+NgRx responde a esa necesidad con un modelo de flujo de datos mas claro.
 
-## The Main Flow
+## El flujo principal
 
-The main NgRx flow in this lesson is:
+El flujo principal de NgRx en esta leccion es:
 
-1. A component dispatches an action.
-2. A reducer updates state synchronously.
-3. An effect reacts when async work is needed.
-4. A success or failure action returns the async result to the store.
-5. Selectors expose exactly what each UI region needs.
+1. Un componente despacha una accion.
+2. Un reducer actualiza el estado de forma sincronica.
+3. Un effect reacciona cuando se necesita trabajo asincrono.
+4. Una accion de exito o fallo devuelve el resultado asincrono al store.
+5. Los selectors exponen exactamente lo que necesita cada region de UI.
 
-That flow matters because every responsibility has a clear home.
+Este flujo importa porque cada responsabilidad tiene un lugar claro.
 
-## What This Lesson Builds
+## Que construye esta leccion
 
-The example is an incident command center.
+El ejemplo es un centro de mando de incidentes.
 
-This is a strong NgRx scenario because several UI regions need coordinated global state:
+Es un escenario solido de NgRx porque varias regiones de UI necesitan un estado global coordinado:
 
-- toolbar filters
-- async loading state
-- a filtered incident list
-- a selected incident detail panel
-- summary counts
+- filtros de la toolbar
+- estado de carga asincrona
+- una lista filtrada de incidentes
+- un panel de detalle del incidente seleccionado
+- conteos de resumen
 
-All of those areas depend on the same feature state.
+Todas esas areas dependen del mismo estado de la feature.
 
-## What to Look For
+## En que fijarte
 
-When you study the lesson, focus on these questions:
+Cuando estudies la leccion, centrate en estas preguntas:
 
-1. Which events are modeled as actions?
-2. Which state changes happen in the reducer?
-3. Which logic is derived in selectors instead of components?
-4. Which work is side-effectful and therefore belongs in an effect?
-5. How do components stay thin by reading selectors and dispatching actions?
+1. Que eventos se modelan como actions?
+2. Que cambios de estado ocurren en el reducer?
+3. Que logica se deriva en selectors en lugar de hacerlo en componentes?
+4. Que trabajo tiene efectos secundarios y por lo tanto pertenece a un effect?
+5. Como se mantienen delgados los componentes leyendo selectors y despachando actions?
 
-## Why Selectors Matter
+## Por que importan los selectors
 
-Selectors are one of the most valuable ideas in NgRx.
+Los selectors son una de las ideas mas valiosas de NgRx.
 
-They let the store own read models such as:
+Permiten que el store posea modelos de lectura como:
 
-- filtered collections
-- summary counts
-- the selected entity
-- empty-state conditions
+- colecciones filtradas
+- conteos de resumen
+- la entidad seleccionada
+- condiciones de estado vacio
 
-That keeps components from duplicating the same filtering and counting logic.
+Eso evita que los componentes dupliquen la misma logica de filtrado y conteo.
 
-## Why Effects Matter
+## Por que importan los effects
 
-Reducers must stay pure.
+Los reducers deben mantenerse puros.
 
-That means reducers should not call APIs, generate random values, navigate, or write to storage.
+Eso significa que no deberian llamar APIs, generar valores aleatorios, navegar ni escribir en almacenamiento.
 
-Effects exist so async workflows can stay explicit without polluting reducers or components.
+Los effects existen para que los flujos asincronos se mantengan explicitos sin contaminar reducers ni componentes.
 
-## Exercises
+## Ejercicios
 
-1. Add a new status filter action and selector.
-2. Add a second effect that simulates saving a triage update.
-3. Introduce another derived selector for unresolved high-priority incidents.
-4. Add a failure banner component that reads only the error selector.
-5. Refactor the incident collection into a normalized entity-style shape.
+1. Anade una nueva accion y selector para filtrar por estado.
+2. Anade un segundo effect que simule guardar una actualizacion de triage.
+3. Introduce otro selector derivado para incidentes de alta prioridad sin resolver.
+4. Anade un componente de banner de fallo que lea solo el selector de error.
+5. Refactoriza la coleccion de incidentes a una forma normalizada tipo entity.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- why actions are useful even though they add ceremony
-- why reducers must stay pure
-- why selectors should own derived state
-- why effects are the right place for HTTP and other side effects
+- por que las actions son utiles aunque anadan ceremonia
+- por que los reducers deben mantenerse puros
+- por que los selectors deberian poseer el estado derivado
+- por que los effects son el lugar correcto para HTTP y otros efectos secundarios
 
-Once those boundaries make sense, NgRx stops feeling like extra boilerplate and starts feeling like a system for making application state predictable.
+Cuando esos limites tienen sentido, NgRx deja de sentirse como boilerplate extra y empieza a sentirse como un sistema para hacer predecible el estado de una aplicacion.

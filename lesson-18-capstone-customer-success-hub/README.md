@@ -1,41 +1,41 @@
-# Lesson 18: Capstone Customer Success Hub
+# Leccion 18: Capstone Customer Success Hub
 
-This capstone is a Vite-based Angular application that combines the major ideas from the series into one small but realistic product workspace.
+Este capstone es una aplicacion Angular basada en Vite que combina las ideas principales de la serie en un espacio de trabajo de producto pequeno pero realista.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How routing, layout shells, and feature pages fit together in one app
-- How to centralize HTTP behavior with an interceptor and a typed API service
-- How to keep shared app state in a signals-based store
-- How to connect reactive forms to shared filtered state
-- How to persist user preferences and let multiple pages respond to them
-- How feature structure, reusable UI, and data flow work together in a production-style Angular app
+- Como encajan en una sola app el routing, los shells de layout y las paginas por feature
+- Como centralizar el comportamiento HTTP con un interceptor y un servicio de API tipado
+- Como mantener el estado compartido de la app en un store basado en signals
+- Como conectar formularios reactivos con estado filtrado compartido
+- Como persistir preferencias del usuario y permitir que varias paginas respondan a ellas
+- Como trabajan juntas la estructura por features, la UI reutilizable y el flujo de datos en una app Angular con estilo de produccion
 
-## Main files
+## Archivos principales
 
-- `src/app/app.routes.ts`: application routes and feature boundaries
-- `src/app/interceptors/customer-success-api.interceptor.ts`: centralized request behavior
-- `src/app/core/services/hub-api.service.ts`: typed API access layer
-- `src/app/core/services/hub-store.service.ts`: shared signals store and persisted preferences
-- `src/app/layout/hub-shell.component.ts`: shell, navigation, loading, and error states
-- `src/app/features/queue/pages/queue-page.component.ts`: reactive filter form connected to shared state
-- `public/mock-api/customer-success-hub.json`: mock backend data for the capstone
-- `src/app/core/services/hub-store.service.spec.ts`: store-level tests for loading, filtering, and preferences
-- `src/app/features/queue/pages/queue-page.component.spec.ts`: feature-page tests for reactive form wiring
+- `src/app/app.routes.ts`: rutas de la aplicacion y limites entre features
+- `src/app/interceptors/customer-success-api.interceptor.ts`: comportamiento centralizado de peticiones
+- `src/app/core/services/hub-api.service.ts`: capa tipada de acceso a API
+- `src/app/core/services/hub-store.service.ts`: store compartido de signals y preferencias persistidas
+- `src/app/layout/hub-shell.component.ts`: shell, navegacion, estados de carga y de error
+- `src/app/features/queue/pages/queue-page.component.ts`: formulario reactivo de filtros conectado al estado compartido
+- `public/mock-api/customer-success-hub.json`: datos simulados de backend para el capstone
+- `src/app/core/services/hub-store.service.spec.ts`: pruebas a nivel de store para carga, filtrado y preferencias
+- `src/app/features/queue/pages/queue-page.component.spec.ts`: pruebas de la pagina de feature para el cableado del formulario reactivo
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Start with `app.routes.ts` and see how the capstone is divided into features.
-2. Read `hub-store.service.ts` and identify which parts of the state are raw, computed, and persisted.
-3. Compare `hub-api.service.ts` with `customer-success-api.interceptor.ts` to see how HTTP concerns are separated.
-4. Open `queue-page.component.ts` and trace how the reactive form updates the store.
-5. Visit the preferences page and confirm that queue rendering changes based on shared settings.
+1. Empieza por `app.routes.ts` y observa como el capstone se divide en features.
+2. Lee `hub-store.service.ts` e identifica que partes del estado son crudas, computadas y persistidas.
+3. Compara `hub-api.service.ts` con `customer-success-api.interceptor.ts` para ver como se separan las preocupaciones HTTP.
+4. Abre `queue-page.component.ts` y sigue como el formulario reactivo actualiza el store.
+5. Visita la pagina de preferencias y confirma que el renderizado de la cola cambia segun los ajustes compartidos.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Many Angular products are not single-page demos with one concept at a time. They combine routing, shared state, HTTP infrastructure, filters, user preferences, and reusable layout patterns in one workspace. This capstone keeps the scope small while showing how those pieces fit together coherently.
+Muchos productos Angular no son demos de una sola pagina con un concepto cada vez. Combinan routing, estado compartido, infraestructura HTTP, filtros, preferencias de usuario y patrones de layout reutilizable en un mismo workspace. Este capstone mantiene el alcance pequeno mientras muestra como esas piezas encajan de forma coherente.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
@@ -43,6 +43,6 @@ npm run dev
 npm test
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 19 revisits global state with a dedicated NgRx example so you can compare a lightweight custom store with a more formal action-reducer-effect architecture.
+La Leccion 19 vuelve al estado global con un ejemplo dedicado de NgRx para que puedas comparar un store ligero personalizado con una arquitectura mas formal de action-reducer-effect.

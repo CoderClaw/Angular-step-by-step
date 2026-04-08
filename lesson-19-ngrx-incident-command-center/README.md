@@ -1,45 +1,45 @@
-# Lesson 19: NgRx Incident Command Center
+# Leccion 19: NgRx Incident Command Center
 
-This lesson is a Vite-based Angular application that introduces formal global state management with NgRx through a small incident triage workspace.
+Esta leccion es una aplicacion Angular basada en Vite que introduce gestion formal de estado global con NgRx a traves de un pequeno workspace de triage de incidentes.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How actions, reducers, selectors, and effects fit together in one Angular feature
-- How components read state with `store.select(...)` and update state by dispatching actions
-- How to keep reducers pure while moving HTTP work into effects
-- How derived state belongs in selectors rather than being recalculated in every component
-- How to model loading, filters, selection, and detail panels in one coherent global store
+- Como encajan actions, reducers, selectors y effects dentro de una feature Angular
+- Como los componentes leen estado con `store.select(...)` y lo actualizan despachando actions
+- Como mantener puros los reducers mientras el trabajo HTTP se mueve a effects
+- Como el estado derivado pertenece a selectors en lugar de recalcularse en cada componente
+- Como modelar carga, filtros, seleccion y paneles de detalle dentro de un unico store global coherente
 
-## Main files
+## Archivos principales
 
-- `src/app/state/incidents.actions.ts`: all named state transition events for the feature
-- `src/app/state/incidents.reducer.ts`: feature state and reducer logic
-- `src/app/state/incidents.selectors.ts`: reusable read models and derived state
-- `src/app/state/incidents.effects.ts`: async loading side effects
-- `src/app/services/incidents-api.service.ts`: mock API that simulates remote incident loading
-- `src/app/components/incident-toolbar.component.ts`: dispatches filter and reload actions
-- `src/app/components/incident-list.component.ts`: renders filtered incidents and dispatches selection and resolution changes
-- `src/app/components/incident-detail.component.ts`: shows the currently selected incident from store state
+- `src/app/state/incidents.actions.ts`: todos los eventos nombrados de transicion de estado para la feature
+- `src/app/state/incidents.reducer.ts`: estado de la feature y logica del reducer
+- `src/app/state/incidents.selectors.ts`: modelos de lectura reutilizables y estado derivado
+- `src/app/state/incidents.effects.ts`: efectos secundarios de carga asincrona
+- `src/app/services/incidents-api.service.ts`: API simulada que imita carga remota de incidentes
+- `src/app/components/incident-toolbar.component.ts`: despacha acciones de filtro y recarga
+- `src/app/components/incident-list.component.ts`: renderiza incidentes filtrados y despacha cambios de seleccion y resolucion
+- `src/app/components/incident-detail.component.ts`: muestra el incidente actualmente seleccionado desde el estado del store
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Start with `incidents.actions.ts` and identify the feature events.
-2. Read `incidents.reducer.ts` and trace which parts of state change for each action.
-3. Open `incidents.selectors.ts` and find the derived state used by the UI.
-4. Read `incidents.effects.ts` to see where async loading happens.
-5. Compare the toolbar and list components to see how components dispatch actions and select state without owning the data directly.
+1. Empieza por `incidents.actions.ts` e identifica los eventos de la feature.
+2. Lee `incidents.reducer.ts` y sigue que partes del estado cambian para cada accion.
+3. Abre `incidents.selectors.ts` y encuentra el estado derivado usado por la UI.
+4. Lee `incidents.effects.ts` para ver donde ocurre la carga asincrona.
+5. Compara los componentes de toolbar y lista para ver como los componentes despachan acciones y seleccionan estado sin poseer directamente los datos.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Support systems, operations dashboards, incident boards, and admin tools often have multiple distant UI regions that all need the same global truth: active filters, selected entities, async status, and computed summaries. NgRx is a practical fit when those flows grow beyond a small custom store.
+Los sistemas de soporte, dashboards operativos, tableros de incidentes y herramientas de administracion suelen tener varias regiones distantes de UI que necesitan la misma verdad global: filtros activos, entidades seleccionadas, estado asincrono y resumenes computados. NgRx encaja bien de forma practica cuando esos flujos crecen mas alla de un pequeno store personalizado.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Previous lesson
+## Leccion anterior
 
-Lesson 18 combined many Angular ideas in one capstone app. This lesson revisits the shared-state problem with the more formal NgRx architecture.
+La Leccion 18 combino muchas ideas de Angular en una app capstone. Esta leccion retoma el problema del estado compartido con una arquitectura NgRx mas formal.

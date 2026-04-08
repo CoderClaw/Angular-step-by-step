@@ -1,36 +1,36 @@
-# Lesson 17: Advanced UI Integration Patterns with an Operations Board
+# Leccion 17: Patrones avanzados de integracion de UI con un tablero de operaciones
 
-This lesson is a Vite-based Angular application that teaches how to combine Angular UI primitives with browser capabilities to build richer interactive workflows.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como combinar primitivas de UI de Angular con capacidades del navegador para construir flujos de trabajo interactivos mas ricos.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to use Angular CDK drag-and-drop in a standalone component
-- How to coordinate selected-item state with a detail panel
-- How to keep complex UI interactions predictable with immutable state updates
-- How to integrate the browser Clipboard API from Angular event handlers
-- How to structure interaction-heavy code so the template stays readable
+- Como usar drag-and-drop de Angular CDK en un componente standalone
+- Como coordinar el estado del elemento seleccionado con un panel de detalle
+- Como mantener predecibles las interacciones complejas de UI mediante actualizaciones inmutables de estado
+- Como integrar la API de Clipboard del navegador desde handlers de eventos de Angular
+- Como estructurar codigo con muchas interacciones para que la plantilla siga siendo legible
 
-## Main files
+## Archivos principales
 
-- `src/app/app.component.ts`: drag-drop logic, selected-item state, and clipboard integration
-- `src/app/app.component.html`: board layout, drag-drop lists, and detail panel
-- `src/app/app.component.css`: visual states for the board, selected card, and drag feedback
-- `src/app/models/operations-board.model.ts`: typed board and task models
-- `src/app/app.component.spec.ts`: component tests for board state transitions and clipboard integration
+- `src/app/app.component.ts`: logica de drag-drop, estado del elemento seleccionado e integracion del portapapeles
+- `src/app/app.component.html`: layout del tablero, listas drag-drop y panel de detalle
+- `src/app/app.component.css`: estados visuales del tablero, la tarjeta seleccionada y la retroalimentacion de arrastre
+- `src/app/models/operations-board.model.ts`: modelos tipados del tablero y de tareas
+- `src/app/app.component.spec.ts`: pruebas del componente para transiciones de estado del tablero e integracion del portapapeles
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `app.component.ts` and inspect the task state and selected task computation.
-2. Read the `drop()` method and see how the drag-drop event is mapped back into application state.
-3. Inspect the template and notice where `cdkDropList`, `cdkDrag`, and `cdkDragHandle` are applied.
-4. Review `copySelectedTaskSummary()` and see how Angular code can wrap browser APIs cleanly.
-5. Run the app, drag tasks across columns, and copy the selected task summary.
+1. Abre `app.component.ts` e inspecciona el estado de tareas y el calculo de la tarea seleccionada.
+2. Lee el metodo `drop()` y observa como el evento de drag-drop se mapea de vuelta al estado de la aplicacion.
+3. Inspecciona la plantilla y observa donde se aplican `cdkDropList`, `cdkDrag` y `cdkDragHandle`.
+4. Revisa `copySelectedTaskSummary()` y observa como el codigo Angular puede envolver de forma limpia APIs del navegador.
+5. Ejecuta la app, arrastra tareas entre columnas y copia el resumen de la tarea seleccionada.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Product teams often need boards, queues, planners, or operational dashboards where users drag work between states, inspect details, and share or copy structured updates. Angular applications rarely live on forms and tables alone; they often need these richer interaction patterns too.
+Los equipos de producto suelen necesitar tableros, colas, planificadores o dashboards operativos donde los usuarios mueven trabajo entre estados, inspeccionan detalles y comparten o copian actualizaciones estructuradas. Las aplicaciones Angular rara vez viven solo de formularios y tablas; a menudo tambien necesitan estos patrones de interaccion mas ricos.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
@@ -38,6 +38,6 @@ npm run dev
 npm test
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 18 will be the capstone application that combines the series concepts into one larger Angular project.
+La Leccion 18 sera la aplicacion capstone que combina los conceptos de la serie en un proyecto Angular mas amplio.

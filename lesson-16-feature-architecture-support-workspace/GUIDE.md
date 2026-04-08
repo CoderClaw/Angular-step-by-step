@@ -1,128 +1,128 @@
-# Lesson 16 Guide: Feature Architecture
+# Guia de la Leccion 16: Arquitectura por features
 
-This lesson is about scaling Angular project structure.
+Esta leccion trata de escalar la estructura de un proyecto Angular.
 
-By now, you know many Angular features individually. The next challenge is organizing them so a larger application remains understandable.
+A estas alturas ya conoces muchas capacidades de Angular por separado. El siguiente reto es organizarlas para que una aplicacion mas grande siga siendo comprensible.
 
-## Why Structure Matters
+## Por que importa la estructura
 
-As projects grow, one big `app` folder quickly becomes hard to navigate.
+A medida que los proyectos crecen, una sola carpeta grande `app` se vuelve rapidamente dificil de navegar.
 
-Developers need clear answers to questions like:
+Los desarrolladores necesitan respuestas claras a preguntas como:
 
-- where do shared services live?
-- where does reusable UI live?
-- where do feature-specific pages live?
-- where should layout code go?
+- donde viven los servicios compartidos?
+- donde vive la UI reutilizable?
+- donde viven las paginas especificas de cada feature?
+- donde deberia ir el codigo de layout?
 
-This lesson answers those questions with a practical folder strategy.
+Esta leccion responde a esas preguntas con una estrategia practica de carpetas.
 
-## The Main Structure in This Lesson
+## La estructura principal en esta leccion
 
-The project uses areas such as:
+El proyecto usa areas como:
 
 - `core`
 - `shared`
 - `layout`
 - `features`
 
-This is not the only valid Angular structure, but it is a useful and realistic one.
+Esta no es la unica estructura valida en Angular, pero si es util y realista.
 
 ## `core`
 
-The `core` area usually contains application-wide concerns.
+El area `core` suele contener preocupaciones de toda la aplicacion.
 
-Examples:
+Ejemplos:
 
-- models used broadly across the app
-- services that several features depend on
-- infrastructure or central logic
+- modelos usados ampliamente en la app
+- servicios de los que dependen varias features
+- infraestructura o logica central
 
-If something belongs to the app as a whole rather than one feature, `core` is often the right place.
+Si algo pertenece al conjunto de la app y no a una sola feature, `core` suele ser el lugar correcto.
 
 ## `shared`
 
-The `shared` area usually contains reusable UI pieces.
+El area `shared` suele contener piezas de UI reutilizables.
 
-These are things that multiple features may use, but that are not themselves a business feature.
+Son cosas que varias features pueden usar, pero que no son en si mismas una feature de negocio.
 
-Examples:
+Ejemplos:
 
 - cards
 - badges
-- small presentational components
+- pequenos componentes presentacionales
 
-The important idea is that `shared` should stay general enough to be reused, not become a dumping ground for random unrelated code.
+La idea importante es que `shared` debe mantenerse lo bastante general como para reutilizarse, no convertirse en un cajon de sastre para codigo aleatorio no relacionado.
 
 ## `layout`
 
-The `layout` area usually holds app shells and route framing.
+El area `layout` suele alojar shells de aplicacion y el marco de rutas.
 
-This is where you put structures that define how major areas of the app are presented, such as:
+Aqui es donde colocas estructuras que definen como se presentan las grandes areas de la app, como:
 
-- top-level navigation
-- a workspace shell
-- persistent sidebars or headers
+- navegacion de nivel superior
+- un shell de workspace
+- sidebars o cabeceras persistentes
 
-Layout is about structure around features, not the features themselves.
+El layout trata de la estructura alrededor de las features, no de las features mismas.
 
 ## `features`
 
-The `features` area is where domain-specific functionality lives.
+El area `features` es donde vive la funcionalidad especifica del dominio.
 
-Examples in this lesson include separate routed feature pages such as triage and handoff.
+Los ejemplos en esta leccion incluyen paginas de feature separadas y enrutadas como triage y handoff.
 
-This is often the most important area in a real application because it lets the codebase grow by business capability rather than by technical file type alone.
+Esta suele ser el area mas importante en una aplicacion real porque permite que la base de codigo crezca por capacidad de negocio y no solo por tipo tecnico de archivo.
 
-## Why Route-Based Features Help
+## Por que ayudan las features basadas en rutas
 
-Route-based features naturally encourage separation.
+Las features basadas en rutas fomentan la separacion de forma natural.
 
-Each feature can own:
+Cada feature puede poseer:
 
-- its pages
-- its local UI
-- its local logic
-- its place in the user journey
+- sus paginas
+- su UI local
+- su logica local
+- su lugar en el recorrido del usuario
 
-That makes the code easier to scale than one flat folder full of unrelated files.
+Eso hace que el codigo sea mas facil de escalar que una carpeta plana llena de archivos no relacionados.
 
-## The Big Lesson
+## La gran leccion
 
-This lesson is not just about folders.
+Esta leccion no trata solo de carpetas.
 
-It is about ownership.
+Trata de propiedad.
 
-Every part of the project should have a reason to exist in its chosen place.
+Cada parte del proyecto deberia tener una razon para existir en el lugar elegido.
 
-Good structure reduces confusion and helps teams change the application safely.
+Una buena estructura reduce confusion y ayuda a los equipos a cambiar la aplicacion de forma segura.
 
-## How to Study the Lesson
+## Como estudiar la leccion
 
-Start from the route map.
+Empieza por el mapa de rutas.
 
-Then ask:
+Luego preguntate:
 
-- what belongs to the app as a whole?
-- what belongs to the shell?
-- what belongs to reusable UI?
-- what belongs only to one feature?
+- que pertenece al conjunto de la app?
+- que pertenece al shell?
+- que pertenece a UI reutilizable?
+- que pertenece solo a una feature?
 
-Those questions are more important than memorizing the folder names themselves.
+Esas preguntas son mas importantes que memorizar los nombres de carpetas por si solos.
 
-## Exercises
+## Ejercicios
 
-1. Add a third feature page and place it correctly.
-2. Move a reusable UI piece into `shared` if it is duplicated.
-3. Add a new app-wide service to `core`.
-4. Create a second shell-only layout concern and keep it out of feature code.
+1. Anade una tercera pagina de feature y colocala correctamente.
+2. Mueve una pieza de UI reutilizable a `shared` si esta duplicada.
+3. Anade un nuevo servicio global de aplicacion a `core`.
+4. Crea una segunda preocupacion de layout exclusiva del shell y mantenla fuera del codigo de las features.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- why large apps need a structure beyond one component tree
-- what kinds of code belong in `core`, `shared`, `layout`, and `features`
-- why route boundaries often align well with feature boundaries
+- por que las apps grandes necesitan una estructura que vaya mas alla de un solo arbol de componentes
+- que tipos de codigo pertenecen a `core`, `shared`, `layout` y `features`
+- por que los limites de rutas suelen alinearse bien con los limites de features
 
-The next lesson explores advanced UI integration, where rich user interactions add another layer of complexity.
+La siguiente leccion explora integracion avanzada de UI, donde las interacciones ricas del usuario anaden otra capa de complejidad.

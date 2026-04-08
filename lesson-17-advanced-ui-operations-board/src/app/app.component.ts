@@ -101,8 +101,8 @@ export class AppComponent {
     const sourceIndex = sourceItems.findIndex((item) => item.id === task.id);
     const targetIndex = event.currentIndex;
 
-    // The drag-drop event gives positions inside filtered column arrays.
-    // We map those positions back into one immutable tasks array so Angular can refresh predictably.
+    // El evento de drag-drop entrega posiciones dentro de arreglos de columnas filtradas.
+    // Mapeamos esas posiciones de vuelta a un unico arreglo inmutable de tareas para que Angular pueda refrescar de forma predecible.
     const updatedSource = sourceItems.filter((item) => item.id !== task.id);
     const movedTask: BoardTask = { ...task, status: targetColumnId };
     const updatedTarget = [...targetItems];

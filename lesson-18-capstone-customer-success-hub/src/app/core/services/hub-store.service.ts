@@ -92,8 +92,8 @@ export class HubStoreService {
     });
   }
 
-  // The capstone uses a small signals-based store to keep pages in sync.
-  // Feature pages read computed state and update filters without duplicating logic.
+  // El capstone usa un pequeno store basado en signals para mantener sincronizadas las paginas.
+  // Las paginas de feature leen estado computado y actualizan filtros sin duplicar logica.
   loadSnapshot(): void {
     if (this.isLoading()) {
       return;

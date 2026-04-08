@@ -18,8 +18,8 @@ export const customerSuccessApiInterceptor: HttpInterceptorFn = (
     ? request.url.replace("/api/", "/mock-api/")
     : request.url;
 
-  // The capstone centralizes shared API behavior in one place.
-  // Components and stores can call simple endpoints without repeating headers or base paths.
+  // El capstone centraliza el comportamiento compartido de API en un solo lugar.
+  // Los componentes y stores pueden llamar endpoints sencillos sin repetir cabeceras ni rutas base.
   const nextRequest = request.clone({
     url: rewrittenUrl,
     setHeaders: {
