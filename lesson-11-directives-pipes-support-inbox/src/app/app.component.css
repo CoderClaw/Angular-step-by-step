@@ -1,0 +1,143 @@
+.page-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.hero-panel,
+.summary-grid article,
+.ticket-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.hero-panel {
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(42, 111, 214, 0.13),
+      transparent 36%
+    ),
+    var(--surface);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 12ch;
+  margin-bottom: 0.75rem;
+  font-size: clamp(2rem, 4.8vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.hero-copy,
+.summary-grid span,
+.customer-name,
+.ticket-meta dt {
+  color: var(--text-muted);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.summary-grid article,
+.ticket-card {
+  padding: 1rem;
+}
+
+.summary-grid strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.5rem;
+}
+
+.tickets-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.ticket-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+}
+
+.priority-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.ticket-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 0;
+}
+
+.ticket-meta div {
+  padding: 0.85rem;
+  border-radius: 16px;
+  background: var(--surface-strong);
+}
+
+.ticket-meta dt,
+.ticket-meta dd {
+  margin: 0;
+}
+
+.ticket-meta dd {
+  margin-top: 0.35rem;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .summary-grid,
+  .ticket-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-shell {
+    width: min(100%, calc(100% - 1rem));
+    padding-top: 1rem;
+  }
+
+  .hero-panel,
+  .summary-grid article,
+  .ticket-card {
+    padding: 1.25rem;
+  }
+
+  .ticket-topline {
+    flex-direction: column;
+  }
+}

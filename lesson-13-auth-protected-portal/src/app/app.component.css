@@ -1,0 +1,101 @@
+.page-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 4rem;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.nav-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 0.75rem 0.95rem;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.nav-link--active,
+.nav-link:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.session-pill {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 14px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+}
+
+.session-pill span {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--accent-dark);
+}
+
+.ghost-button {
+  background: transparent;
+  color: var(--accent-dark);
+  border: 1px solid var(--border);
+}
+
+.ghost-button:hover {
+  background: var(--accent-soft);
+}
+
+@media (max-width: 760px) {
+  .page-shell {
+    width: min(100%, calc(100% - 1rem));
+    padding-top: 1rem;
+  }
+
+  .topbar {
+    flex-direction: column;
+    padding: 1.25rem;
+  }
+}

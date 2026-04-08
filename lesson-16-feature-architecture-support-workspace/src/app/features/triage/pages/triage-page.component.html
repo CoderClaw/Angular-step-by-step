@@ -1,0 +1,20 @@
+<section class="feature-copy">
+  <p class="feature-kicker">Feature area</p>
+  <h2>Triage queue</h2>
+  <p>
+    This feature owns the triage screen. It imports only what it needs and reads
+    shared data from a core service instead of relying on a giant app component.
+  </p>
+</section>
+
+<div class="feature-grid">
+  @for (item of queue; track item.id) {
+    <article class="queue-card">
+      <span class="queue-card__priority">{{ item.priority }}</span>
+      <h3>{{ item.customer }}</h3>
+      <p>{{ item.issue }}</p>
+      <strong>Next step</strong>
+      <p>{{ item.nextStep }}</p>
+    </article>
+  }
+</div>

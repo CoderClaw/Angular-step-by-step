@@ -1,0 +1,80 @@
+{
+  "metrics": [
+    {
+      "label": "Open success plans",
+      "value": "12",
+      "tone": "teal"
+    },
+    {
+      "label": "At-risk renewals",
+      "value": "3",
+      "tone": "amber"
+    },
+    {
+      "label": "Avg. response time",
+      "value": "1.9h",
+      "tone": "teal"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "m-1",
+      "title": "Healthcare rollout readiness",
+      "owner": "Priya",
+      "status": "On track",
+      "dueLabel": "Today 16:00"
+    },
+    {
+      "id": "m-2",
+      "title": "Premium onboarding macros",
+      "owner": "Nora",
+      "status": "Needs review",
+      "dueLabel": "Tomorrow"
+    },
+    {
+      "id": "m-3",
+      "title": "Revenue corrections sign-off",
+      "owner": "Luis",
+      "status": "Blocked",
+      "dueLabel": "Awaiting approval"
+    }
+  ],
+  "workItems": [
+    {
+      "id": "w-1",
+      "account": "Northwind Logistics",
+      "summary": "Confirm the enterprise SSO recovery script before the launch review.",
+      "owner": "Amira",
+      "priority": "High",
+      "status": "Open",
+      "nextStep": "Meet identity engineering and publish the final operator note."
+    },
+    {
+      "id": "w-2",
+      "account": "Hearth Foods",
+      "summary": "Verify billing fallback mapping for the seasonal plan migration.",
+      "owner": "Dante",
+      "priority": "High",
+      "status": "Waiting",
+      "nextStep": "Finance needs to confirm rollback totals after the dry run."
+    },
+    {
+      "id": "w-3",
+      "account": "Blue Mesa Care",
+      "summary": "Package localized screenshots for the reporting enablement brief.",
+      "owner": "Yara",
+      "priority": "Medium",
+      "status": "Open",
+      "nextStep": "Collect final screenshots and send them to product operations."
+    },
+    {
+      "id": "w-4",
+      "account": "Summit Retail",
+      "summary": "Close support follow-ups after the launch handoff retro.",
+      "owner": "Owen",
+      "priority": "Low",
+      "status": "Resolved",
+      "nextStep": "Archive the checklist after the CS lead signs off."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+<section class="panel-shell">
+  <header class="panel-header">
+    <div>
+      <h2>{{ title() }}</h2>
+      @if (subtitle()) {
+        <p>{{ subtitle() }}</p>
+      }
+    </div>
+
+    <!-- Content projection makes the action area reusable without hard-coding buttons. -->
+    <div class="panel-actions">
+      <ng-content select="[panel-actions]" />
+    </div>
+  </header>
+
+  <div class="panel-body">
+    <ng-content />
+  </div>
+</section>

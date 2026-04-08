@@ -1,0 +1,45 @@
+.feature-copy {
+  margin-bottom: 1.25rem;
+}
+
+.feature-kicker {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.feature-copy p:last-child {
+  color: var(--text-muted);
+}
+
+.feature-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.queue-card {
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+}
+
+.queue-card__priority {
+  display: inline-flex;
+  margin-bottom: 0.65rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}

@@ -1,0 +1,26 @@
+<section class="page-card">
+  <p class="page-kicker">Protected dashboard</p>
+  <h2>Authenticated area</h2>
+  <p class="page-copy">
+    This route is guarded. If the session is missing, Angular redirects to login
+    before the dashboard renders.
+  </p>
+
+  @if (authService.currentUser(); as user) {
+    <div class="message message--success">
+      Signed in as {{ user.email }} with the {{ user.role }} role.
+    </div>
+  }
+
+  <div class="task-grid">
+    @for (task of secureTasks; track task) {
+      <article class="task-card">
+        <h3>{{ task }}</h3>
+        <p>
+          Protected portal content often looks ordinary in the UI, but the route
+          access is controlled.
+        </p>
+      </article>
+    }
+  </div>
+</section>

@@ -1,0 +1,157 @@
+.page-shell {
+  width: min(1240px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.hero-panel,
+.stats-grid article {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.hero-panel {
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(95, 86, 214, 0.14),
+      transparent 36%
+    ),
+    var(--surface);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+h1,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 12ch;
+  margin-bottom: 0.75rem;
+  font-size: clamp(2rem, 4.8vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.hero-copy,
+.stats-grid span,
+.empty-state p,
+.grid-row,
+.ghost-button {
+  color: var(--text-muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.stats-grid article {
+  padding: 1rem;
+}
+
+.stats-grid strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.content-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.grid-row {
+  display: grid;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  align-items: center;
+}
+
+.priority-chip,
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.priority-chip {
+  background: var(--warning-soft);
+  color: #8c5f18;
+}
+
+.status-chip {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--accent-dark);
+}
+
+.ghost-button {
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+.ghost-button:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.empty-state {
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px dashed var(--border);
+  text-align: center;
+  background: var(--surface-strong);
+}
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-shell {
+    width: min(100%, calc(100% - 1rem));
+    padding-top: 1rem;
+  }
+
+  .hero-panel {
+    padding: 1.25rem;
+  }
+
+  .grid-row {
+    grid-template-columns: 1fr !important;
+  }
+}

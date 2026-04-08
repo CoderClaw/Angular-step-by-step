@@ -1,0 +1,90 @@
+@if (vm$ | async; as vm) {
+  <main class="page-shell">
+    <section class="hero-panel">
+      <p class="eyebrow">Lesson 07</p>
+      <h1>Stream-driven live search with RxJS</h1>
+      <p class="hero-copy">
+        This dashboard combines search text and status filters into one stream,
+        debounces input, switches to the latest request, and renders the result
+        with the `AsyncPipe`.
+      </p>
+
+      <div class="summary-grid">
+        <article>
+          <span>Search query</span>
+          <strong>{{ vm.query || "Empty" }}</strong>
+        </article>
+        <article>
+          <span>Status filter</span>
+          <strong>{{ vm.status }}</strong>
+        </article>
+        <article>
+          <span>Results</span>
+          <strong>{{ vm.totalResults }}</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="toolbar-panel">
+      <label class="field field--wide">
+        <span>Search work items</span>
+        <input
+          type="search"
+          placeholder="Search by title, customer, or summary"
+          (input)="onQueryChanged($event)"
+        />
+      </label>
+
+      <label class="field">
+        <span>Status</span>
+        <select (change)="onStatusChanged($event)">
+          @for (status of statusOptions; track status) {
+            <option [value]="status">{{ status }}</option>
+          }
+        </select>
+      </label>
+    </section>
+
+    @if (vm.isLoading) {
+      <section class="message-panel">
+        <h2>Searching</h2>
+        <p>
+          RxJS is waiting for the latest debounced search request to finish.
+        </p>
+      </section>
+    } @else if (vm.results.length === 0) {
+      <section class="message-panel">
+        <h2>No results</h2>
+        <p>Try another query or a broader status filter.</p>
+      </section>
+    } @else {
+      <section class="results-grid">
+        @for (item of vm.results; track item.id) {
+          <article class="result-card">
+            <div class="card-topline">
+              <div class="chip-row">
+                <span class="status-chip">{{ item.status }}</span>
+                <span class="priority-chip">{{ item.priority }}</span>
+              </div>
+              <small>{{ item.updatedAt | date: "mediumDate" }}</small>
+            </div>
+
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.summary }}</p>
+
+            <dl class="meta-grid">
+              <div>
+                <dt>Customer</dt>
+                <dd>{{ item.customer }}</dd>
+              </div>
+              <div>
+                <dt>Owner</dt>
+                <dd>{{ item.owner }}</dd>
+              </div>
+            </dl>
+          </article>
+        }
+      </section>
+    }
+  </main>
+}

@@ -1,0 +1,18 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 09</p>
+    <h1>Shared state across multiple Angular components</h1>
+    <p class="hero-copy">
+      This booking flow uses one store-like service as the shared source of
+      truth. Filters, offer cards, and the booking summary all stay synchronized
+      through the same central state.
+    </p>
+  </section>
+
+  <app-booking-filters />
+
+  <section class="layout-grid">
+    <app-booking-offers />
+    <app-booking-summary />
+  </section>
+</main>

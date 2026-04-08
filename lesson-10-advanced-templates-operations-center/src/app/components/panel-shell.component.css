@@ -1,0 +1,36 @@
+.panel-shell {
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.panel-header h2,
+.panel-header p {
+  margin-top: 0;
+}
+
+.panel-header p {
+  color: var(--text-muted);
+}
+
+.panel-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  .panel-header {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,27 @@
+@if (article; as activeArticle) {
+  <section class="page-block">
+    <a class="secondary-link" routerLink="/articles">Back to all articles</a>
+    <p class="page-kicker">Article detail route</p>
+    <h2>{{ activeArticle.title }}</h2>
+    <p class="page-copy">{{ activeArticle.summary }}</p>
+
+    <div class="detail-meta">
+      <span class="section-chip">{{ activeArticle.section }}</span>
+      <small>Updated {{ activeArticle.updatedAt | date: "mediumDate" }}</small>
+    </div>
+
+    <article class="content-card">
+      <p>{{ activeArticle.body }}</p>
+    </article>
+  </section>
+} @else {
+  <section class="page-block">
+    <p class="page-kicker">Missing article</p>
+    <h2>This article could not be found</h2>
+    <p class="page-copy">
+      The route parameter did not match any known article. This is a smaller
+      example of route-driven UI branching.
+    </p>
+    <a class="primary-link" routerLink="/articles">Return to article list</a>
+  </section>
+}

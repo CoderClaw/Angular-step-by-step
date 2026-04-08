@@ -1,0 +1,29 @@
+@if (items().length > 0) {
+  <div class="grid-table">
+    <div
+      class="grid-header"
+      [style.gridTemplateColumns]="
+        'repeat(' + columns().length + ', minmax(0, 1fr))'
+      "
+    >
+      @for (column of columns(); track column) {
+        <span>{{ column }}</span>
+      }
+    </div>
+
+    <div class="grid-body">
+      @for (item of items(); track $index) {
+        <!-- The row template comes from the parent, so the parent controls how each row renders. -->
+        <ng-container
+          [ngTemplateOutlet]="rowTemplate()"
+          [ngTemplateOutletContext]="{ $implicit: item }"
+        />
+      }
+    </div>
+  </div>
+} @else if (emptyTemplate()) {
+  <ng-container
+    [ngTemplateOutlet]="emptyTemplate()"
+    [ngTemplateOutletContext]="{ count: items().length }"
+  />
+}

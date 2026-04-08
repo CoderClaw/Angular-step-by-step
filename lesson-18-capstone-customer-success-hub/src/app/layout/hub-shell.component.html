@@ -1,0 +1,61 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <div>
+      <p class="eyebrow">Lesson 18 Capstone</p>
+      <h1>Customer Success Hub</h1>
+      <p class="hero-copy">
+        This final app combines routing, feature structure, a centralized API
+        layer, a signals store, reactive forms, and persisted preferences in one
+        small but realistic workspace.
+      </p>
+    </div>
+
+    <nav class="nav-pills" aria-label="Capstone sections">
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="nav-pills__link--active"
+        class="nav-pills__link"
+        >Dashboard</a
+      >
+      <a
+        routerLink="/queue"
+        routerLinkActive="nav-pills__link--active"
+        class="nav-pills__link"
+        >Queue</a
+      >
+      <a
+        routerLink="/preferences"
+        routerLinkActive="nav-pills__link--active"
+        class="nav-pills__link"
+        >Preferences</a
+      >
+    </nav>
+  </section>
+
+  @if (store.isLoading()) {
+    <section class="message-panel">
+      <h2>Loading workspace</h2>
+      <p>The hub is fetching shared data through the API layer.</p>
+    </section>
+  } @else if (store.errorMessage()) {
+    <section class="message-panel message-panel--error">
+      <h2>Request failed</h2>
+      <p>{{ store.errorMessage() }}</p>
+      <button type="button" (click)="store.loadSnapshot()">Retry</button>
+    </section>
+  } @else {
+    <section class="stats-grid">
+      @for (metric of store.metrics(); track metric.label) {
+        <app-stat-card
+          [label]="metric.label"
+          [value]="metric.value"
+          [tone]="metric.tone"
+        ></app-stat-card>
+      }
+    </section>
+
+    <section class="feature-panel">
+      <router-outlet></router-outlet>
+    </section>
+  }
+</main>

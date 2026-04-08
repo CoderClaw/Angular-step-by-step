@@ -1,0 +1,24 @@
+<section class="feature-copy">
+  <p class="feature-kicker">Feature area</p>
+  <h2>Launch handoff queue</h2>
+  <p>
+    This feature is routed separately, but it still reuses app-wide structure
+    and data access. That balance is what makes a larger Angular codebase easier
+    to extend.
+  </p>
+</section>
+
+<div class="feature-grid">
+  @for (item of queue; track item.id) {
+    <article
+      class="handoff-card"
+      [class.handoff-card--blocked]="item.status === 'Blocked'"
+      [class.handoff-card--follow-up]="item.status === 'Needs follow-up'"
+    >
+      <span class="handoff-card__status">{{ item.status }}</span>
+      <h3>{{ item.stream }}</h3>
+      <p>Owner: {{ item.owner }}</p>
+      <p>{{ item.note }}</p>
+    </article>
+  }
+</div>

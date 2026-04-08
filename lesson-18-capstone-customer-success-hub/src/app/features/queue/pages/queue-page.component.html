@@ -1,0 +1,64 @@
+<section class="section-copy">
+  <p class="section-kicker">Workflow</p>
+  <h2>Shared queue filters with reactive forms</h2>
+  <p>
+    The form updates a signals store, and the page reads the store’s computed
+    filtered queue.
+  </p>
+</section>
+
+<form class="filter-panel" [formGroup]="filterForm">
+  <label>
+    Search
+    <input
+      type="text"
+      formControlName="query"
+      placeholder="Account, summary, or owner"
+    />
+  </label>
+
+  <label>
+    Priority
+    <select formControlName="priority">
+      <option value="All">All priorities</option>
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+  </label>
+
+  <label class="checkbox-row">
+    <input type="checkbox" formControlName="includeResolved" />
+    Include resolved work
+  </label>
+</form>
+
+<div
+  class="queue-grid"
+  [class.queue-grid--compact]="store.preferences().compactMode"
+>
+  @for (item of store.filteredWorkItems(); track item.id) {
+    <article
+      class="work-card"
+      [class.work-card--highlight]="
+        store.preferences().highlightHighPriority && item.priority === 'High'
+      "
+      [class.work-card--compact]="store.preferences().compactMode"
+    >
+      <div class="work-card__topline">
+        <span class="priority-pill">{{ item.priority }}</span>
+        <span class="status-pill">{{ item.status }}</span>
+      </div>
+      <h3>{{ item.account }}</h3>
+      <p>{{ item.summary }}</p>
+      <p>Owner: {{ item.owner }}</p>
+      <strong>Next step</strong>
+      <p>{{ item.nextStep }}</p>
+    </article>
+  } @empty {
+    <article class="empty-card">
+      <h3>No matching work items</h3>
+      <p>Adjust the filters to broaden the queue again.</p>
+    </article>
+  }
+</div>

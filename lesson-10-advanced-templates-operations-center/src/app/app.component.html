@@ -1,0 +1,111 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 10</p>
+    <h1>Advanced templates and content reuse in Angular</h1>
+    <p class="hero-copy">
+      This operations center uses reusable layout shells and template-driven
+      data grids so the parent decides how rows and empty states render without
+      copying the surrounding component structure.
+    </p>
+  </section>
+
+  <section class="stats-grid">
+    <article>
+      <span>Approvals</span>
+      <strong>{{ approvals.length }}</strong>
+    </article>
+    <article>
+      <span>Incidents</span>
+      <strong>{{ incidents.length }}</strong>
+    </article>
+    <article>
+      <span>Reuse patterns</span>
+      <strong>2 core components</strong>
+    </article>
+  </section>
+
+  <section class="content-grid">
+    <app-panel-shell
+      [title]="'Approval Queue'"
+      [subtitle]="
+        'Reusable panel shell with projected actions and template-defined rows.'
+      "
+    >
+      <button panel-actions type="button" class="ghost-button">
+        Export queue
+      </button>
+
+      <ng-template #approvalRow let-approval>
+        <div
+          class="grid-row"
+          [style.gridTemplateColumns]="'repeat(4, minmax(0, 1fr))'"
+        >
+          <div>
+            <strong>{{ approval.name }}</strong>
+          </div>
+          <div>{{ approval.owner }}</div>
+          <div>
+            <span class="priority-chip">{{ approval.priority }}</span>
+          </div>
+          <div>{{ approval.due | date: "mediumDate" }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template #approvalEmpty>
+        <div class="empty-state">
+          <h3>No approvals waiting</h3>
+          <p>
+            The shared grid component can render a parent-supplied empty state
+            too.
+          </p>
+        </div>
+      </ng-template>
+
+      <app-template-grid
+        [columns]="approvalColumns"
+        [items]="approvals"
+        [rowTemplate]="approvalRow"
+        [emptyTemplate]="approvalEmpty"
+      />
+    </app-panel-shell>
+
+    <app-panel-shell
+      [title]="'Active Incident Review'"
+      [subtitle]="
+        'The same grid component is reused with a different row template and action slot.'
+      "
+    >
+      <button panel-actions type="button">Create incident note</button>
+
+      <ng-template #incidentRow let-incident>
+        <div
+          class="grid-row"
+          [style.gridTemplateColumns]="'repeat(4, minmax(0, 1fr))'"
+        >
+          <div>
+            <strong>{{ incident.service }}</strong>
+          </div>
+          <div>
+            <span class="status-chip">{{ incident.status }}</span>
+          </div>
+          <div>{{ incident.commander }}</div>
+          <div>{{ incident.startedAt | date: "shortTime" }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template #incidentEmpty>
+        <div class="empty-state">
+          <h3>No active incidents</h3>
+          <p>The operations center is clear right now.</p>
+        </div>
+      </ng-template>
+
+      <app-template-grid
+        [columns]="incidentColumns"
+        [items]="incidents"
+        [rowTemplate]="incidentRow"
+        [emptyTemplate]="incidentEmpty"
+      />
+    </app-panel-shell>
+  </section>
+</main>

@@ -1,0 +1,55 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 11</p>
+    <h1>Reusable presentation behavior with directives and pipes</h1>
+    <p class="hero-copy">
+      This support inbox uses a custom directive for priority emphasis and
+      custom pipes for domain-specific display formatting. The goal is to keep
+      templates expressive without repeating formatting logic everywhere.
+    </p>
+
+    <div class="summary-grid">
+      <article>
+        <span>Total tickets</span>
+        <strong>{{ tickets.length }}</strong>
+      </article>
+      <article>
+        <span>High priority</span>
+        <strong>{{ highPriorityCount }}</strong>
+      </article>
+      <article>
+        <span>Waiting</span>
+        <strong>{{ waitingCount }}</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="tickets-grid">
+    @for (ticket of tickets; track ticket.id) {
+      <article class="ticket-card" [appPriorityEmphasis]="ticket.priority">
+        <div class="ticket-topline">
+          <div>
+            <p class="customer-name">{{ ticket.customerName }}</p>
+            <h2>{{ ticket.subject }}</h2>
+          </div>
+          <span class="priority-chip">{{ ticket.priority | titlecase }}</span>
+        </div>
+
+        <dl class="ticket-meta">
+          <div>
+            <dt>Status</dt>
+            <dd>{{ ticket.status | friendlyStatus }}</dd>
+          </div>
+          <div>
+            <dt>Owner</dt>
+            <dd>{{ ticket.owner }}</dd>
+          </div>
+          <div>
+            <dt>Last update</dt>
+            <dd>{{ ticket.updatedAt | relativeTime }}</dd>
+          </div>
+        </dl>
+      </article>
+    }
+  </section>
+</main>

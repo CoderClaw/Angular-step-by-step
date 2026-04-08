@@ -1,0 +1,30 @@
+<article class="review-row">
+  <div class="row-main">
+    <div>
+      <p class="team-name">{{ item().team }}</p>
+      <h2>{{ item().title }}</h2>
+      <p class="summary-text">{{ item().summary }}</p>
+    </div>
+
+    <div class="row-meta">
+      <span class="status-chip status-chip--{{ item().status }}">{{
+        item().status
+      }}</span>
+      <strong>{{ item().score }} pts</strong>
+    </div>
+  </div>
+
+  <div class="row-footer">
+    <span>Owner: {{ item().owner }}</span>
+    <div class="button-row">
+      <button
+        type="button"
+        class="ghost-button"
+        (click)="blocked.emit(item().id)"
+      >
+        Block
+      </button>
+      <button type="button" (click)="approved.emit(item().id)">Approve</button>
+    </div>
+  </div>
+</article>

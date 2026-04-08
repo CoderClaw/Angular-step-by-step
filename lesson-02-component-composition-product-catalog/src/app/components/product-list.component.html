@@ -1,0 +1,29 @@
+<section class="list-panel">
+  <div class="list-header">
+    <div>
+      <h2>Reusable product list</h2>
+      <p>
+        This component focuses only on rendering a collection and forwarding
+        events.
+      </p>
+    </div>
+  </div>
+
+  @if (products().length > 0) {
+    <div class="product-grid">
+      @for (product of products(); track product.id) {
+        <app-product-card
+          [product]="product"
+          [selected]="selectedProductId() === product.id"
+          (viewRequested)="productSelected.emit($event)"
+          (shortlistToggled)="shortlistToggled.emit($event)"
+        />
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <h3>No products match the current filters</h3>
+      <p>Try a different category or a broader search term.</p>
+    </div>
+  }
+</section>

@@ -1,0 +1,21 @@
+<section class="page-block">
+  <p class="page-kicker">Articles route</p>
+  <h2>Knowledge base articles</h2>
+  <p class="page-copy">
+    Each card links to a route with a dynamic parameter. That parameter is then
+    used to load the selected article detail page.
+  </p>
+
+  <div class="card-grid">
+    @for (article of articles; track article.id) {
+      <article class="info-card">
+        <span class="section-chip">{{ article.section }}</span>
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.summary }}</p>
+        <a class="primary-link" [routerLink]="['/articles', article.id]"
+          >Open article</a
+        >
+      </article>
+    }
+  </div>
+</section>

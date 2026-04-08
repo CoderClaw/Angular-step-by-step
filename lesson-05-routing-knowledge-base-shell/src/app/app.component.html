@@ -1,0 +1,31 @@
+<main class="page-shell">
+  <aside class="sidebar">
+    <div class="brand-block">
+      <p class="eyebrow">Lesson 05</p>
+      <h1>Knowledge Base Shell</h1>
+      <p>
+        A small routed Angular app with a persistent shell, navigation,
+        redirects, route params, and a not-found page.
+      </p>
+    </div>
+
+    <nav class="nav-list" aria-label="Primary">
+      @for (item of navigationItems; track item.route) {
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="nav-link--active"
+          [routerLinkActiveOptions]="{
+            exact: item.route === '/dashboard' || item.route === '/team',
+          }"
+          class="nav-link"
+        >
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+  </aside>
+
+  <section class="content-shell">
+    <router-outlet />
+  </section>
+</main>

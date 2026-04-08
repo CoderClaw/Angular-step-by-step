@@ -1,0 +1,17 @@
+<section class="page-block">
+  <p class="page-kicker">Team route</p>
+  <h2>Persistent shell, changing content</h2>
+  <p class="page-copy">
+    The sidebar stays visible while the routed content changes in the outlet.
+    That is the core idea behind an application shell.
+  </p>
+
+  <div class="card-grid">
+    @for (member of teamMembers; track member.name) {
+      <article class="info-card">
+        <h3>{{ member.name }}</h3>
+        <p>{{ member.role }}</p>
+      </article>
+    }
+  </div>
+</section>

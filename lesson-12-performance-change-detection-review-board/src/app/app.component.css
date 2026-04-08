@@ -1,0 +1,154 @@
+.page-shell {
+  width: min(1240px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.hero-panel,
+.controls-panel,
+.board-panel,
+.summary-grid article,
+.stats-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.hero-panel {
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(45, 124, 250, 0.14),
+      transparent 36%
+    ),
+    var(--surface);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 12ch;
+  margin-bottom: 0.75rem;
+  font-size: clamp(2rem, 4.8vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.hero-copy,
+.summary-grid span,
+.field span,
+.stats-card span,
+.panel-header p {
+  color: var(--text-muted);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.summary-grid article,
+.stats-card {
+  padding: 1rem;
+}
+
+.summary-grid strong,
+.stats-card strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.5rem;
+}
+
+.controls-panel {
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.7fr) minmax(
+      160px,
+      0.4fr
+    );
+  gap: 1rem;
+  align-items: end;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field span,
+.stats-card span {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.board-panel {
+  padding: 1.5rem;
+}
+
+.rows-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.load-more-button {
+  margin-top: 1rem;
+  border: 0;
+  border-radius: 14px;
+  padding: 0.95rem 1.2rem;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+.load-more-button:hover {
+  background: var(--accent-dark);
+}
+
+@media (max-width: 980px) {
+  .summary-grid,
+  .controls-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-shell {
+    width: min(100%, calc(100% - 1rem));
+    padding-top: 1rem;
+  }
+
+  .hero-panel,
+  .controls-panel,
+  .board-panel,
+  .summary-grid article,
+  .stats-card {
+    padding: 1.25rem;
+  }
+}

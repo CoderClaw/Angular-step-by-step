@@ -1,0 +1,42 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <div>
+      <p class="eyebrow">Lesson 16</p>
+      <h1>Feature architecture for a scalable Angular workspace</h1>
+      <p class="hero-copy">
+        This project is organized by responsibility: app-wide models and
+        services in `core`, reusable UI in `shared`, route framing in `layout`,
+        and domain screens inside `features`.
+      </p>
+    </div>
+
+    <nav class="nav-pills" aria-label="Workspace sections">
+      <a
+        routerLink="/triage"
+        routerLinkActive="nav-pills__link--active"
+        class="nav-pills__link"
+        >Triage</a
+      >
+      <a
+        routerLink="/handoff"
+        routerLinkActive="nav-pills__link--active"
+        class="nav-pills__link"
+        >Handoff</a
+      >
+    </nav>
+  </section>
+
+  <section class="metrics-grid">
+    @for (metric of metrics; track metric.label) {
+      <app-metric-card
+        [label]="metric.label"
+        [value]="metric.value"
+        [tone]="metric.tone"
+      ></app-metric-card>
+    }
+  </section>
+
+  <section class="feature-panel">
+    <router-outlet></router-outlet>
+  </section>
+</main>

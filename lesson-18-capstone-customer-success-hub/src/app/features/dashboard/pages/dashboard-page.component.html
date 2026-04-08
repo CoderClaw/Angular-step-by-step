@@ -1,0 +1,28 @@
+<section class="section-copy">
+  <p class="section-kicker">Overview</p>
+  <h2>Launch milestones and urgent work</h2>
+  <p>
+    The dashboard mixes API-loaded summary data with signals-derived state such
+    as the current urgent count.
+  </p>
+</section>
+
+<section class="callout-panel">
+  <span>Urgent unresolved items</span>
+  <strong>{{ store.urgentCount() }}</strong>
+</section>
+
+<div class="milestones-grid">
+  @for (milestone of store.milestones(); track milestone.id) {
+    <article
+      class="milestone-card"
+      [class.milestone-card--warning]="milestone.status === 'Needs review'"
+      [class.milestone-card--blocked]="milestone.status === 'Blocked'"
+    >
+      <span class="milestone-card__status">{{ milestone.status }}</span>
+      <h3>{{ milestone.title }}</h3>
+      <p>Owner: {{ milestone.owner }}</p>
+      <p>Due: {{ milestone.dueLabel }}</p>
+    </article>
+  }
+</div>

@@ -1,0 +1,43 @@
+:root {
+  color-scheme: light;
+  --page-bg: radial-gradient(
+    circle at top,
+    #eef4ff 0%,
+    #dbe7ff 38%,
+    #f8fafc 100%
+  );
+  --surface: rgba(255, 255, 255, 0.93);
+  --surface-strong: #ffffff;
+  --border: #ccd7ee;
+  --text-main: #162033;
+  --text-muted: #5d6b82;
+  --accent: #2457d6;
+  --accent-dark: #173c96;
+  --accent-soft: #dce7ff;
+  --success: #1d7a53;
+  --warning: #b7791f;
+  --shadow: 0 20px 50px rgba(27, 55, 121, 0.14);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--page-bg);
+  color: var(--text-main);
+}
+
+body {
+  min-width: 320px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}

@@ -1,0 +1,61 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <div>
+      <p class="eyebrow">Lesson 17</p>
+      <h1>Advanced UI integration patterns in Angular</h1>
+      <p class="hero-copy">
+        This board combines Angular CDK drag-and-drop with a detail panel and
+        clipboard integration. The UI stays small, but it demonstrates the kind
+        of coordinated interaction patterns common in real products.
+      </p>
+    </div>
+
+    <section class="detail-panel">
+      @if (selectedTask(); as task) {
+        <span class="detail-panel__label">Selected task</span>
+        <h2>{{ task.title }}</h2>
+        <p class="detail-panel__meta">Owner: {{ task.owner }}</p>
+        <p>{{ task.detail }}</p>
+        <button type="button" (click)="copySelectedTaskSummary()">
+          Copy status summary
+        </button>
+        @if (copyMessage()) {
+          <p class="detail-panel__message">{{ copyMessage() }}</p>
+        }
+      }
+    </section>
+  </section>
+
+  <section class="board-grid" cdkDropListGroup>
+    @for (column of columns; track column.id) {
+      <section class="board-column">
+        <header class="board-column__header">
+          <h2>{{ column.title }}</h2>
+          <p>{{ column.description }}</p>
+        </header>
+
+        <div
+          class="board-column__list"
+          cdkDropList
+          [cdkDropListData]="tasksFor(column.id)"
+          (cdkDropListDropped)="drop($event, column.id)"
+        >
+          @for (task of tasksFor(column.id); track task.id) {
+            <article
+              class="task-card"
+              cdkDrag
+              [cdkDragData]="task"
+              [class.task-card--selected]="selectedTaskId() === task.id"
+              (click)="selectTask(task.id)"
+            >
+              <div class="task-card__drag-handle" cdkDragHandle>Drag</div>
+              <h3>{{ task.title }}</h3>
+              <p>{{ task.summary }}</p>
+              <span class="task-card__meta">Owner: {{ task.owner }}</span>
+            </article>
+          }
+        </div>
+      </section>
+    }
+  </section>
+</main>

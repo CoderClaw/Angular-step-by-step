@@ -1,0 +1,51 @@
+<aside class="summary-panel">
+  <h2>Booking summary</h2>
+  <p>
+    This component never receives inputs from the parent. It reads the same
+    shared store directly, which keeps it synchronized with the offer cards and
+    filters.
+  </p>
+
+  @if (store.selections().length > 0) {
+    <div class="selection-list">
+      @for (selection of store.selections(); track selection.offer.id) {
+        <article class="selection-card">
+          <h3>{{ selection.offer.title }}</h3>
+          <p>{{ selection.seats }} seat(s) at {{ selection.offer.location }}</p>
+          <strong>{{
+            selection.subtotal | currency: "USD" : "symbol" : "1.0-0"
+          }}</strong>
+        </article>
+      }
+    </div>
+
+    <div class="totals-card">
+      <div>
+        <span>Total seats</span>
+        <strong>{{ store.selectedSeats() }}</strong>
+      </div>
+      <div>
+        <span>Total cost</span>
+        <strong>{{
+          store.totalCost() | currency: "USD" : "symbol" : "1.0-0"
+        }}</strong>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="ghost-button"
+      (click)="store.clearSelections()"
+    >
+      Clear booking
+    </button>
+  } @else {
+    <div class="empty-state">
+      <h3>No seats selected</h3>
+      <p>
+        Add seats in the offer list to see the shared store update here
+        immediately.
+      </p>
+    </div>
+  }
+</aside>

@@ -1,0 +1,59 @@
+<section class="offers-panel">
+  <div class="panel-header">
+    <div>
+      <h2>Available workshops</h2>
+      <p>
+        These cards read filter state and selection state from the same shared
+        store.
+      </p>
+    </div>
+  </div>
+
+  @if (store.visibleOffers().length > 0) {
+    <div class="offers-grid">
+      @for (offer of store.visibleOffers(); track offer.id) {
+        <article class="offer-card">
+          <div class="offer-topline">
+            <span class="team-chip">{{ offer.team }}</span>
+            <span class="location-chip">{{ offer.location }}</span>
+          </div>
+
+          <h3>{{ offer.title }}</h3>
+          <p>{{ offer.summary }}</p>
+
+          <dl class="offer-meta">
+            <div>
+              <dt>Price</dt>
+              <dd>
+                {{ offer.pricePerSeat | currency: "USD" : "symbol" : "1.0-0" }}
+              </dd>
+            </div>
+            <div>
+              <dt>Seats left</dt>
+              <dd>{{ offer.seatsLeft }}</dd>
+            </div>
+          </dl>
+
+          <div class="seat-controls">
+            <button
+              type="button"
+              class="ghost-button"
+              (click)="store.decrementSeats(offer.id)"
+            >
+              -
+            </button>
+            <strong>{{ store.seatsFor(offer.id) }}</strong>
+            <button type="button" (click)="store.incrementSeats(offer.id)">
+              +
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <h3>No offers match the current filters</h3>
+      <p>Adjust the shared filter state to make more workshops visible.</p>
+    </div>
+  }
+</section>

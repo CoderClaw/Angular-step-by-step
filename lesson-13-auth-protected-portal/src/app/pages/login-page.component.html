@@ -1,0 +1,28 @@
+<section class="page-card auth-card">
+  <p class="page-kicker">Login route</p>
+  <h2>Mock sign-in form</h2>
+  <p class="page-copy">
+    This form demonstrates a protected flow, not real backend security. Use it
+    to learn how Angular routes and guards coordinate access.
+  </p>
+
+  <form class="login-form" (ngSubmit)="login()">
+    <label class="field">
+      <span>Email</span>
+      <input type="email" name="email" [(ngModel)]="email" />
+    </label>
+
+    <label class="field">
+      <span>Password</span>
+      <input type="password" name="password" [(ngModel)]="password" />
+    </label>
+
+    @if (errorMessage) {
+      <div class="message message--error">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <button type="submit">Sign in</button>
+  </form>
+</section>

@@ -1,0 +1,48 @@
+.filter-panel {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.filter-panel h2,
+.filter-panel p {
+  margin: 0;
+}
+
+.filter-panel p,
+.field span {
+  color: var(--text-muted);
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field span {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .filter-panel {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+}

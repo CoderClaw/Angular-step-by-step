@@ -1,0 +1,39 @@
+<main class="page-shell">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Lesson 13</p>
+      <h1>Protected portal flow</h1>
+    </div>
+
+    <nav class="nav-row">
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="nav-link--active"
+        class="nav-link"
+        >Dashboard</a
+      >
+      <a
+        routerLink="/login"
+        routerLinkActive="nav-link--active"
+        class="nav-link"
+        >Login</a
+      >
+
+      @if (authService.currentUser(); as user) {
+        <div class="session-pill">
+          <span>{{ user.email }}</span>
+          <strong>{{ user.role }}</strong>
+        </div>
+        <button
+          type="button"
+          class="ghost-button"
+          (click)="authService.logout()"
+        >
+          Logout
+        </button>
+      }
+    </nav>
+  </header>
+
+  <router-outlet />
+</main>

@@ -1,0 +1,98 @@
+.review-row {
+  padding: 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+}
+
+.row-main,
+.row-footer,
+.button-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row-main {
+  align-items: start;
+}
+
+.team-name,
+.summary-text,
+.row-footer span {
+  color: var(--text-muted);
+}
+
+.team-name,
+.summary-text,
+h2,
+p {
+  margin-top: 0;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status-chip--pending {
+  background: var(--warning-soft);
+  color: #885b14;
+}
+
+.status-chip--approved {
+  background: var(--success-soft);
+  color: #206048;
+}
+
+.status-chip--blocked {
+  background: #fde7e7;
+  color: #9f3838;
+}
+
+.row-meta {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: end;
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 0.75rem 1rem;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--accent-dark);
+}
+
+.ghost-button {
+  background: transparent;
+  color: var(--accent-dark);
+  border: 1px solid var(--border);
+}
+
+.ghost-button:hover {
+  background: var(--accent-soft);
+}
+
+@media (max-width: 700px) {
+  .row-main,
+  .row-footer,
+  .button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .row-meta {
+    justify-items: start;
+  }
+}

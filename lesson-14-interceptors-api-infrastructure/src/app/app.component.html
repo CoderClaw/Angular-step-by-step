@@ -1,0 +1,70 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 14</p>
+    <h1>Interceptors and centralized API infrastructure</h1>
+    <p class="hero-copy">
+      This operations overview loads data through a service that calls
+      `/api/...`, while an interceptor rewrites the URL, attaches shared
+      headers, and normalizes HTTP failures into consistent application errors.
+    </p>
+
+    <div class="button-row">
+      <button type="button" (click)="loadOverview()" [disabled]="isLoading">
+        {{ isLoading ? "Loading..." : "Load overview" }}
+      </button>
+      <button
+        type="button"
+        class="ghost-button"
+        (click)="loadOverview(true)"
+        [disabled]="isLoading"
+      >
+        Simulate failed request
+      </button>
+    </div>
+  </section>
+
+  @if (isLoading) {
+    <section class="message-panel">
+      <h2>Loading operations overview</h2>
+      <p>The interceptor and API service are processing a request right now.</p>
+    </section>
+  } @else if (errorMessage) {
+    <section class="message-panel message-panel--error">
+      <h2>Request failed</h2>
+      <p>{{ errorMessage }}</p>
+    </section>
+  } @else if (overview) {
+    <section class="meta-panel">
+      <span>Generated at</span>
+      <strong>{{ overview.generatedAt | date: "medium" }}</strong>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel">
+        <h2>Announcements</h2>
+        <div class="card-grid">
+          @for (item of overview.announcements; track item.id) {
+            <article class="info-card">
+              <span class="chip">{{ item.team }}</span>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.summary }}</p>
+            </article>
+          }
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Operational checks</h2>
+        <div class="card-grid">
+          @for (check of overview.checks; track check.id) {
+            <article class="info-card">
+              <span class="chip chip--status">{{ check.status }}</span>
+              <h3>{{ check.name }}</h3>
+              <p>Owner: {{ check.owner }}</p>
+            </article>
+          }
+        </div>
+      </section>
+    </section>
+  }
+</main>

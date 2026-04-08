@@ -1,0 +1,27 @@
+<section class="filter-panel">
+  <div>
+    <h2>Catalog controls</h2>
+    <p>
+      These controls live in their own component and emit typed events upward.
+    </p>
+  </div>
+
+  <label class="field">
+    <span>Search</span>
+    <input
+      type="search"
+      placeholder="Search by product or description"
+      [value]="searchTerm()"
+      (input)="onSearchInput($event)"
+    />
+  </label>
+
+  <label class="field">
+    <span>Category</span>
+    <select [value]="currentCategory()" (change)="onCategoryChange($event)">
+      @for (category of categories(); track category) {
+        <option [value]="category">{{ category }}</option>
+      }
+    </select>
+  </label>
+</section>

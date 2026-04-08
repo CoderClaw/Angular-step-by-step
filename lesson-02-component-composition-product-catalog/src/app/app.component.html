@@ -1,0 +1,45 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 02</p>
+    <h1>Component composition with typed parent-child communication</h1>
+    <p class="hero-copy">
+      This catalog screen is split into focused standalone components. The
+      parent owns state, reusable child components render the UI, and typed
+      outputs report user actions back up.
+    </p>
+
+    <div class="summary-grid">
+      <article>
+        <span>Catalog items</span>
+        <strong>{{ products.length }}</strong>
+      </article>
+      <article>
+        <span>Visible now</span>
+        <strong>{{ visibleProducts.length }}</strong>
+      </article>
+      <article>
+        <span>Shortlisted</span>
+        <strong>{{ shortlistedCount }}</strong>
+      </article>
+    </div>
+  </section>
+
+  <app-product-filter
+    [categories]="categories"
+    [currentCategory]="selectedCategory"
+    [searchTerm]="searchTerm"
+    (categoryChanged)="onCategoryChanged($event)"
+    (searchChanged)="onSearchChanged($event)"
+  />
+
+  <section class="catalog-layout">
+    <app-product-list
+      [products]="visibleProducts"
+      [selectedProductId]="selectedProductId"
+      (productSelected)="onProductSelected($event)"
+      (shortlistToggled)="onShortlistToggled($event)"
+    />
+
+    <app-product-detail [product]="selectedProduct" />
+  </section>
+</main>

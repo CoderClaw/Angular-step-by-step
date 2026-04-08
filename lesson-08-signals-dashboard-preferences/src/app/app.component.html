@@ -1,0 +1,99 @@
+<main class="page-shell" [class.page-shell--compact]="compactMode()">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 08</p>
+    <h1>Signal-based dashboard state in modern Angular</h1>
+    <p class="hero-copy">
+      This dashboard uses signals for local state, computed values for derived
+      UI, and an effect to persist preferences without subscriptions.
+    </p>
+
+    <div class="summary-grid">
+      <article>
+        <span>Total tiles</span>
+        <strong>{{ totalTiles() }}</strong>
+      </article>
+      <article>
+        <span>Visible now</span>
+        <strong>{{ visibleCount() }}</strong>
+      </article>
+      <article>
+        <span>Saved tiles</span>
+        <strong>{{ savedCount() }}</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="controls-panel">
+    <label class="field field--wide">
+      <span>Search tiles</span>
+      <input
+        type="search"
+        placeholder="Search by title or context"
+        [value]="query()"
+        (input)="onQueryChanged($event)"
+      />
+    </label>
+
+    <label class="field">
+      <span>Team</span>
+      <select [value]="selectedTeam()" (change)="onTeamChanged($event)">
+        @for (team of teamOptions; track team) {
+          <option [value]="team">{{ team }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="toggle-row">
+      <input
+        type="checkbox"
+        [checked]="showSavedOnly()"
+        (change)="onSavedOnlyChanged($event)"
+      />
+      <span>Saved only</span>
+    </label>
+
+    <label class="toggle-row">
+      <input
+        type="checkbox"
+        [checked]="compactMode()"
+        (change)="onCompactModeChanged($event)"
+      />
+      <span>Compact mode</span>
+    </label>
+
+    <button type="button" class="ghost-button" (click)="resetPreferences()">
+      Reset preferences
+    </button>
+  </section>
+
+  @if (visibleTiles().length > 0) {
+    <section class="tiles-grid">
+      @for (tile of visibleTiles(); track tile.id) {
+        <article class="tile-card" [class.tile-card--compact]="compactMode()">
+          <div class="tile-topline">
+            <span class="team-chip">{{ tile.team }}</span>
+            @if (tile.saved) {
+              <span class="saved-chip">Saved</span>
+            }
+          </div>
+
+          <h2>{{ tile.title }}</h2>
+          <strong class="metric-text">{{ tile.metric }}</strong>
+          <p>{{ tile.context }}</p>
+
+          <button type="button" (click)="toggleSaved(tile.id)">
+            {{ tile.saved ? "Remove from saved" : "Save tile" }}
+          </button>
+        </article>
+      }
+    </section>
+  } @else {
+    <section class="empty-panel">
+      <h2>No tiles match the current preferences</h2>
+      <p>
+        Change the query or filters to see the computed signal update
+        immediately.
+      </p>
+    </section>
+  }
+</main>

@@ -1,0 +1,36 @@
+:root {
+  color-scheme: light;
+  --page-bg: linear-gradient(180deg, #fcfaf5 0%, #f6f4ff 50%, #f6fbff 100%);
+  --surface: rgba(255, 255, 255, 0.95);
+  --surface-strong: #ffffff;
+  --border: #ddd7ef;
+  --text-main: #1d2433;
+  --text-muted: #687287;
+  --accent: #b25b2a;
+  --accent-soft: #fff0e5;
+  --navy: #29445d;
+  --navy-soft: #e8f2fb;
+  --shadow: 0 18px 48px rgba(54, 72, 102, 0.12);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--page-bg);
+  color: var(--text-main);
+}
+
+body {
+  min-width: 320px;
+}
+
+button,
+a {
+  font: inherit;
+}

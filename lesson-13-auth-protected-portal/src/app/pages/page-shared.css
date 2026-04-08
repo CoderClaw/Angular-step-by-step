@@ -1,0 +1,99 @@
+.page-card {
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.auth-card {
+  width: min(560px, 100%);
+}
+
+.page-kicker {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+.page-copy,
+.field span,
+.task-card p {
+  color: var(--text-muted);
+}
+
+.login-form,
+.field,
+.task-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.field span {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.message {
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+}
+
+.message--error {
+  background: var(--danger-soft);
+  color: #9c3333;
+}
+
+.message--success {
+  background: var(--success-soft);
+  color: #1f5d46;
+}
+
+.task-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.task-card {
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+}
+
+button,
+.inline-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  border: 0;
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover,
+.inline-link:hover {
+  background: var(--accent-dark);
+}
+
+@media (max-width: 900px) {
+  .task-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,48 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 15</p>
+    <h1>Testing Angular components and services</h1>
+    <p class="hero-copy">
+      This release readiness board is intentionally small, but the lesson is
+      about how to test the service business rules and the component rendering
+      separately with Vitest and Angular TestBed.
+    </p>
+  </section>
+
+  <section class="summary-grid">
+    <article class="summary-card">
+      <span class="summary-label">Launch state</span>
+      <strong>{{ summary.launchState }}</strong>
+    </article>
+    <article class="summary-card">
+      <span class="summary-label">Checks reviewed</span>
+      <strong>{{ summary.totalChecks }}</strong>
+    </article>
+    <article class="summary-card">
+      <span class="summary-label">Blocked</span>
+      <strong>{{ summary.blockedChecks }}</strong>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>Recommended next action</h2>
+    <p>{{ summary.nextAction }}</p>
+  </section>
+
+  <section class="panel">
+    <h2>Readiness checks</h2>
+    <div class="checks-grid">
+      @for (check of checks; track check.id) {
+        <article
+          class="check-card"
+          [class.check-card--warning]="check.status === 'Needs attention'"
+          [class.check-card--blocked]="check.status === 'Blocked'"
+        >
+          <span class="status-pill">{{ check.status }}</span>
+          <h3>{{ check.title }}</h3>
+          <p>Owner: {{ check.owner }}</p>
+        </article>
+      }
+    </div>
+  </section>
+</main>

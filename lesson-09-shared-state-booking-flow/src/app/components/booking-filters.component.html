@@ -1,0 +1,46 @@
+<section class="filters-panel">
+  <div class="summary-strip">
+    <article>
+      <span>Total offers</span>
+      <strong>{{ store.totalOffers() }}</strong>
+    </article>
+    <article>
+      <span>Visible offers</span>
+      <strong>{{ store.visibleOffers().length }}</strong>
+    </article>
+    <article>
+      <span>Selected seats</span>
+      <strong>{{ store.selectedSeats() }}</strong>
+    </article>
+  </div>
+
+  <div class="controls-grid">
+    <label class="field field--wide">
+      <span>Search workshops</span>
+      <input
+        type="search"
+        [value]="store.query()"
+        placeholder="Search by title, summary, or location"
+        (input)="onQueryChanged($event)"
+      />
+    </label>
+
+    <label class="field">
+      <span>Team</span>
+      <select [value]="store.selectedTeam()" (change)="onTeamChanged($event)">
+        @for (team of store.teamOptions; track team) {
+          <option [value]="team">{{ team }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="toggle-row">
+      <input
+        type="checkbox"
+        [checked]="store.budgetFriendlyOnly()"
+        (change)="onBudgetChanged($event)"
+      />
+      <span>Budget-friendly only</span>
+    </label>
+  </div>
+</section>

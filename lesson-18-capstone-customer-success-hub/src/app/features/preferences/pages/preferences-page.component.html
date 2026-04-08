@@ -1,0 +1,51 @@
+<section class="section-copy">
+  <p class="section-kicker">Preferences</p>
+  <h2>Persisted workspace settings</h2>
+  <p>
+    Preferences are stored through the shared signals store so multiple pages
+    can react to the same user choices.
+  </p>
+</section>
+
+<div class="preferences-grid">
+  <article class="preference-card">
+    <h3>Compact queue cards</h3>
+    <p>Reduce padding in the queue view for denser review sessions.</p>
+    <button
+      type="button"
+      (click)="
+        store.updatePreferences({
+          compactMode: !store.preferences().compactMode,
+        })
+      "
+    >
+      {{
+        store.preferences().compactMode
+          ? "Disable compact mode"
+          : "Enable compact mode"
+      }}
+    </button>
+  </article>
+
+  <article class="preference-card">
+    <h3>Highlight high priority items</h3>
+    <p>
+      Emphasize urgent customer work in the queue with a stronger background
+      treatment.
+    </p>
+    <button
+      type="button"
+      (click)="
+        store.updatePreferences({
+          highlightHighPriority: !store.preferences().highlightHighPriority,
+        })
+      "
+    >
+      {{
+        store.preferences().highlightHighPriority
+          ? "Disable highlighting"
+          : "Enable highlighting"
+      }}
+    </button>
+  </article>
+</div>

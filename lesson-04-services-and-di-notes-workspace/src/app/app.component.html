@@ -1,0 +1,175 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 04</p>
+    <h1>
+      Move application logic into services with Angular dependency injection
+    </h1>
+    <p class="hero-copy">
+      This notes workspace keeps persistence and note operations inside an
+      injected service. The component only handles UI state and user events.
+    </p>
+
+    <div class="summary-grid">
+      <article>
+        <span>Total notes</span>
+        <strong>{{ allNotes.length }}</strong>
+      </article>
+      <article>
+        <span>Pinned</span>
+        <strong>{{ pinnedCount }}</strong>
+      </article>
+      <article>
+        <span>Archived</span>
+        <strong>{{ archivedCount }}</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="layout-grid">
+    <section class="composer-panel">
+      <div class="panel-header">
+        <div>
+          <h2>New workspace note</h2>
+          <p>
+            Write a short internal note and let the service persist it to local
+            storage.
+          </p>
+        </div>
+      </div>
+
+      <form class="composer-form" (ngSubmit)="addNote()">
+        <label class="field">
+          <span>Title</span>
+          <input
+            type="text"
+            name="titleDraft"
+            [(ngModel)]="titleDraft"
+            placeholder="Add a clear note title"
+          />
+        </label>
+
+        <label class="field">
+          <span>Category</span>
+          <select name="categoryDraft" [(ngModel)]="categoryDraft">
+            @for (category of categories; track category) {
+              <option [value]="category">{{ category }}</option>
+            }
+          </select>
+        </label>
+
+        <label class="field field--full">
+          <span>Body</span>
+          <textarea
+            name="bodyDraft"
+            [(ngModel)]="bodyDraft"
+            rows="5"
+            placeholder="Capture the decision, customer detail, or release note"
+          ></textarea>
+        </label>
+
+        <button type="submit">Save note</button>
+      </form>
+    </section>
+
+    <aside class="filter-panel">
+      <h2>View options</h2>
+      <label class="field">
+        <span>Filter by category</span>
+        <select [(ngModel)]="selectedFilter" name="selectedFilter">
+          <option value="All">All</option>
+          @for (category of categories; track category) {
+            <option [value]="category">{{ category }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="toggle-row">
+        <input
+          type="checkbox"
+          [(ngModel)]="includeArchived"
+          name="includeArchived"
+        />
+        <span>Include archived notes</span>
+      </label>
+
+      <div class="service-note">
+        <h3>Why a service?</h3>
+        <p>
+          Storage logic, note creation, and mutation rules all live in one
+          injectable class instead of being mixed into the UI component.
+        </p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="notes-panel">
+    <div class="panel-header">
+      <div>
+        <h2>Saved notes</h2>
+        <p>
+          The component reads from the service and renders the current filtered
+          view.
+        </p>
+      </div>
+    </div>
+
+    @if (visibleNotes.length > 0) {
+      <div class="notes-grid">
+        @for (note of visibleNotes; track note.id) {
+          <article
+            class="note-card"
+            [class.note-card--archived]="note.archived"
+          >
+            <div class="note-topline">
+              <div class="chip-row">
+                <span class="category-chip">{{ note.category }}</span>
+                @if (note.pinned) {
+                  <span class="accent-chip">Pinned</span>
+                }
+                @if (note.archived) {
+                  <span class="muted-chip">Archived</span>
+                }
+              </div>
+              <small>{{ note.updatedAt | date: "medium" }}</small>
+            </div>
+
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.body }}</p>
+
+            <div class="button-row">
+              <button
+                type="button"
+                class="ghost-button"
+                (click)="togglePinned(note.id)"
+              >
+                {{ note.pinned ? "Unpin" : "Pin" }}
+              </button>
+              <button
+                type="button"
+                class="ghost-button"
+                (click)="toggleArchived(note.id)"
+              >
+                {{ note.archived ? "Restore" : "Archive" }}
+              </button>
+              <button
+                type="button"
+                class="danger-button"
+                (click)="deleteNote(note.id)"
+              >
+                Delete
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        <h3>No notes in this view</h3>
+        <p>
+          Change the filter or add a new note to see the service-backed list
+          update.
+        </p>
+      </div>
+    }
+  </section>
+</main>

@@ -1,0 +1,95 @@
+<main class="page-shell">
+  <section class="hero-card">
+    <p class="eyebrow">Lesson 01</p>
+    <h1>Angular foundations with a realistic task tracker</h1>
+    <p class="hero-copy">
+      This first app introduces the basic building blocks of Angular with a UI
+      that resembles a small feature you might build in a real product.
+    </p>
+
+    <div class="stats-grid">
+      <article>
+        <span class="stat-label">Total tasks</span>
+        <strong>{{ totalTasks }}</strong>
+      </article>
+      <article>
+        <span class="stat-label">Open</span>
+        <strong>{{ openTasks }}</strong>
+      </article>
+      <article>
+        <span class="stat-label">Completed</span>
+        <strong>{{ completedTasks }}</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="workspace-card">
+    <div class="toolbar">
+      <div>
+        <h2>Daily tasks</h2>
+        <p>Practice bindings, events, forms, and Angular control flow.</p>
+      </div>
+
+      <!-- The select uses two-way binding as another simple state input. -->
+      <label class="filter-control">
+        <span>Filter</span>
+        <select [(ngModel)]="selectedFilter">
+          <option value="all">All</option>
+          <option value="open">Open</option>
+          <option value="completed">Completed</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- The form submit event keeps keyboard and button submission consistent. -->
+    <form class="task-form" (ngSubmit)="addTask()">
+      <label class="task-input-group">
+        <span>New task</span>
+        <input
+          type="text"
+          name="taskTitle"
+          placeholder="Write a small, concrete task"
+          [(ngModel)]="newTaskTitle"
+        />
+      </label>
+
+      <button type="submit">Add task</button>
+    </form>
+
+    <!-- Modern Angular templates use @if and @for instead of older structural syntax. -->
+    @if (visibleTasks.length > 0) {
+      <ul class="task-list">
+        @for (task of visibleTasks; track task.id) {
+          <li class="task-item" [class.task-item--done]="task.completed">
+            <label class="task-main">
+              <input
+                type="checkbox"
+                [checked]="task.completed"
+                (change)="toggleTask(task.id)"
+              />
+
+              <span>
+                {{ task.title }}
+              </span>
+            </label>
+
+            <button
+              type="button"
+              class="ghost-button"
+              (click)="removeTask(task.id)"
+            >
+              Remove
+            </button>
+          </li>
+        }
+      </ul>
+    } @else {
+      <div class="empty-state">
+        <h3>No tasks match this filter</h3>
+        <p>
+          Change the filter or add a new task to see Angular update the view.
+        </p>
+      </div>
+    }
+  </section>
+</main>

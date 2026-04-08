@@ -1,0 +1,30 @@
+:root {
+  color-scheme: light;
+  --bg: linear-gradient(180deg, #f9fbfd 0%, #eef5ff 100%);
+  --surface: rgba(255, 255, 255, 0.96);
+  --border: #d8e1ed;
+  --text-main: #1b2432;
+  --text-muted: #667286;
+  --accent: #146c94;
+  --accent-soft: #dff1ff;
+  --warning-soft: #fff5dd;
+  --danger-soft: #ffe8e6;
+  --shadow: 0 18px 42px rgba(48, 74, 110, 0.12);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text-main);
+}
+
+button {
+  font: inherit;
+}

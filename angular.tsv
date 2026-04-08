@@ -1,0 +1,126 @@
+Front	Back	Tags
+What is Angular?	A frontend framework for building client-side applications with TypeScript, using components, templates, dependency injection, routing, forms, HTTP, and reactive state tools.	angular overview fundamentals
+What core question does Angular help answer?	How to build a user interface that stays synchronized with application state as the user interacts with it.	angular overview fundamentals
+What are the main building blocks Angular provides for application structure?	Components, templates, dependency injection, routing, forms, HTTP utilities, and reactive tools such as RxJS and signals.	angular overview fundamentals
+What is the core Angular mental model?	The UI is a function of application state.	angular mental-model fundamentals
+What usually happens instead of manually editing the DOM in Angular?	You update component state, and Angular recalculates what should appear on screen.	angular mental-model fundamentals
+What is the usual Angular update flow?	A component holds state, the template reads it, the user interacts, the component updates state, and Angular updates the rendered output.	angular mental-model fundamentals
+Why is TypeScript especially useful in Angular?	Because Angular apps often have structured models, typed forms, reusable component APIs, and services that benefit from explicit contracts.	angular typescript fundamentals
+What is a TypeScript interface used for in Angular?	To define the shape of application data so code is safer, clearer, and easier to refactor.	angular typescript models
+What is a component in Angular?	The main building block of the UI, usually combining a TypeScript class, an HTML template, and optional CSS.	angular components fundamentals
+What does a component class usually own?	UI state, event handling, derived values used by the template, and orchestration of service calls or shared state.	angular components design
+What logic usually should not stay inside a component?	Repeated business logic, low-level persistence details, and application-wide infrastructure concerns.	angular components design
+What is a standalone component?	A component that declares its own Angular dependencies directly and does not need an NgModule.	angular standalone fundamentals
+Why do standalone components reduce indirection?	Because the component directly lists what it imports instead of depending on a separate NgModule declaration.	angular standalone design
+What does bootstrapApplication do?	It starts Angular and uses a specified component as the root of the application.	angular bootstrap fundamentals
+What is ApplicationConfig used for?	To register application-level configuration such as providers, routing, or HTTP setup.	angular bootstrap config
+What is an Angular template?	A declarative HTML-based view that describes what should appear based on component state.	angular templates fundamentals
+What is interpolation in Angular?	Using {{ ... }} to display a component value as text in the template.	angular templates interpolation
+What is property binding in Angular?	Passing a component value into a DOM or component property, such as [disabled]="isSaving".	angular templates binding
+What is event binding in Angular?	Listening to browser or component events with syntax like (click)="save()".	angular templates events
+What is two-way binding in Angular?	A combination of reading a value from the component and writing changes back to it, commonly via [(ngModel)].	angular templates forms
+What does [(ngModel)] do?	It keeps a form input and a component property synchronized in both directions.	angular forms template-driven
+What modern control flow blocks does Angular provide?	@if and @for.	angular templates control-flow
+What does @if do?	It conditionally renders a block of template content based on an expression.	angular templates control-flow
+What does @for do?	It renders repeated template content from a collection.	angular templates control-flow
+What is source state in Angular?	The core stored state of the component, such as an array of items, a selected id, or a loading flag.	angular state fundamentals
+What is derived state in Angular?	State calculated from source state, such as filtered lists, counts, or selected objects.	angular state fundamentals
+Why should derived state usually not be duplicated?	Because it can get out of sync and is often safer to compute from a single source of truth.	angular state design
+What is the common parent-child communication pattern in Angular?	Data flows down through inputs, and events flow up through outputs.	angular components communication
+What is an input in Angular?	A value a parent component passes into a child component.	angular components communication
+What is an output in Angular?	An event a child component emits so the parent can react.	angular components communication
+Why should the parent often own the broader state?	Because it coordinates the page-level behavior while children stay focused and reusable.	angular components design
+What are the two broad styles of forms in Angular?	Template-driven forms and reactive forms.	angular forms fundamentals
+When are template-driven forms a good fit?	For simpler input scenarios where minimal setup is enough.	angular forms template-driven
+When are reactive forms a better fit?	When forms need many fields, complex validation, cross-field rules, or explicit control of form state.	angular forms reactive
+What is a FormControl?	A reactive forms object representing one field, including its value, validity, and interaction state.	angular forms reactive
+What is a FormGroup?	A collection of related form controls treated as one structured form object.	angular forms reactive
+What is field-level validation?	Validation that checks one control in isolation, such as required, min length, or email format.	angular validation forms
+What is group-level validation?	Validation that checks whether several fields make sense together.	angular validation forms
+Why is validation more than preventing bad input?	Because it expresses business rules clearly in the form model.	angular validation design
+What is a service in Angular?	A class that holds logic that does not primarily belong in the visual component layer.	angular services fundamentals
+What are common service responsibilities?	Data access, persistence, business rules, shared state coordination, and infrastructure concerns.	angular services design
+What does @Injectable do?	It tells Angular that a class participates in dependency injection.	angular dependency-injection services
+What does providedIn: 'root' mean?	Angular registers one application-wide instance of the service in the root injector.	angular dependency-injection services
+What is dependency injection in Angular?	The mechanism Angular uses to create and supply objects to classes that need them.	angular dependency-injection fundamentals
+Why is dependency injection useful?	It improves reuse, flexibility, testing, and lifetime management of dependencies.	angular dependency-injection design
+What is a provider in Angular?	A registration that tells Angular how to create or supply a dependency.	angular dependency-injection providers
+What is the root injector?	The application-wide injector that provides dependencies shared across the whole app.	angular dependency-injection providers
+What problem does Angular routing solve?	It maps URLs to components so applications can support navigation, deep linking, and multiple screens.	angular routing fundamentals
+What is a route definition?	A configuration object that describes which path matches and what should happen for that path.	angular routing fundamentals
+What does RouterOutlet do?	It acts as the placeholder where routed components are rendered.	angular routing fundamentals
+Why is routerLink preferred for internal navigation?	Because it lets Angular manage in-app navigation without a full page reload.	angular routing navigation
+What is a route parameter?	A dynamic value in a route path that lets one route definition support many URLs.	angular routing parameters
+What is a redirect route used for?	To send one path to another path, often for defaults or legacy URLs.	angular routing navigation
+What is a wildcard route used for?	To catch unmatched URLs and handle them gracefully.	angular routing navigation
+What is a route guard?	Logic that decides whether navigation to a route should be allowed.	angular routing auth
+What is a common use case for a route guard?	Protecting routes that should only be available to authenticated users.	angular routing auth
+Why is authentication partly a routing concern?	Because the app must decide whether the user is allowed to navigate to a protected page.	angular auth routing
+What is HttpClient in Angular?	A built-in service for making HTTP requests and receiving typed responses as Observables.	angular http fundamentals
+Why does HttpClient return Observables instead of immediate values?	Because network requests are asynchronous and their results may arrive later.	angular http rxjs
+What async UI states should an Angular component often model for HTTP?	Loading, success, and error.	angular http ui-state
+Why should HTTP logic often live in a service instead of the component?	Because the component should focus on UI state while the service focuses on data access.	angular http services
+What is an Observable?	A source of values over time.	angular rxjs fundamentals
+What kinds of things are often represented as Observables in Angular?	HTTP responses, user input streams, route changes, timers, and combined reactive state.	angular rxjs fundamentals
+What is a subscription?	The connection that starts an Observable execution and listens for emitted values or errors.	angular rxjs subscriptions
+What does the next handler in subscribe usually represent?	The success path when the Observable emits a value.	angular rxjs subscriptions
+What does the error handler in subscribe represent?	The failure path when the Observable errors before successfully completing the intended work.	angular rxjs subscriptions
+What is debounceTime used for?	To wait briefly before reacting, often to avoid overreacting to rapid user input such as typing.	angular rxjs operators
+What is distinctUntilChanged used for?	To prevent repeated work when the next value is the same as the previous one.	angular rxjs operators
+What does combineLatest do?	It combines the latest values from multiple streams into one stream.	angular rxjs operators
+What problem does switchMap often solve?	It switches to the latest inner async work and abandons older work that is no longer relevant.	angular rxjs operators
+What is shareReplay used for?	To share a stream result instead of recomputing or re-executing it for each consumer.	angular rxjs operators
+What is a signal in Angular?	A reactive value container for local state that Angular can track.	angular signals fundamentals
+What is computed in Angular signals?	A derived reactive value that automatically recalculates when the signals it depends on change.	angular signals fundamentals
+What is an effect in Angular signals?	A reactive side effect that runs when the signals it reads change.	angular signals fundamentals
+When are signals often a good fit?	For local synchronous UI state, derived values, and template-facing reactive state.	angular signals design
+When is RxJS often a better fit than signals?	For async streams, event coordination over time, and complex Observable composition.	angular signals rxjs
+What is shared state?	State used by multiple components that is often centralized in one service or store-like abstraction.	angular state shared
+What is a single source of truth?	One authoritative place where shared state is owned so other values can derive from it consistently.	angular state shared
+Why is shared state useful?	It prevents duplicated versions of the same data and keeps multiple UI regions synchronized.	angular state shared
+What is ng-content used for?	Content projection, allowing a parent to place custom markup into a child component's template.	angular templates advanced
+What is ng-template used for?	Defining a template fragment that is not rendered immediately and can be reused later.	angular templates advanced
+What is ngTemplateOutlet used for?	Rendering a template reference dynamically where needed.	angular templates advanced
+What is a directive in Angular?	A way to add behavior to an existing element without creating a whole new component.	angular directives fundamentals
+What kinds of things are directives good for?	Dynamic styling, host event handling, and reusable UI behavior.	angular directives design
+What does HostBinding do?	It binds values from a directive to properties of the host element, such as classes, styles, or attributes.	angular directives hostbinding
+What does HostListener do?	It listens for events on the directive's host element.	angular directives hostlistener
+What is a pipe in Angular?	A template-level transformation that converts a value into a display-friendly form.	angular pipes fundamentals
+What are pipes good for?	Formatting status labels, dates, relative times, and other display transformations.	angular pipes design
+What is ChangeDetectionStrategy.OnPush?	A performance-oriented change-detection mode that makes Angular more selective about when a component needs checking.	angular performance change-detection
+Why do immutable updates matter with performance patterns?	Because creating new references makes state transitions clearer and helps Angular detect meaningful changes.	angular performance state
+Why does tracked list rendering matter?	Because it helps Angular identify which repeated items actually changed so it can avoid unnecessary DOM replacement.	angular performance lists
+What is an interceptor in Angular HTTP?	A function or class that sits between app code and HTTP execution to inspect or modify requests, responses, or errors.	angular http interceptors
+What kinds of concerns belong in interceptors?	Shared headers, URL rewriting, logging, auth metadata, and error normalization.	angular http interceptors
+Why are interceptors useful?	They centralize repeated HTTP behavior so services and components stay cleaner.	angular http interceptors
+What are two common testing targets in Angular?	Services for business logic and components for rendered UI behavior.	angular testing fundamentals
+Why is Angular TestBed useful?	It provides an Angular-aware environment for testing components and services.	angular testing fundamentals
+Why is well-structured code easier to test?	Because responsibilities are clearly separated, so each test can focus on one concern.	angular testing design
+What is a common scalable Angular folder split?	Core for app-wide concerns, shared for reusable UI, layout for shells, and features for domain-specific functionality.	angular architecture structure
+Why is application structure about more than folders?	Because it reflects ownership boundaries and makes the codebase easier to understand and evolve.	angular architecture structure
+What kinds of things often live in core?	App-wide services, shared models, and infrastructure used broadly across the application.	angular architecture core
+What kinds of things often live in shared?	Reusable UI pieces and utilities that are not specific to one domain feature.	angular architecture shared
+What kinds of things often live in layout?	Shells, navigation framing, and persistent structural UI around routed features.	angular architecture layout
+What kinds of things often live in features?	Domain-specific pages, local UI, and feature-owned logic.	angular architecture features
+Why are route boundaries often a good match for feature boundaries?	Because routed areas naturally represent distinct user-facing capabilities.	angular architecture routing
+What is advanced UI integration in Angular?	Coordinating richer behaviors such as drag-and-drop, clipboard access, storage, and complex dashboards with clear state management.	angular ui-integration advanced
+Why does advanced UI often increase state complexity?	Because multiple interaction states, browser APIs, and visual regions must stay synchronized.	angular ui-integration state
+What is a practical definition of single source of truth?	One authoritative state owner from which derived and displayed values are calculated.	angular principles state
+What does clear ownership mean in Angular design?	Each important responsibility has an obvious home, such as component, service, store, or interceptor.	angular principles design
+Why is separation of concerns important in Angular?	Because mixing UI, persistence, business logic, and infrastructure in one place makes code harder to maintain and test.	angular principles design
+Why should loading and error states be modeled explicitly?	Because they are normal application states in async workflows, not exceptional details to ignore.	angular principles async
+What is a common Angular mistake related to state?	Duplicating derived state instead of calculating it from a single source of truth.	angular mistakes state
+What is a common Angular mistake related to components?	Putting too much business logic or infrastructure logic directly inside components.	angular mistakes components
+What is a common Angular mistake related to architecture?	Adding abstractions before the code actually needs them.	angular mistakes architecture
+What is a strong high-level Angular learning path?	Components and templates, state and events, parent-child communication, forms, services and DI, routing, HTTP, RxJS, signals, shared state, template reuse, performance, auth, testing, and architecture.	angular learning-path overview
+What does it mean to understand Angular deeply?	To think in terms of state, ownership, boundaries, derived data, async flow, and reusable UI structure rather than only memorizing APIs.	angular overview mastery
+What is NgRx in Angular?	A formal state-management library for Angular that organizes data flow around actions, reducers, selectors, effects, and a centralized store.	angular ngrx fundamentals
+What problem does NgRx primarily solve?	It brings predictable structure to complex shared application state, especially when many features, async flows, and teams need consistent state-management rules.	angular ngrx fundamentals
+What is an action in NgRx?	A named event object that describes something that happened and may lead to a state transition.	angular ngrx actions
+What is a reducer in NgRx?	A pure function that takes the previous state and an action and returns the next state.	angular ngrx reducers
+Why must reducers stay pure in NgRx?	Because predictable state transitions depend on reducers having no side effects, no service calls, and no hidden mutations.	angular ngrx reducers
+What is a selector in NgRx?	A reusable function for reading a slice of store state or deriving a computed value from it.	angular ngrx selectors
+Why are selectors important in NgRx?	They centralize derived read logic so components do not duplicate filtering, lookup, or summary calculations.	angular ngrx selectors
+What is an effect in NgRx?	A reactive handler that listens for actions, performs side effects such as HTTP calls, and dispatches follow-up success or failure actions.	angular ngrx effects
+What is the usual NgRx component pattern?	Components select state from the store and dispatch actions, while reducers and effects own the state transition and side-effect logic.	angular ngrx components
+When is NgRx often a better fit than a small custom store service?	When the application has complex cross-feature state, many async workflows, or a team that benefits from stronger conventions and more explicit event history.	angular ngrx tradeoffs

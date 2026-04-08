@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-04-04T10:15:00.000Z",
+  "announcements": [
+    {
+      "id": "ann-1",
+      "title": "Search rollout enters final validation",
+      "team": "Platform",
+      "summary": "The final wave of customers will move this afternoon after latency checks finish."
+    },
+    {
+      "id": "ann-2",
+      "title": "Support bulk actions training complete",
+      "team": "Support",
+      "summary": "Support leads completed the final training pass before the wider enablement rollout."
+    }
+  ],
+  "checks": [
+    {
+      "id": "chk-1",
+      "name": "Billing export integrity",
+      "status": "Healthy",
+      "owner": "Alicia"
+    },
+    {
+      "id": "chk-2",
+      "name": "SSO invitation recovery",
+      "status": "Warning",
+      "owner": "Dina"
+    },
+    {
+      "id": "chk-3",
+      "name": "Renewal forecasting inputs",
+      "status": "Action needed",
+      "owner": "Marco"
+    }
+  ]
+}

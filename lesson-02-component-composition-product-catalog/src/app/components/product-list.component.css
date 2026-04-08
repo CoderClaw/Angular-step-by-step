@@ -1,0 +1,32 @@
+.list-panel {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.list-header h2,
+.list-header p,
+.empty-state h3,
+.empty-state p {
+  margin-top: 0;
+}
+
+.list-header p,
+.empty-state p {
+  color: var(--text-muted);
+}
+
+.product-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.empty-state {
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: 18px;
+  border: 1px dashed var(--border);
+  background: var(--surface-strong);
+}

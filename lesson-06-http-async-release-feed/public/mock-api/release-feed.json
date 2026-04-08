@@ -1,0 +1,29 @@
+[
+  {
+    "id": "platform-search-rollout",
+    "title": "Faster search results for account and workspace pages",
+    "team": "Platform",
+    "summary": "Search results now return faster for large customer workspaces after backend index tuning.",
+    "details": "This release reduces query latency on account, workspace, and settings pages. The rollout also adds safer fallbacks when an index is cold, which lowers timeout risk during peak usage.",
+    "status": "Published",
+    "publishedAt": "2026-04-04T08:00:00.000Z"
+  },
+  {
+    "id": "support-inbox-bulk-actions",
+    "title": "Bulk actions for support inbox triage",
+    "team": "Support",
+    "summary": "Support teams can now close, assign, or tag multiple conversations in a single action.",
+    "details": "The feature is rolling out gradually to teams with higher ticket volume. It is designed to reduce repetitive triage work while keeping activity logs and ownership history intact.",
+    "status": "Rolling Out",
+    "publishedAt": "2026-04-03T14:20:00.000Z"
+  },
+  {
+    "id": "analytics-retention-dashboard",
+    "title": "New weekly retention dashboard for product leads",
+    "team": "Analytics",
+    "summary": "A new dashboard view highlights cohort retention trends and segment comparisons.",
+    "details": "The dashboard adds weekly retention trends, breakdowns by customer segment, and export support for review meetings. The team is validating final metric definitions before general availability.",
+    "status": "Planned",
+    "publishedAt": "2026-04-01T10:15:00.000Z"
+  }
+]

@@ -1,0 +1,81 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 12</p>
+    <h1>Performance and change detection patterns in Angular</h1>
+    <p class="hero-copy">
+      This review board focuses on practical performance patterns: `OnPush`
+      components, immutable updates, `computed()` for derived filtering, and
+      `track` in a large list to avoid unnecessary DOM churn.
+    </p>
+
+    <div class="summary-grid">
+      <article>
+        <span>Total items</span>
+        <strong>{{ totalCount() }}</strong>
+      </article>
+      <article>
+        <span>Approved</span>
+        <strong>{{ approvedCount() }}</strong>
+      </article>
+      <article>
+        <span>Blocked</span>
+        <strong>{{ blockedCount() }}</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="controls-panel">
+    <label class="field field--wide">
+      <span>Search</span>
+      <input
+        type="search"
+        placeholder="Filter by title, owner, or summary"
+        [value]="query()"
+        (input)="onQueryChanged($event)"
+      />
+    </label>
+
+    <label class="field">
+      <span>Status</span>
+      <select [value]="statusFilter()" (change)="onStatusChanged($event)">
+        <option value="all">All</option>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="blocked">Blocked</option>
+      </select>
+    </label>
+
+    <div class="stats-card">
+      <span>Visible rows</span>
+      <strong>{{ visibleItems().length }}</strong>
+    </div>
+  </section>
+
+  <section class="board-panel">
+    <div class="panel-header">
+      <div>
+        <h2>Review queue</h2>
+        <p>
+          The list uses `track item.id` so Angular can keep row DOM stable
+          during updates.
+        </p>
+      </div>
+    </div>
+
+    <div class="rows-grid">
+      @for (item of visibleItems(); track item.id) {
+        <app-review-row
+          [item]="item"
+          (approved)="approve($event)"
+          (blocked)="block($event)"
+        />
+      }
+    </div>
+
+    @if (visibleItems().length < filteredItems().length) {
+      <button type="button" class="load-more-button" (click)="loadMore()">
+        Load 30 more rows
+      </button>
+    }
+  </section>
+</main>

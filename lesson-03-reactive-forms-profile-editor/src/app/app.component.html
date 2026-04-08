@@ -1,0 +1,229 @@
+<main class="page-shell">
+  <section class="hero-panel">
+    <p class="eyebrow">Lesson 03</p>
+    <h1>Reactive forms with typed controls and business validation</h1>
+    <p class="hero-copy">
+      This lesson uses a realistic team profile editor to show how Angular
+      reactive forms manage state, validation, submission, and cross-field
+      rules.
+    </p>
+
+    <div class="status-row">
+      <article>
+        <span>Form status</span>
+        <strong>{{ formStatusLabel }}</strong>
+      </article>
+      <article>
+        <span>Notification channel</span>
+        <strong>{{ notificationChannel.value }}</strong>
+      </article>
+      <article>
+        <span>Focus hours</span>
+        <strong>{{ weeklyFocusHours.value }} / week</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="layout-grid">
+    <form
+      class="editor-panel"
+      [formGroup]="profileForm"
+      (ngSubmit)="saveProfile()"
+    >
+      <div class="panel-header">
+        <div>
+          <h2>Team profile editor</h2>
+          <p>
+            Each field is backed by a typed form control inside one reactive
+            form group.
+          </p>
+        </div>
+
+        <div class="button-row">
+          <button
+            type="button"
+            class="ghost-button"
+            (click)="resetToStarterData()"
+          >
+            Reset
+          </button>
+          <button type="submit">Save profile</button>
+        </div>
+      </div>
+
+      <section class="field-grid">
+        <label class="field">
+          <span>Full name</span>
+          <input type="text" formControlName="fullName" />
+          @if (
+            (fullName.touched || submitAttempted) &&
+            fullName.hasError("required")
+          ) {
+            <small class="error-text">Full name is required.</small>
+          }
+          @if (
+            (fullName.touched || submitAttempted) &&
+            fullName.hasError("minlength")
+          ) {
+            <small class="error-text">Use at least 3 characters.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Email</span>
+          <input type="email" formControlName="email" />
+          @if (
+            (email.touched || submitAttempted) && email.hasError("required")
+          ) {
+            <small class="error-text">Email is required.</small>
+          }
+          @if ((email.touched || submitAttempted) && email.hasError("email")) {
+            <small class="error-text">Enter a valid email address.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Role</span>
+          <select formControlName="role">
+            @for (role of availableRoles; track role) {
+              <option [value]="role">{{ role }}</option>
+            }
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Time zone</span>
+          <select formControlName="timeZone">
+            @for (timeZone of availableTimeZones; track timeZone) {
+              <option [value]="timeZone">{{ timeZone }}</option>
+            }
+          </select>
+        </label>
+
+        <label class="field field--full">
+          <span>Bio</span>
+          <textarea rows="5" formControlName="bio"></textarea>
+          @if ((bio.touched || submitAttempted) && bio.hasError("required")) {
+            <small class="error-text">Bio is required.</small>
+          }
+          @if ((bio.touched || submitAttempted) && bio.hasError("minlength")) {
+            <small class="error-text"
+              >Bio should be at least 20 characters long.</small
+            >
+          }
+        </label>
+
+        <label class="field">
+          <span>Notification channel</span>
+          <select formControlName="notificationChannel">
+            <option value="email">Email</option>
+            <option value="slack">Slack</option>
+            <option value="none">None</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Slack handle</span>
+          <input
+            type="text"
+            formControlName="slackHandle"
+            placeholder="@your-handle"
+          />
+          @if (showSlackHandleRequirement) {
+            <small class="error-text">
+              Slack handle is required when Slack notifications are selected.
+            </small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Weekly focus hours</span>
+          <input
+            type="number"
+            formControlName="weeklyFocusHours"
+            min="4"
+            max="40"
+          />
+          @if (
+            (weeklyFocusHours.touched || submitAttempted) &&
+            weeklyFocusHours.hasError("min")
+          ) {
+            <small class="error-text">Use at least 4 focus hours.</small>
+          }
+          @if (
+            (weeklyFocusHours.touched || submitAttempted) &&
+            weeklyFocusHours.hasError("max")
+          ) {
+            <small class="error-text"
+              >Keep the value at or below 40 hours.</small
+            >
+          }
+        </label>
+
+        <label class="checkbox-row field--full">
+          <input type="checkbox" formControlName="receiveDigest" />
+          <span>Send a weekly summary digest to this user</span>
+        </label>
+      </section>
+    </form>
+
+    <aside class="preview-panel">
+      <h2>Saved payload preview</h2>
+      <p>
+        This panel shows the validated data shape that might be sent to an API
+        or saved in a service.
+      </p>
+
+      @if (savedProfile; as profile) {
+        <div class="preview-card">
+          <dl>
+            <div>
+              <dt>Name</dt>
+              <dd>{{ profile.fullName }}</dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd>{{ profile.email }}</dd>
+            </div>
+            <div>
+              <dt>Role</dt>
+              <dd>{{ profile.role }}</dd>
+            </div>
+            <div>
+              <dt>Time zone</dt>
+              <dd>{{ profile.timeZone }}</dd>
+            </div>
+            <div>
+              <dt>Notifications</dt>
+              <dd>{{ profile.notificationChannel }}</dd>
+            </div>
+            <div>
+              <dt>Slack handle</dt>
+              <dd>{{ profile.slackHandle || "Not provided" }}</dd>
+            </div>
+            <div>
+              <dt>Focus hours</dt>
+              <dd>{{ profile.weeklyFocusHours }}</dd>
+            </div>
+            <div>
+              <dt>Digest</dt>
+              <dd>{{ profile.receiveDigest ? "Enabled" : "Disabled" }}</dd>
+            </div>
+          </dl>
+
+          <div class="bio-preview">
+            <h3>Bio</h3>
+            <p>{{ profile.bio }}</p>
+          </div>
+        </div>
+      } @else {
+        <div class="empty-preview">
+          <h3>No saved profile yet</h3>
+          <p>
+            Submit a valid form to see the typed payload that Angular returns.
+          </p>
+        </div>
+      }
+    </aside>
+  </section>
+</main>

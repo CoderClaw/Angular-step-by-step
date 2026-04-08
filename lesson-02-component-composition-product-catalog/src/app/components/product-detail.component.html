@@ -1,0 +1,47 @@
+<aside class="detail-panel">
+  <h2>Selected product</h2>
+
+  @if (product(); as activeProduct) {
+    <div class="detail-card">
+      <div class="detail-header">
+        <div>
+          <p class="detail-category">{{ activeProduct.category }}</p>
+          <h3>{{ activeProduct.name }}</h3>
+        </div>
+
+        <strong>{{
+          activeProduct.price | currency: "USD" : "symbol" : "1.0-0"
+        }}</strong>
+      </div>
+
+      <p class="detail-description">{{ activeProduct.description }}</p>
+
+      <dl class="detail-grid">
+        <div>
+          <dt>Inventory</dt>
+          <dd>{{ activeProduct.inventory }} units</dd>
+        </div>
+        <div>
+          <dt>Lead time</dt>
+          <dd>{{ activeProduct.leadTime }}</dd>
+        </div>
+        <div>
+          <dt>Shortlisted</dt>
+          <dd>{{ activeProduct.shortlisted ? "Yes" : "No" }}</dd>
+        </div>
+        <div>
+          <dt>Featured</dt>
+          <dd>{{ activeProduct.featured ? "Yes" : "No" }}</dd>
+        </div>
+      </dl>
+    </div>
+  } @else {
+    <div class="detail-empty">
+      <h3>No product selected</h3>
+      <p>
+        Choose a visible item from the list to inspect how the detail component
+        updates.
+      </p>
+    </div>
+  }
+</aside>
