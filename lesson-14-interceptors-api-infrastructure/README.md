@@ -1,41 +1,41 @@
-# Lesson 14: Interceptors and API Infrastructure with an Operations Overview
+# Leccion 14: Interceptors e infraestructura de API con una vista operativa
 
-This lesson is a Vite-based Angular application that teaches how to centralize request behavior and error handling with `HttpClient` interceptors and a service layer.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como centralizar el comportamiento de peticiones y el manejo de errores con interceptors de `HttpClient` y una capa de servicios.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to register functional interceptors with `provideHttpClient`
-- How an interceptor can rewrite API URLs before the request is sent
-- How an interceptor can attach shared headers such as auth or tracing metadata
-- How to normalize HTTP failures into consistent application-level errors
-- How a service layer keeps endpoint details out of components
+- Como registrar interceptors funcionales con `provideHttpClient`
+- Como un interceptor puede reescribir URLs de API antes de enviar la peticion
+- Como un interceptor puede adjuntar cabeceras compartidas como autenticacion o metadatos de trazado
+- Como normalizar fallos HTTP en errores consistentes a nivel de aplicacion
+- Como una capa de servicios mantiene los detalles del endpoint fuera de los componentes
 
-## Main files
+## Archivos principales
 
-- `src/app/app.config.ts`: `HttpClient` registration with interceptor wiring
-- `src/app/interceptors/api-infrastructure.interceptor.ts`: shared request and error behavior
-- `src/app/services/operations-api.service.ts`: typed API access layer
-- `public/mock-api/operations-overview.json`: mock API response used by the service
+- `src/app/app.config.ts`: registro de `HttpClient` con cableado del interceptor
+- `src/app/interceptors/api-infrastructure.interceptor.ts`: comportamiento compartido de peticiones y errores
+- `src/app/services/operations-api.service.ts`: capa tipada de acceso a API
+- `public/mock-api/operations-overview.json`: respuesta de API simulada usada por el servicio
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `operations-api.service.ts` and inspect the simple `/api/...` endpoint usage.
-2. Read `api-infrastructure.interceptor.ts` and see how the URL is rewritten to `/mock-api/...`.
-3. Inspect the interceptor error mapping and compare it to the component’s error handling.
-4. Run the app and trigger the simulated failed request.
-5. Notice how the component stays focused on view state rather than shared HTTP concerns.
+1. Abre `operations-api.service.ts` e inspecciona el uso sencillo del endpoint `/api/...`.
+2. Lee `api-infrastructure.interceptor.ts` y observa como la URL se reescribe a `/mock-api/...`.
+3. Inspecciona el mapeo de errores del interceptor y comparalo con el manejo de errores del componente.
+4. Ejecuta la app y dispara la peticion fallida simulada.
+5. Observa como el componente se mantiene enfocado en estado de vista en lugar de preocupaciones HTTP compartidas.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-As Angular applications grow, repeated request headers, base URLs, tracing IDs, auth tokens, and error normalization quickly become cross-cutting concerns. Interceptors are the right place for those concerns, while API services keep components thin and predictable.
+A medida que crecen las aplicaciones Angular, las cabeceras repetidas de peticion, URLs base, IDs de trazado, tokens de autenticacion y normalizacion de errores se convierten rapidamente en preocupaciones transversales. Los interceptors son el lugar correcto para esas preocupaciones, mientras los servicios de API mantienen los componentes delgados y predecibles.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 15 will focus on testing Angular components and services.
+La Leccion 15 se centrara en probar componentes y servicios Angular.

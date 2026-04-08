@@ -5,7 +5,7 @@ import { ReleaseReadinessService } from "./services/release-readiness.service";
 
 describe("AppComponent", () => {
   beforeEach(async () => {
-    // The component test replaces the real service so the template is driven by known values.
+    // La prueba del componente reemplaza el servicio real para que la plantilla use valores conocidos.
     await TestBed.configureTestingModule({
       imports: [AppComponent],
       providers: [

@@ -18,8 +18,8 @@ export const apiInfrastructureInterceptor: HttpInterceptorFn = (
     ? request.url.replace("/api/", "/mock-api/")
     : request.url;
 
-  // Interceptors are a good place for shared request infrastructure.
-  // Here we rewrite the API base path and attach mock tracing/auth headers.
+  // Los interceptors son un buen lugar para infraestructura compartida de peticiones.
+  // Aqui reescribimos la ruta base de la API y anadimos cabeceras simuladas de trazado y autenticacion.
   const nextRequest = request.clone({
     url: rewrittenUrl,
     setHeaders: {

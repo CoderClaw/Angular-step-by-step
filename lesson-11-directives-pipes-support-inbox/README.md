@@ -1,41 +1,41 @@
-# Lesson 11: Directives and Pipes with a Support Inbox
+# Leccion 11: Directivas y pipes con una bandeja de soporte
 
-This lesson is a Vite-based Angular application that teaches how to package reusable presentation behavior into a custom attribute directive and custom pipes.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como empaquetar comportamiento de presentacion reutilizable en una directiva de atributo personalizada y pipes personalizados.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to build a standalone custom attribute directive
-- How to use `HostBinding` to control host element styles
-- How to use `HostListener` to react to host events
-- How to create standalone custom pipes for domain-specific formatting
-- How directives and pipes reduce repeated view logic across templates
+- Como construir una directiva de atributo personalizada standalone
+- Como usar `HostBinding` para controlar estilos del elemento host
+- Como usar `HostListener` para reaccionar a eventos del host
+- Como crear pipes personalizados standalone para formato especifico del dominio
+- Como las directivas y los pipes reducen logica de vista repetida en las plantillas
 
-## Main files
+## Archivos principales
 
-- `src/app/directives/priority-emphasis.directive.ts`: reusable host styling and hover behavior
-- `src/app/pipes/friendly-status.pipe.ts`: transforms internal status values into user-facing text
-- `src/app/pipes/relative-time.pipe.ts`: formats timestamps into simple relative labels
-- `src/app/app.component.html`: applies the directive and pipes in a realistic inbox screen
+- `src/app/directives/priority-emphasis.directive.ts`: estilo reutilizable del host y comportamiento hover
+- `src/app/pipes/friendly-status.pipe.ts`: transforma valores internos de estado en texto orientado al usuario
+- `src/app/pipes/relative-time.pipe.ts`: formatea marcas de tiempo como etiquetas relativas sencillas
+- `src/app/app.component.html`: aplica la directiva y los pipes en una pantalla de bandeja realista
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `priority-emphasis.directive.ts` and inspect the host bindings and host listeners.
-2. Read both pipe files and compare their transform responsibilities.
-3. Open `app.component.html` and find where each reusable piece is applied.
-4. Change ticket priorities and statuses to see the directive and pipes update the view.
-5. Consider how much repeated logic would appear in the template without these reusable pieces.
+1. Abre `priority-emphasis.directive.ts` e inspecciona los host bindings y host listeners.
+2. Lee ambos archivos de pipes y compara sus responsabilidades de transformacion.
+3. Abre `app.component.html` y encuentra donde se aplica cada pieza reutilizable.
+4. Cambia prioridades y estados de tickets para ver como la directiva y los pipes actualizan la vista.
+5. Considera cuanta logica repetida apareceria en la plantilla sin estas piezas reutilizables.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Support dashboards, admin tools, back-office screens, and internal workflows often repeat the same formatting and visual emphasis rules across many views. Directives and pipes help keep those rules consistent and reusable.
+Los dashboards de soporte, herramientas de administracion, pantallas internas y flujos de trabajo suelen repetir las mismas reglas de formato y enfasis visual en muchas vistas. Las directivas y los pipes ayudan a mantener esas reglas consistentes y reutilizables.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 12 will focus on performance and change-detection-oriented patterns.
+La Leccion 12 se centrara en patrones de rendimiento y deteccion de cambios.

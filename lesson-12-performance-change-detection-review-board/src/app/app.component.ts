@@ -22,10 +22,10 @@ export class AppComponent {
   readonly statusFilter = signal<ReviewStatus>("all");
   readonly limit = signal(30);
 
-  // The board starts with many items to make list rendering and filtering relevant.
+  // El tablero empieza con muchos elementos para que el renderizado y filtrado de listas sean relevantes.
   readonly items = signal<ReviewItem[]>(this.createItems());
 
-  // computed caches derived results until one dependency changes.
+  // computed mantiene en cache los resultados derivados hasta que cambia una dependencia.
   readonly filteredItems = computed(() => {
     const normalizedQuery = this.query().trim().toLowerCase();
 

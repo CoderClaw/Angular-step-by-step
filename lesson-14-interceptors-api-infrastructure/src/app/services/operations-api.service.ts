@@ -10,8 +10,8 @@ import { OperationsOverview } from "../operations-overview.model";
 export class OperationsApiService {
   private readonly http = inject(HttpClient);
 
-  // The service exposes a clean API to the component.
-  // The component does not need to know about URL rewriting or shared headers.
+  // El servicio expone una API limpia al componente.
+  // El componente no necesita conocer la reescritura de URLs ni las cabeceras compartidas.
   getOverview(simulateFailure = false): Observable<OperationsOverview> {
     const endpoint = simulateFailure
       ? "/api/missing-operations-overview.json"

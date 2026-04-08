@@ -1,114 +1,114 @@
-# Lesson 11 Guide: Directives and Pipes
+# Guia de la Leccion 11: Directivas y pipes
 
-This lesson introduces two Angular tools that help you reuse behavior and formatting directly in templates.
+Esta leccion introduce dos herramientas de Angular que ayudan a reutilizar comportamiento y formato directamente en las plantillas.
 
-## Why Directives and Pipes Matter
+## Por que importan las directivas y los pipes
 
-As templates grow, two kinds of repetition often appear:
+A medida que las plantillas crecen, suelen aparecer dos tipos de repeticion:
 
-- repeated UI behavior
-- repeated formatting rules
+- comportamiento de UI repetido
+- reglas de formato repetidas
 
-If that logic stays duplicated in every component, templates become noisy and hard to maintain.
+Si esa logica se mantiene duplicada en cada componente, las plantillas se vuelven ruidosas y dificiles de mantener.
 
-Directives and pipes solve those two problems in different ways.
+Las directivas y los pipes resuelven esos dos problemas de maneras distintas.
 
-## Directives
+## Directivas
 
-A directive adds behavior to an existing element.
+Una directiva anade comportamiento a un elemento existente.
 
-It does not necessarily create a whole new component. Instead, it enhances an element that already exists.
+No necesariamente crea un componente completo nuevo. En su lugar, mejora un elemento que ya existe.
 
-This is useful when you want reusable behavior such as:
+Esto es util cuando quieres comportamiento reutilizable como:
 
-- emphasis for priority levels
-- hover interaction
-- dynamic classes or styles
-- host event handling
+- enfasis para niveles de prioridad
+- interaccion hover
+- clases o estilos dinamicos
+- manejo de eventos del host
 
 ### `HostBinding`
 
-`HostBinding` lets a directive bind values directly to the host element.
+`HostBinding` permite que una directiva vincule valores directamente al elemento host.
 
-That means the directive can control things like:
+Eso significa que la directiva puede controlar cosas como:
 
-- CSS classes
-- inline styles
-- ARIA attributes
+- clases CSS
+- estilos inline
+- atributos ARIA
 
 ### `HostListener`
 
-`HostListener` lets a directive react to events on its host element.
+`HostListener` permite que una directiva reaccione a eventos en su elemento host.
 
-That means the directive can respond to:
+Eso significa que la directiva puede responder a:
 
-- clicks
-- mouseenter and mouseleave
-- keyboard events
+- clics
+- `mouseenter` y `mouseleave`
+- eventos de teclado
 
-Together, `HostBinding` and `HostListener` make directives a powerful way to package reusable UI behavior.
+Juntos, `HostBinding` y `HostListener` hacen que las directivas sean una forma potente de empaquetar comportamiento de UI reutilizable.
 
 ## Pipes
 
-A pipe transforms a value for display in the template.
+Un pipe transforma un valor para mostrarlo en la plantilla.
 
-It is usually used when you want formatting logic to stay out of the component class.
+Suele usarse cuando quieres que la logica de formato permanezca fuera de la clase del componente.
 
-Examples:
+Ejemplos:
 
-- turning a status code into a friendlier label
-- formatting relative time
-- converting domain values into UI-friendly text
+- convertir un codigo de estado en una etiqueta mas amigable
+- formatear tiempo relativo
+- convertir valores del dominio en texto amigable para la UI
 
-Pipes are especially useful because they keep templates readable while still making formatting rules reusable.
+Los pipes son especialmente utiles porque mantienen las plantillas legibles y al mismo tiempo hacen reutilizables las reglas de formato.
 
-## Why This Lesson Uses a Support Inbox
+## Por que esta leccion usa una bandeja de soporte
 
-A support inbox is a good example because it naturally has:
+Una bandeja de soporte es un buen ejemplo porque naturalmente tiene:
 
-- status labels
-- priority emphasis
-- dates and times
-- repeated rows of similar data
+- etiquetas de estado
+- enfasis de prioridad
+- fechas y horas
+- filas repetidas de datos similares
 
-That makes it a practical place to teach both directives and pipes.
+Eso la convierte en un lugar practico para ensenar tanto directivas como pipes.
 
-## The Big Design Lesson
+## La gran leccion de diseno
 
-This lesson is really about choosing the right form of reuse.
+Esta leccion trata realmente de elegir la forma correcta de reutilizacion.
 
-Use a component when you are reusing a chunk of UI structure.
+Usa un componente cuando estes reutilizando una parte de estructura de UI.
 
-Use a directive when you are reusing behavior on existing elements.
+Usa una directiva cuando estes reutilizando comportamiento sobre elementos existentes.
 
-Use a pipe when you are reusing display transformation logic.
+Usa un pipe cuando estes reutilizando logica de transformacion para visualizacion.
 
-That distinction is very important in Angular design.
+Esa distincion es muy importante en el diseno con Angular.
 
-## How to Study the Lesson
+## Como estudiar la leccion
 
-Read it in this order:
+Leela en este orden:
 
-1. Identify the repeated formatting problems.
-2. See which ones are solved with pipes.
-3. Identify the repeated UI behavior problems.
-4. See which ones are solved with a directive.
+1. Identifica los problemas de formato repetido.
+2. Mira cuales se resuelven con pipes.
+3. Identifica los problemas de comportamiento de UI repetido.
+4. Mira cuales se resuelven con una directiva.
 
-This helps you connect the code choice to the problem being solved.
+Esto ayuda a conectar la eleccion de codigo con el problema que se esta resolviendo.
 
-## Exercises
+## Ejercicios
 
-1. Add another custom pipe for a display value.
-2. Extend the directive with another host style or class rule.
-3. Add keyboard behavior to the directive.
-4. Replace one inline formatting expression with a reusable pipe.
+1. Anade otro pipe personalizado para un valor de visualizacion.
+2. Extiende la directiva con otra regla de estilo o clase del host.
+3. Anade comportamiento de teclado a la directiva.
+4. Sustituye una expresion de formato inline por un pipe reutilizable.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- what a directive is good for
-- what a pipe is good for
-- why not all reuse should become a component
+- para que sirve una directiva
+- para que sirve un pipe
+- por que no toda reutilizacion debe convertirse en un componente
 
-The next lesson moves into performance and change detection, where Angular efficiency becomes a more explicit concern.
+La siguiente leccion entra en rendimiento y deteccion de cambios, donde la eficiencia de Angular se vuelve una preocupacion mas explicita.

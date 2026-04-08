@@ -1,123 +1,123 @@
-# Lesson 14 Guide: Interceptors and API Infrastructure
+# Guia de la Leccion 14: Interceptors e infraestructura de API
 
-This lesson shifts attention from individual components to application-wide HTTP behavior.
+Esta leccion desplaza la atencion desde componentes individuales hacia el comportamiento HTTP de toda la aplicacion.
 
-By this point in the series, you have already seen `HttpClient`. Now the question is:
+A estas alturas de la serie, ya has visto `HttpClient`. Ahora la pregunta es:
 
-How do you avoid repeating the same request setup and error-handling logic everywhere?
+Como evitas repetir la misma configuracion de peticiones y logica de manejo de errores en todas partes?
 
-## Why Interceptors Matter
+## Por que importan los interceptors
 
-In a real application, many requests share the same concerns:
+En una aplicacion real, muchas peticiones comparten las mismas preocupaciones:
 
-- a base URL
-- auth headers
-- request IDs or tracing metadata
-- consistent error normalization
+- una URL base
+- cabeceras de autenticacion
+- IDs de peticion o metadatos de trazado
+- normalizacion consistente de errores
 
-If every component or service repeats that work, the code becomes inconsistent and fragile.
+Si cada componente o servicio repite ese trabajo, el codigo se vuelve inconsistente y fragil.
 
-Interceptors solve this by centralizing request and response behavior.
+Los interceptors resuelven esto centralizando el comportamiento de peticiones y respuestas.
 
-## What This Lesson Builds
+## Que construye esta leccion
 
-The example is an operations overview loaded through a typed service and a functional interceptor.
+El ejemplo es una vista operativa cargada a traves de un servicio tipado y un interceptor funcional.
 
-That is a good example because it shows the separation clearly:
+Es un buen ejemplo porque muestra con claridad la separacion:
 
-- the component asks for data
-- the service calls a simple endpoint
-- the interceptor handles shared HTTP concerns
+- el componente pide datos
+- el servicio llama a un endpoint sencillo
+- el interceptor maneja las preocupaciones HTTP compartidas
 
-## What an Interceptor Does
+## Que hace un interceptor
 
-An interceptor sits between your app code and the underlying HTTP execution.
+Un interceptor se situa entre el codigo de tu app y la ejecucion HTTP subyacente.
 
-It can inspect or modify:
+Puede inspeccionar o modificar:
 
-- outgoing requests
-- incoming responses
-- errors
+- peticiones salientes
+- respuestas entrantes
+- errores
 
-This means it is a good place for cross-cutting concerns that should apply to many requests.
+Eso significa que es un buen lugar para preocupaciones transversales que deberian aplicar a muchas peticiones.
 
-## Functional Interceptors
+## Interceptors funcionales
 
-Modern Angular supports functional interceptors.
+Angular moderno admite interceptors funcionales.
 
-This is useful because they are compact and easy to read.
+Esto es util porque son compactos y faciles de leer.
 
-The lesson likely shows an interceptor doing things like:
+La leccion probablemente muestra un interceptor haciendo cosas como:
 
-- rewriting a URL
-- attaching shared headers
-- converting HTTP failures into clearer application-level errors
+- reescribir una URL
+- adjuntar cabeceras compartidas
+- convertir fallos HTTP en errores de aplicacion mas claros
 
-## Why URL Rewriting Is a Good Teaching Tool
+## Por que reescribir URLs es una buena herramienta didactica
 
-URL rewriting demonstrates the idea of central infrastructure very clearly.
+La reescritura de URLs demuestra la idea de infraestructura central con mucha claridad.
 
-The service can call a simple `/api/...` endpoint, while the interceptor decides how that should really be resolved.
+El servicio puede llamar a un endpoint sencillo `/api/...`, mientras el interceptor decide como debe resolverse realmente.
 
-That means components and services do not need to know every environment or deployment detail.
+Eso significa que componentes y servicios no necesitan conocer cada detalle de entorno o despliegue.
 
-## Shared Headers
+## Cabeceras compartidas
 
-Headers such as auth tokens or request IDs are classic interceptor work.
+Cabeceras como tokens de autenticacion o IDs de peticion son trabajo clasico de interceptor.
 
-Without an interceptor, every request would need to repeat them.
+Sin un interceptor, cada peticion tendria que repetirlas.
 
-With an interceptor, the behavior is centralized and consistent.
+Con un interceptor, el comportamiento se centraliza y se mantiene consistente.
 
-## Error Normalization
+## Normalizacion de errores
 
-Raw HTTP errors are often too low-level for components.
+Los errores HTTP sin procesar suelen ser demasiado de bajo nivel para los componentes.
 
-A component usually wants a usable error message, not a full transport-level object.
+Un componente normalmente quiere un mensaje de error util, no un objeto completo a nivel de transporte.
 
-An interceptor can translate those failures into a cleaner form that the rest of the app can work with more consistently.
+Un interceptor puede traducir esos fallos a una forma mas limpia con la que el resto de la app pueda trabajar de manera mas consistente.
 
-## The Role of the Service Layer
+## El papel de la capa de servicios
 
-This lesson also reinforces a pattern that matters a lot in real applications.
+Esta leccion tambien refuerza un patron que importa mucho en aplicaciones reales.
 
-The service should expose a clear application-level method such as:
+El servicio deberia exponer un metodo claro a nivel de aplicacion como:
 
-- get overview
-- get feed
-- get account summary
+- obtener vista general
+- obtener feed
+- obtener resumen de cuenta
 
-It should not force the component to think in terms of HTTP infrastructure.
+No deberia obligar al componente a pensar en terminos de infraestructura HTTP.
 
-This separation is important:
+Esta separacion es importante:
 
-- components own UI behavior
-- services own data access intent
-- interceptors own shared HTTP infrastructure
+- los componentes poseen el comportamiento de UI
+- los servicios poseen la intencion de acceso a datos
+- los interceptors poseen la infraestructura HTTP compartida
 
-## How to Study the Lesson
+## Como estudiar la leccion
 
-Read it in this order:
+Leela en este orden:
 
-1. Look at the API service and see the clean endpoint call.
-2. Then inspect the interceptor and identify the cross-cutting logic.
-3. Then read the component and notice how little HTTP-specific code it needs.
+1. Mira el servicio de API y observa la llamada limpia al endpoint.
+2. Luego inspecciona el interceptor e identifica la logica transversal.
+3. Despues lee el componente y observa lo poco de codigo especifico de HTTP que necesita.
 
-That reading order highlights why the abstraction is useful.
+Ese orden de lectura destaca por que la abstraccion es util.
 
-## Exercises
+## Ejercicios
 
-1. Add another shared header in the interceptor.
-2. Add a second endpoint that automatically benefits from the same infrastructure.
-3. Change the error message format in one place and observe the app-wide effect.
-4. Add a logging step for development use.
+1. Anade otra cabecera compartida en el interceptor.
+2. Anade un segundo endpoint que se beneficie automaticamente de la misma infraestructura.
+3. Cambia el formato del mensaje de error en un solo lugar y observa el efecto en toda la app.
+4. Anade un paso de logging para uso en desarrollo.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- what an interceptor is for
-- why repeated HTTP setup should be centralized
-- how the service layer stays cleaner because of the interceptor
+- para que sirve un interceptor
+- por que la configuracion HTTP repetida deberia centralizarse
+- como la capa de servicios se mantiene mas limpia gracias al interceptor
 
-The next lesson covers testing, which becomes much easier when your responsibilities are separated this clearly.
+La siguiente leccion cubre testing, que se vuelve mucho mas facil cuando las responsabilidades estan separadas con esta claridad.

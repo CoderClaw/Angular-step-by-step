@@ -1,106 +1,106 @@
-# Lesson 15 Guide: Testing Angular Components and Services
+# Guia de la Leccion 15: Testing de componentes y servicios Angular
 
-This lesson introduces testing as a normal part of Angular development rather than an optional extra.
+Esta leccion introduce el testing como una parte normal del desarrollo Angular, no como un extra opcional.
 
-By this point in the series, you have seen components, services, routing, HTTP, signals, and shared state. Testing is how you gain confidence that those behaviors still work as the app changes.
+A estas alturas de la serie, ya has visto componentes, servicios, routing, HTTP, signals y estado compartido. El testing es la forma de ganar confianza en que esos comportamientos siguen funcionando a medida que cambia la app.
 
-## Why Testing Matters
+## Por que importa el testing
 
-Without tests, every change depends more heavily on manual checking.
+Sin pruebas, cada cambio depende mucho mas de comprobaciones manuales.
 
-That becomes risky as a codebase grows.
+Eso se vuelve arriesgado a medida que crece una base de codigo.
 
-Tests help answer questions like:
+Las pruebas ayudan a responder preguntas como:
 
-- does this business rule still work?
-- does this component still render the expected content?
-- did a refactor break something subtle?
+- sigue funcionando esta regla de negocio?
+- sigue renderizando este componente el contenido esperado?
+- rompio un refactor algo sutil?
 
-## Why This Lesson Uses Two Levels of Testing
+## Por que esta leccion usa dos niveles de testing
 
-The example focuses on two very common test targets:
+El ejemplo se centra en dos objetivos de prueba muy comunes:
 
-- a service with business logic
-- a component with rendered UI
+- un servicio con logica de negocio
+- un componente con UI renderizada
 
-That is a good teaching split because it shows that not everything needs the same style of test.
+Esa es una buena separacion didactica porque muestra que no todo necesita el mismo estilo de prueba.
 
-## Service Tests
+## Pruebas de servicios
 
-Service tests are good when you want to verify logic without the DOM getting in the way.
+Las pruebas de servicios son buenas cuando quieres verificar logica sin que el DOM se interponga.
 
-This is often the cleanest place to test:
+Este suele ser el lugar mas limpio para probar:
 
-- calculations
-- summary building
-- decision rules
-- value transformations
+- calculos
+- construccion de resumenes
+- reglas de decision
+- transformaciones de valores
 
-If the business rule is correct in the service, the component can stay simpler.
+Si la regla de negocio es correcta en el servicio, el componente puede mantenerse mas simple.
 
-## Component Tests
+## Pruebas de componentes
 
-Component tests are useful when the important question is:
+Las pruebas de componentes son utiles cuando la pregunta importante es:
 
-What does the user actually see?
+Que ve realmente el usuario?
 
-These tests often verify:
+Estas pruebas suelen verificar:
 
-- rendered text
-- conditional UI
-- interaction behavior
-- template output based on mock dependencies
+- texto renderizado
+- UI condicional
+- comportamiento de interaccion
+- salida de plantilla basada en dependencias simuladas
 
-In this lesson, the component test likely replaces the real service with a mock provider so the UI can be checked with known data.
+En esta leccion, la prueba del componente probablemente sustituye el servicio real por un provider simulado para poder comprobar la UI con datos conocidos.
 
-## Why Mocking Matters
+## Por que importa el mocking
 
-Mocking is useful because a component test should usually focus on the component.
+El mocking es util porque una prueba de componente normalmente deberia centrarse en el componente.
 
-If the real service logic is already tested separately, the component test can use a simpler fake version and just verify rendering behavior.
+Si la logica real del servicio ya esta probada por separado, la prueba del componente puede usar una version falsa mas simple y limitarse a verificar el comportamiento de renderizado.
 
-That keeps tests focused and easier to understand.
+Eso mantiene las pruebas enfocadas y mas faciles de entender.
 
-## Vitest and Angular TestBed
+## Vitest y Angular TestBed
 
-This lesson uses Vitest with Angular TestBed.
+Esta leccion usa Vitest con Angular TestBed.
 
-TestBed creates a realistic Angular testing environment so components and services can run with Angular features available.
+TestBed crea un entorno de pruebas Angular realista para que componentes y servicios puedan ejecutarse con las capacidades de Angular disponibles.
 
-That means the tests are not just plain TypeScript scripts. They run in an Angular-aware context.
+Eso significa que las pruebas no son simples scripts TypeScript. Se ejecutan en un contexto consciente de Angular.
 
-## The Main Lesson Here
+## La leccion principal aqui
 
-Testing is easier when the code is well-structured.
+Hacer pruebas es mas facil cuando el codigo esta bien estructurado.
 
-Earlier lessons separated responsibilities between components and services. This lesson shows one reason that separation matters.
+Las lecciones anteriores separaron responsabilidades entre componentes y servicios. Esta leccion muestra una razon por la que esa separacion importa.
 
-If business rules live in a service and rendering behavior lives in a component, each part can be tested more clearly.
+Si las reglas de negocio viven en un servicio y el comportamiento de renderizado vive en un componente, cada parte puede probarse con mas claridad.
 
-## How to Study the Lesson
+## Como estudiar la leccion
 
-Read it in this order:
+Leela en este orden:
 
-1. Read the service implementation.
-2. Read the service spec and compare each test to a business rule.
-3. Read the component implementation.
-4. Read the component spec and notice how the service is mocked.
+1. Lee la implementacion del servicio.
+2. Lee la spec del servicio y compara cada prueba con una regla de negocio.
+3. Lee la implementacion del componente.
+4. Lee la spec del componente y observa como se simula el servicio.
 
-This order helps you connect each test to a deliberate responsibility boundary.
+Este orden ayuda a conectar cada prueba con un limite de responsabilidad deliberado.
 
-## Exercises
+## Ejercicios
 
-1. Add another service test for a new business-rule branch.
-2. Add another component test for a different UI state.
-3. Replace one hardcoded mock value with a second scenario.
-4. Refactor the service and verify that the tests still pass.
+1. Anade otra prueba de servicio para una rama nueva de regla de negocio.
+2. Anade otra prueba de componente para un estado distinto de la UI.
+3. Sustituye un valor fijo del mock por un segundo escenario.
+4. Refactoriza el servicio y verifica que las pruebas sigan pasando.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- why services and components often need different kinds of tests
-- why mocking helps keep tests focused
-- why structured code is easier to test than tangled code
+- por que los servicios y los componentes suelen necesitar tipos distintos de pruebas
+- por que el mocking ayuda a mantener las pruebas enfocadas
+- por que el codigo estructurado es mas facil de probar que el codigo enredado
 
-The next lesson returns to application structure and shows how larger Angular apps stay organized as features multiply.
+La siguiente leccion vuelve a la estructura de la aplicacion y muestra como las apps Angular mas grandes se mantienen organizadas a medida que se multiplican las funcionalidades.

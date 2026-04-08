@@ -12,8 +12,8 @@ export class AuthService {
   readonly isAuthenticated = computed(() => this.session() !== null);
   readonly currentUser = computed(() => this.session());
 
-  // This mock login flow keeps the lesson focused on Angular patterns.
-  // The component does not need to know how persistence or session shaping works.
+  // Este flujo de login simulado mantiene la leccion enfocada en patrones de Angular.
+  // El componente no necesita saber como funcionan la persistencia o la forma de la sesion.
   login(email: string, password: string): boolean {
     const normalizedEmail = email.trim().toLowerCase();
     const normalizedPassword = password.trim();

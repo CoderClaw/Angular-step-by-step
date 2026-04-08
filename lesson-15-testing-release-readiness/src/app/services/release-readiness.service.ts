@@ -34,8 +34,8 @@ export class ReleaseReadinessService {
     return this.checks;
   }
 
-  // The service is a good place for business rules that multiple components could reuse.
-  // Keeping the summary logic here makes it easy to test without touching the DOM.
+  // El servicio es un buen lugar para reglas de negocio que varios componentes podrian reutilizar.
+  // Mantener aqui la logica de resumen facilita probarla sin tocar el DOM.
   buildSummary(checks: ReleaseCheck[]): ReleaseReadinessSummary {
     const readyChecks = checks.filter(
       (check) => check.status === "Ready",

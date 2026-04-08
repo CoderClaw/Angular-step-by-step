@@ -1,112 +1,112 @@
-# Lesson 12 Guide: Performance and Change Detection
+# Guia de la Leccion 12: Rendimiento y deteccion de cambios
 
-This lesson introduces performance thinking in Angular.
+Esta leccion introduce la forma de pensar en rendimiento dentro de Angular.
 
-Up to now, the lessons focused mostly on correctness and structure. This lesson adds another question:
+Hasta ahora, las lecciones se centraron sobre todo en correccion y estructura. Esta leccion anade otra pregunta:
 
-How can the UI stay responsive as the amount of data grows?
+Como puede la UI mantenerse responsiva a medida que crece la cantidad de datos?
 
-## Why Performance Matters
+## Por que importa el rendimiento
 
-Many business applications render:
+Muchas aplicaciones de negocio renderizan:
 
-- large lists
+- listas grandes
 - dashboards
-- queues
-- review boards
-- reporting tables
+- colas
+- tableros de revision
+- tablas de reportes
 
-If Angular updates too much work too often, the interface becomes slower and harder to use.
+Si Angular actualiza demasiado trabajo con demasiada frecuencia, la interfaz se vuelve mas lenta y dificil de usar.
 
-This lesson shows some of the techniques Angular developers use to keep rendering efficient.
+Esta leccion muestra algunas de las tecnicas que usan los desarrolladores Angular para mantener el renderizado eficiente.
 
 ## `OnPush`
 
-One of the main ideas in this lesson is `ChangeDetectionStrategy.OnPush`.
+Una de las ideas principales de esta leccion es `ChangeDetectionStrategy.OnPush`.
 
-Normally, Angular checks components for changes very often.
+Normalmente, Angular revisa los componentes para detectar cambios muy a menudo.
 
-With `OnPush`, Angular becomes more selective about when it needs to re-evaluate a component.
+Con `OnPush`, Angular se vuelve mas selectivo respecto a cuando necesita reevaluar un componente.
 
-This can improve performance because Angular avoids unnecessary work.
+Esto puede mejorar el rendimiento porque Angular evita trabajo innecesario.
 
-The tradeoff is that the code must follow clearer state-update patterns.
+La contrapartida es que el codigo debe seguir patrones de actualizacion de estado mas claros.
 
-## Why Immutable Updates Matter Here
+## Por que importan aqui las actualizaciones inmutables
 
-When using performance-oriented patterns, immutable updates become especially important.
+Cuando se usan patrones orientados al rendimiento, las actualizaciones inmutables se vuelven especialmente importantes.
 
-Instead of mutating arrays or objects in place, the code creates new references.
+En lugar de mutar arreglos u objetos en el lugar, el codigo crea nuevas referencias.
 
-That makes state transitions clearer and helps Angular detect meaningful changes more reliably.
+Eso hace que las transiciones de estado sean mas claras y ayuda a Angular a detectar cambios significativos de forma mas confiable.
 
-This is why lessons about performance often repeat the importance of immutable data updates.
+Por eso las lecciones sobre rendimiento suelen repetir la importancia de las actualizaciones inmutables de datos.
 
-## Tracking Repeated Lists
+## Tracking de listas repetidas
 
-Large lists can be expensive to rerender.
+Las listas grandes pueden ser costosas de rerenderizar.
 
-Angular needs a way to understand which items are actually new, changed, or removed.
+Angular necesita una forma de entender que elementos son realmente nuevos, cambiados o eliminados.
 
-That is why tracked list rendering matters.
+Por eso importa el renderizado de listas con tracking.
 
-If Angular can identify items predictably, it avoids replacing more DOM than necessary.
+Si Angular puede identificar los elementos de forma predecible, evita reemplazar mas DOM del necesario.
 
-## Incremental Rendering Thinking
+## Pensar en renderizado incremental
 
-Performance is not only about one Angular setting.
+El rendimiento no trata solo de una configuracion de Angular.
 
-It is also about designing the UI carefully.
+Tambien trata de disenar la UI con cuidado.
 
-For example:
+Por ejemplo:
 
-- render only what is needed
-- derive values efficiently
-- avoid unnecessary recalculation
-- keep row components focused
+- renderizar solo lo necesario
+- derivar valores de forma eficiente
+- evitar recalculos innecesarios
+- mantener enfocadas las filas del componente
 
-This lesson likely shows those ideas through a review board or moderation queue.
+Es probable que esta leccion muestre esas ideas a traves de un tablero de revision o una cola de moderacion.
 
-## What the Example Teaches
+## Lo que ensena el ejemplo
 
-A review board is a good performance lesson because it simulates a screen with many repeated items and frequent state changes.
+Un tablero de revision es una buena leccion de rendimiento porque simula una pantalla con muchos elementos repetidos y cambios de estado frecuentes.
 
-That is exactly the kind of place where poor change-detection habits become visible.
+Ese es exactamente el tipo de lugar donde se vuelven visibles los malos habitos de deteccion de cambios.
 
-## The Main Mindset Shift
+## El principal cambio de mentalidad
 
-The key shift is this:
+El cambio clave es este:
 
-Do not only ask whether the UI works.
+No preguntes solo si la UI funciona.
 
-Also ask whether the UI updates efficiently.
+Pregunta tambien si la UI se actualiza de forma eficiente.
 
-That is a more advanced frontend skill, but it matters a lot in real applications.
+Esa es una habilidad frontend mas avanzada, pero importa mucho en aplicaciones reales.
 
-## How to Study the Lesson
+## Como estudiar la leccion
 
-Read it in this order:
+Leela en este orden:
 
-1. Find where `OnPush` is enabled.
-2. Inspect how the data is updated.
-3. Observe how the repeated list is tracked.
-4. Identify where derived or computed values reduce unnecessary work.
+1. Encuentra donde se habilita `OnPush`.
+2. Inspecciona como se actualizan los datos.
+3. Observa como se hace tracking de la lista repetida.
+4. Identifica donde los valores derivados o computados reducen trabajo innecesario.
 
-That reading strategy will reveal the lesson much more clearly than starting from the CSS or markup.
+Esa estrategia de lectura revelara la leccion con mucha mas claridad que empezar por el CSS o el marcado.
 
-## Exercises
+## Ejercicios
 
-1. Add another list action and keep the update immutable.
-2. Remove the tracking expression temporarily and observe the difference in code intent.
-3. Create another small row component and consider whether `OnPush` belongs there too.
-4. Add another derived summary value without duplicating source state.
+1. Anade otra accion sobre la lista y manten la actualizacion inmutable.
+2. Elimina temporalmente la expresion de tracking y observa la diferencia en la intencion del codigo.
+3. Crea otro componente pequeno de fila y considera si `OnPush` deberia vivir ahi tambien.
+4. Anade otro valor derivado de resumen sin duplicar el estado fuente.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- what `OnPush` is trying to optimize
-- why immutable updates help Angular
-- why list tracking matters in repeated UIs
+- que intenta optimizar `OnPush`
+- por que las actualizaciones inmutables ayudan a Angular
+- por que importa el tracking de listas en UIs repetidas
 
-The next lesson moves into authentication and protected flows, where routing and state combine in another real application pattern.
+La siguiente leccion entra en autenticacion y flujos protegidos, donde routing y estado se combinan en otro patron de aplicacion real.

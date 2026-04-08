@@ -1,40 +1,40 @@
-# Lesson 12: Performance and Change Detection with a Review Board
+# Leccion 12: Rendimiento y deteccion de cambios con un tablero de revision
 
-This lesson is a Vite-based Angular application that teaches practical performance patterns for medium and large UI lists.
+Esta leccion es una aplicacion Angular basada en Vite que ensena patrones practicos de rendimiento para listas de UI medianas y grandes.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to use `ChangeDetectionStrategy.OnPush` in standalone components
-- How immutable updates help OnPush components stay predictable
-- How `computed()` can avoid repeated derivation work for filtered views
-- How `track item.id` reduces DOM churn in large lists
-- How to reveal large result sets incrementally instead of rendering everything at once
+- Como usar `ChangeDetectionStrategy.OnPush` en componentes standalone
+- Como las actualizaciones inmutables ayudan a que los componentes OnPush se mantengan predecibles
+- Como `computed()` puede evitar trabajo repetido de derivacion en vistas filtradas
+- Como `track item.id` reduce el churn del DOM en listas grandes
+- Como revelar conjuntos grandes de resultados de forma incremental en lugar de renderizarlo todo a la vez
 
-## Main files
+## Archivos principales
 
-- `src/app/app.component.ts`: source state, computed filters, and immutable list updates
-- `src/app/components/review-row.component.ts`: optimized row component using OnPush
-- `src/app/app.component.html`: tracked large-list rendering and incremental loading
+- `src/app/app.component.ts`: estado fuente, filtros computados y actualizaciones inmutables de listas
+- `src/app/components/review-row.component.ts`: componente de fila optimizado usando OnPush
+- `src/app/app.component.html`: renderizado de listas grandes con tracking y carga incremental
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `review-row.component.ts` and confirm it uses `ChangeDetectionStrategy.OnPush`.
-2. Read `app.component.ts` and inspect `filteredItems`, `visibleItems`, and immutable update methods.
-3. Inspect the `@for` loop in `app.component.html` and note the `track item.id` expression.
-4. Run the app and approve or block several rows while filters are active.
-5. Compare this structure with earlier lessons and notice how the performance guidance appears in both state updates and template rendering.
+1. Abre `review-row.component.ts` y confirma que usa `ChangeDetectionStrategy.OnPush`.
+2. Lee `app.component.ts` e inspecciona `filteredItems`, `visibleItems` y los metodos de actualizacion inmutable.
+3. Inspecciona el bucle `@for` en `app.component.html` y observa la expresion `track item.id`.
+4. Ejecuta la app y aprueba o bloquea varias filas mientras haya filtros activos.
+5. Compara esta estructura con lecciones anteriores y observa como la guia de rendimiento aparece tanto en las actualizaciones de estado como en el renderizado de la plantilla.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Admin queues, audit lists, moderation dashboards, review boards, and support backlogs often render many rows at once and update them frequently. Performance work in Angular usually starts with sensible change-detection boundaries, immutable updates, and stable list tracking rather than premature complexity.
+Las colas de administracion, listas de auditoria, dashboards de moderacion, tableros de revision y backlogs de soporte suelen renderizar muchas filas a la vez y actualizarlas con frecuencia. El trabajo de rendimiento en Angular suele empezar con limites sensatos de deteccion de cambios, actualizaciones inmutables y tracking estable de listas, no con complejidad prematura.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 13 will introduce authentication and protected application flows.
+La Leccion 13 introducira autenticacion y flujos protegidos de aplicacion.

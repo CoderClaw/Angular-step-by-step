@@ -11,8 +11,8 @@ export const authGuard: CanActivateFn = (_route, state) => {
     return true;
   }
 
-  // Guards can redirect instead of only returning false.
-  // That is a common pattern for protected applications.
+  // Los guards pueden redirigir en lugar de limitarse a devolver false.
+  // Ese es un patron comun en aplicaciones protegidas.
   return router.createUrlTree(["/login"], {
     queryParams: {
       returnUrl: state.url,

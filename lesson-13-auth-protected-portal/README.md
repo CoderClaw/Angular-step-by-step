@@ -1,43 +1,43 @@
-# Lesson 13: Authentication and Protected Flows with an Internal Portal
+# Leccion 13: Autenticacion y flujos protegidos con un portal interno
 
-This lesson is a Vite-based Angular application that teaches how to protect routes, manage a mock authenticated session, and redirect unauthenticated users into a login flow.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como proteger rutas, gestionar una sesion autenticada simulada y redirigir a personas no autenticadas hacia un flujo de inicio de sesion.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to register guarded routes with Angular Router
-- How to write a `CanActivateFn` guard
-- How to redirect unauthenticated users to a login page
-- How to preserve a `returnUrl` during login redirects
-- How to store a small mock session in a service
-- How protected UI and routing concerns work together
+- Como registrar rutas protegidas con Angular Router
+- Como escribir un guard `CanActivateFn`
+- Como redirigir a usuarios no autenticados a una pagina de login
+- Como preservar una `returnUrl` durante las redirecciones al iniciar sesion
+- Como almacenar una pequena sesion simulada en un servicio
+- Como trabajan juntas las preocupaciones de UI protegida y routing
 
-## Main files
+## Archivos principales
 
-- `src/app/services/auth.service.ts`: mock session handling and persistence
-- `src/app/auth.guard.ts`: route protection logic and redirect behavior
-- `src/app/app.routes.ts`: login, dashboard, and fallback routes
-- `src/app/pages/login-page.component.ts`: mock sign-in flow
-- `src/app/pages/dashboard-page.component.ts`: protected authenticated page
+- `src/app/services/auth.service.ts`: manejo y persistencia de sesion simulada
+- `src/app/auth.guard.ts`: logica de proteccion de rutas y comportamiento de redireccion
+- `src/app/app.routes.ts`: rutas de login, dashboard y fallback
+- `src/app/pages/login-page.component.ts`: flujo simulado de inicio de sesion
+- `src/app/pages/dashboard-page.component.ts`: pagina autenticada protegida
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `src/app/app.routes.ts` and inspect which route is guarded.
-2. Read `src/app/auth.guard.ts` and see how the redirect is produced.
-3. Read `src/app/services/auth.service.ts` and inspect the mock session logic.
-4. Run the app, navigate to `/dashboard` while logged out, and watch the guard redirect.
-5. Sign in and confirm that the protected route becomes available.
+1. Abre `src/app/app.routes.ts` e inspecciona que ruta esta protegida.
+2. Lee `src/app/auth.guard.ts` y observa como se produce la redireccion.
+3. Lee `src/app/services/auth.service.ts` e inspecciona la logica de sesion simulada.
+4. Ejecuta la app, navega a `/dashboard` mientras estas desconectado y observa la redireccion del guard.
+5. Inicia sesion y confirma que la ruta protegida queda disponible.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Most business Angular applications have protected areas, authenticated navigation, and route-level access checks. Even when the real backend auth system is more complex, the frontend still needs the same basic pieces: session state, redirects, and guarded routes.
+La mayoria de las aplicaciones Angular de negocio tienen areas protegidas, navegacion autenticada y controles de acceso a nivel de ruta. Incluso cuando el sistema real de autenticacion del backend es mas complejo, el frontend sigue necesitando las mismas piezas basicas: estado de sesion, redirecciones y rutas protegidas.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 14 will introduce interceptors and centralized API infrastructure patterns.
+La Leccion 14 introducira interceptors y patrones centralizados de infraestructura de API.

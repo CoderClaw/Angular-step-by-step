@@ -1,7 +1,7 @@
 import { Directive, HostBinding, HostListener, input } from "@angular/core";
 
-// Attribute directives are useful when one visual or behavioral rule needs to be
-// reused across many elements without duplicating CSS classes everywhere.
+// Las directivas de atributo son utiles cuando una regla visual o de comportamiento necesita
+// reutilizarse en muchos elementos sin duplicar clases CSS por todas partes.
 @Directive({
   selector: "[appPriorityEmphasis]",
   standalone: true,

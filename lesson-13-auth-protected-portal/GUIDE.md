@@ -1,129 +1,129 @@
-# Lesson 13 Guide: Authentication and Protected Flows
+# Guia de la Leccion 13: Autenticacion y flujos protegidos
 
-This lesson shows how Angular applications control access to certain routes and guide users through a login flow.
+Esta leccion muestra como las aplicaciones Angular controlan el acceso a ciertas rutas y guian a las personas usuarias a traves de un flujo de login.
 
-## Why This Matters
+## Por que importa esto
 
-Many applications have areas that should only be available after sign-in.
+Muchas aplicaciones tienen areas que solo deberian estar disponibles despues de iniciar sesion.
 
-Examples:
+Ejemplos:
 
-- internal admin pages
-- customer account areas
-- operational dashboards
-- tools with sensitive data
+- paginas internas de administracion
+- areas de cuenta del cliente
+- dashboards operativos
+- herramientas con datos sensibles
 
-That means the app must answer two questions:
+Eso significa que la app debe responder dos preguntas:
 
-- is the user authenticated?
-- what should happen if they are not?
+- esta autenticado el usuario?
+- que deberia pasar si no lo esta?
 
-This lesson focuses on that flow.
+Esta leccion se centra en ese flujo.
 
-## What the Example Builds
+## Que construye el ejemplo
 
-The example is a protected internal portal.
+El ejemplo es un portal interno protegido.
 
-That is realistic because a portal usually includes:
+Es realista porque un portal suele incluir:
 
-- a login page
-- a protected dashboard
-- route-level access control
-- redirect behavior when the user is not signed in
+- una pagina de login
+- un dashboard protegido
+- control de acceso a nivel de ruta
+- comportamiento de redireccion cuando el usuario no ha iniciado sesion
 
-## Mock Authentication
+## Autenticacion simulada
 
-This lesson usually uses a mock auth service rather than a real backend auth system.
+Esta leccion suele usar un servicio de autenticacion simulado en lugar de un sistema real de autenticacion de backend.
 
-That is a good teaching choice.
+Esa es una buena decision didactica.
 
-It keeps the focus on frontend behavior:
+Mantiene el foco en el comportamiento del frontend:
 
-- storing a session-like state
-- checking it in the router
-- redirecting correctly
-- restoring intended navigation after login
+- almacenar un estado tipo sesion
+- comprobarlo en el router
+- redirigir correctamente
+- restaurar la navegacion prevista despues del login
 
-## Route Guards
+## Route guards
 
-Route guards are one of the main concepts here.
+Los route guards son uno de los conceptos principales aqui.
 
-A guard decides whether navigation to a route should be allowed.
+Un guard decide si debe permitirse la navegacion a una ruta.
 
-If the user is authenticated, the route can continue.
+Si el usuario esta autenticado, la ruta puede continuar.
 
-If not, the app can redirect them somewhere else.
+Si no, la app puede redirigirlo a otro lugar.
 
-This is a very common Angular pattern.
+Este es un patron muy comun en Angular.
 
 ## `CanActivateFn`
 
-Modern Angular supports functional route guards such as `CanActivateFn`.
+Angular moderno admite guards funcionales de ruta como `CanActivateFn`.
 
-This is useful because it keeps guard logic compact and easy to read.
+Esto es util porque mantiene la logica del guard compacta y facil de leer.
 
-The lesson likely shows how the guard:
+La leccion probablemente muestra como el guard:
 
-- checks auth state
-- redirects unauthenticated users
-- preserves a return URL
+- comprueba el estado de autenticacion
+- redirige a usuarios no autenticados
+- preserva una URL de retorno
 
-## Why `returnUrl` Matters
+## Por que importa `returnUrl`
 
-The return URL is a very practical detail.
+La URL de retorno es un detalle muy practico.
 
-Without it, a user who gets redirected to login may lose the page they originally wanted.
+Sin ella, un usuario que es redirigido a login puede perder la pagina que queria originalmente.
 
-With it, the app can send them back after successful authentication.
+Con ella, la app puede devolverlo alli despues de una autenticacion exitosa.
 
-This makes the experience feel much more polished and realistic.
+Eso hace que la experiencia se sienta mucho mas pulida y realista.
 
-## Session State
+## Estado de sesion
 
-Even in a mock app, the frontend still needs session state.
+Incluso en una app simulada, el frontend sigue necesitando estado de sesion.
 
-That means a service often owns:
+Eso significa que un servicio suele poseer:
 
-- whether the user is logged in
-- who the current user is
-- how login and logout update state
+- si el usuario ha iniciado sesion
+- quien es el usuario actual
+- como actualizan el estado las acciones de login y logout
 
-This continues the same pattern from earlier lessons: components and routes react to state, while services own the underlying logic.
+Esto continua el mismo patron de lecciones anteriores: los componentes y las rutas reaccionan al estado, mientras los servicios poseen la logica subyacente.
 
-## How to Study the Lesson
+## Como estudiar la leccion
 
-Read it in this order:
+Leela en este orden:
 
-1. Inspect the route definitions.
-2. Identify which routes are protected.
-3. Read the guard and understand the allow vs redirect logic.
-4. Read the auth service and see how session state is modeled.
-5. Read the login page and trace the return flow.
+1. Inspecciona las definiciones de rutas.
+2. Identifica que rutas estan protegidas.
+3. Lee el guard y entiende la logica de permitir frente a redirigir.
+4. Lee el servicio de autenticacion y observa como se modela el estado de sesion.
+5. Lee la pagina de login y sigue el flujo de retorno.
 
-That reading order mirrors the actual navigation flow.
+Ese orden de lectura refleja el flujo real de navegacion.
 
-## The Big Lesson
+## La gran leccion
 
-Authentication in frontend code is not only about showing or hiding a button.
+La autenticacion en codigo frontend no trata solo de mostrar u ocultar un boton.
 
-It is about controlling navigation and preserving user intent in a predictable way.
+Trata de controlar la navegacion y preservar la intencion del usuario de forma predecible.
 
-This is why routing and session state must work together.
+Por eso routing y estado de sesion deben trabajar juntos.
 
-## Exercises
+## Ejercicios
 
-1. Add a logout button that returns the user to login.
-2. Add another protected route.
-3. Show the current user name in the dashboard.
-4. Add a small message that explains why a redirect happened.
+1. Anade un boton de logout que devuelva al usuario al login.
+2. Anade otra ruta protegida.
+3. Muestra el nombre del usuario actual en el dashboard.
+4. Anade un pequeno mensaje que explique por que ocurrio una redireccion.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- what a route guard does
-- why a session service is useful
-- why `returnUrl` improves the login flow
-- why auth is often a routing concern as much as a UI concern
+- que hace un route guard
+- por que es util un servicio de sesion
+- por que `returnUrl` mejora el flujo de login
+- por que la autenticacion suele ser tanto una preocupacion de routing como de UI
 
-The next lesson moves into interceptors and centralized API infrastructure, which expands the app-wide side of Angular even further.
+La siguiente leccion entra en interceptors e infraestructura centralizada de API, lo que expande aun mas el lado global de Angular.
