@@ -3,13 +3,13 @@ import { provideRouter } from "@angular/router";
 
 import { routes } from "./app.routes";
 
-// Routing is registered globally because navigation is an app-wide concern.
-// Providers tell Angular's dependency injection system how to create or supply shared values.
-// When something asks for a dependency like the Router, Angular looks in its injector and uses
-// the registered provider to decide what instance to return.
+// El routing se registra globalmente porque la navegacion es una preocupacion de toda la app.
+// Los providers le dicen al sistema de inyeccion de dependencias de Angular como crear o suministrar valores compartidos.
+// Cuando algo solicita una dependencia como Router, Angular la busca en su inyector y usa
+// el provider registrado para decidir que instancia devolver.
 export const appConfig: ApplicationConfig = {
-  // provideRouter(routes) adds all router-related services to the application's root injector.
-  // That makes navigation available across the app, and it also tells Angular which route
-  // definitions to use when matching URLs and rendering routed components.
+  // provideRouter(routes) anade todos los servicios relacionados con el router al inyector raiz de la aplicacion.
+  // Eso hace que la navegacion este disponible en toda la app y tambien le dice a Angular que definiciones
+  // de ruta debe usar para hacer coincidir URLs y renderizar componentes enrutados.
   providers: [provideRouter(routes)],
 };

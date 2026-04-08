@@ -1,41 +1,41 @@
-# Lesson 04: Services and Dependency Injection with a Notes Workspace
+# Leccion 04: Servicios e inyeccion de dependencias con un espacio de notas
 
-This lesson is a Vite-based Angular application that teaches how to move data logic and persistence out of a component and into an injected service.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como mover la logica de datos y la persistencia fuera de un componente y llevarla a un servicio inyectado.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to create an Angular service with `@Injectable`
-- How `providedIn: 'root'` makes a service available through Angular DI
-- How to use `inject()` inside a standalone component
-- How to keep persistence and mutation rules out of the UI component
-- How local storage can be hidden behind a service API
-- How components can focus on view state while services manage application data
+- Como crear un servicio Angular con `@Injectable`
+- Como `providedIn: 'root'` hace que un servicio este disponible mediante DI de Angular
+- Como usar `inject()` dentro de un componente standalone
+- Como mantener la persistencia y las reglas de mutacion fuera del componente de UI
+- Como local storage puede ocultarse detras de una API de servicio
+- Como los componentes pueden centrarse en el estado de vista mientras los servicios gestionan los datos de la aplicacion
 
-## Main files
+## Archivos principales
 
-- `src/app/services/notes.service.ts`: note storage, loading, saving, and mutation logic
-- `src/app/app.component.ts`: UI state and service usage through dependency injection
-- `src/app/note.model.ts`: note types used across the app
+- `src/app/services/notes.service.ts`: almacenamiento, carga, guardado y logica de mutacion de notas
+- `src/app/app.component.ts`: estado de UI y uso del servicio mediante inyeccion de dependencias
+- `src/app/note.model.ts`: tipos de nota usados en toda la app
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `src/app/note.model.ts` and inspect the note shape.
-2. Read `src/app/services/notes.service.ts` and find where storage is isolated.
-3. Read `src/app/app.component.ts` and notice how `inject()` gives the component access to the service.
-4. Run the app, add notes, pin notes, archive notes, and refresh the page to confirm persistence.
-5. Compare the component code with earlier lessons and notice how much less data logic it now owns.
+1. Abre `src/app/note.model.ts` e inspecciona la forma de la nota.
+2. Lee `src/app/services/notes.service.ts` y encuentra donde se aisla el almacenamiento.
+3. Lee `src/app/app.component.ts` y observa como `inject()` le da al componente acceso al servicio.
+4. Ejecuta la app, anade notas, fija notas, archiva notas y recarga la pagina para confirmar la persistencia.
+5. Compara el codigo del componente con el de lecciones anteriores y observa cuanta menos logica de datos posee ahora.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Real Angular applications often need to persist small pieces of data, coordinate mutations, and share logic across screens. A service is the natural home for that work, while components stay focused on rendering and user interaction.
+Las aplicaciones Angular reales suelen necesitar persistir pequenas piezas de datos, coordinar mutaciones y compartir logica entre pantallas. Un servicio es el lugar natural para ese trabajo, mientras los componentes permanecen enfocados en el renderizado y la interaccion del usuario.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 05 will introduce routing and turn a single-screen app into a small multi-page Angular application shell.
+La Leccion 05 introducira routing y convertira una app de una sola pantalla en un pequeno shell de aplicacion Angular con varias paginas.

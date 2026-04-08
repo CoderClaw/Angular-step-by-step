@@ -2,12 +2,12 @@ import { Injectable } from "@angular/core";
 
 import { Note, NoteCategory } from "../note.model";
 
-// @Injectable tells Angular that this class participates in dependency injection.
-// Angular can then create the service for us and supply it anywhere the class is injected.
+// @Injectable le dice a Angular que esta clase participa en la inyeccion de dependencias.
+// Angular puede entonces crear el servicio por nosotros y suministrarlo donde se inyecte la clase.
 @Injectable({
-  // providedIn: "root" registers one application-wide instance in Angular's root injector.
-  // That means components can inject NotesService without listing it in their own providers array,
-  // and every consumer shares the same note state for the lifetime of the app.
+  // providedIn: "root" registra una instancia unica para toda la aplicacion en el inyector raiz de Angular.
+  // Eso significa que los componentes pueden inyectar NotesService sin declararlo en su propio arreglo de providers,
+  // y que todo consumidor comparte el mismo estado de notas durante la vida de la app.
   providedIn: "root",
 })
 export class NotesService {
@@ -15,8 +15,8 @@ export class NotesService {
 
   private notes: Note[] = this.loadNotes();
 
-  // The service owns the note data and the persistence details.
-  // Components stay smaller because they no longer know how storage works.
+  // El servicio posee los datos de notas y los detalles de persistencia.
+  // Los componentes se mantienen mas pequenos porque ya no necesitan saber como funciona el almacenamiento.
   getNotes(): Note[] {
     return [...this.notes].sort((leftNote, rightNote) => {
       if (leftNote.pinned !== rightNote.pinned) {

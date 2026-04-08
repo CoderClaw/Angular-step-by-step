@@ -1,50 +1,50 @@
-# Lesson 01 Guide: Angular Foundations
+# Guia de la Leccion 01: Fundamentos de Angular
 
-This guide explains the ideas behind Lesson 1 in a slower, more didactic way than the main README. It is written for someone who is just starting with Angular and wants to understand not only what the code does, but also why Angular is structured this way.
+Esta guia explica las ideas detras de la Leccion 1 de una forma mas lenta y didactica que el README principal. Esta escrita para alguien que esta empezando con Angular y quiere entender no solo que hace el codigo, sino tambien por que Angular esta estructurado de esta manera.
 
-## What You Are Building
+## Que estas construyendo
 
-In this lesson, you work with a small task tracker.
+En esta leccion trabajas con un pequeno gestor de tareas.
 
-The app lets you:
+La app te permite:
 
-- see a list of tasks
-- add a new task
-- mark a task as completed
-- remove a task
-- filter tasks by status
-- display counters such as total, completed, and open tasks
+- ver una lista de tareas
+- anadir una tarea nueva
+- marcar una tarea como completada
+- eliminar una tarea
+- filtrar tareas por estado
+- mostrar contadores como total, completadas y abiertas
 
-This is a very good first Angular example because it includes the basic ingredients of many real interfaces:
+Este es un muy buen primer ejemplo de Angular porque incluye los ingredientes basicos de muchas interfaces reales:
 
-- some data
-- some user input
-- some buttons
-- a list rendered from state
-- some derived values shown in the UI
+- algunos datos
+- algo de entrada del usuario
+- algunos botones
+- una lista renderizada a partir del estado
+- algunos valores derivados mostrados en la UI
 
-Even though the app is small, the same ideas will appear again in larger Angular projects.
+Aunque la app es pequena, las mismas ideas volveran a aparecer en proyectos Angular mas grandes.
 
-## The Main Idea of Angular
+## La idea principal de Angular
 
-Angular is a framework for building user interfaces with components.
+Angular es un framework para construir interfaces de usuario con componentes.
 
-A component usually has two sides:
+Un componente suele tener dos lados:
 
-- TypeScript code that holds state and behavior
-- an HTML template that describes what the UI should look like
+- codigo TypeScript que contiene estado y comportamiento
+- una plantilla HTML que describe como debe verse la UI
 
-The important idea is this:
+La idea importante es esta:
 
-The template is a reflection of the component state.
+La plantilla es un reflejo del estado del componente.
 
-That means you usually do not manually edit the DOM yourself. Instead, you change the component data, and Angular updates the screen for you.
+Eso significa que normalmente no editas el DOM manualmente elemento por elemento. En su lugar, cambias los datos del componente y Angular actualiza la pantalla por ti.
 
-In this lesson, when `tasks`, `newTaskTitle`, or `selectedFilter` changes, Angular recalculates the template and shows the new result.
+En esta leccion, cuando cambian `tasks`, `newTaskTitle` o `selectedFilter`, Angular vuelve a calcular la plantilla y muestra el nuevo resultado.
 
-## Project Structure
+## Estructura del proyecto
 
-Start by looking at these files:
+Empieza mirando estos archivos:
 
 - `src/main.ts`
 - `src/app/app.config.ts`
@@ -52,315 +52,250 @@ Start by looking at these files:
 - `src/app/app.component.ts`
 - `src/app/app.component.html`
 
-Each file has a different responsibility.
+Cada archivo tiene una responsabilidad distinta.
 
 ### `src/main.ts`
 
-This is the entry point of the app.
+Este es el punto de entrada de la app.
 
-Its job is to start Angular in the browser.
+Su trabajo es iniciar Angular en el navegador.
 
-The key function is `bootstrapApplication(...)`.
+La funcion clave es `bootstrapApplication(...)`.
 
-You can think of bootstrapping as:
+Puedes pensar en el bootstrapping como:
 
-"Start Angular and render this root component as the application."
+"Inicia Angular y renderiza este componente raiz como la aplicacion."
 
-Angular needs a starting point, and the root component becomes that starting point.
+Angular necesita un punto de partida, y el componente raiz se convierte en ese punto de partida.
 
 ### `src/app/app.config.ts`
 
-This file contains application-level configuration.
+Este archivo contiene configuracion a nivel de aplicacion.
 
-In later lessons, this is where you will often register things like:
+En lecciones posteriores, aqui suele registrarse cosas como:
 
 - routing
-- HTTP features
-- global providers
+- capacidades HTTP
+- providers globales
 
-In Lesson 1, the configuration is small because the app is intentionally simple.
+En la Leccion 1, la configuracion es pequena porque la app es intencionalmente simple.
 
 ### `src/app/task.model.ts`
 
-This file defines the shapes of your data with TypeScript.
+Este archivo define la forma de tus datos con TypeScript.
 
-The `Task` interface says that every task should have:
+La interfaz `Task` dice que cada tarea debe tener:
 
-- an `id`
-- a `title`
-- a `completed` flag
+- un `id`
+- un `title`
+- una bandera `completed`
 
-This is important because it makes your data explicit.
+Esto es importante porque hace explicitos tus datos.
 
-Without types, it becomes easier to accidentally create inconsistent objects. With types, TypeScript helps you catch mistakes earlier.
+Sin tipos, es mas facil crear objetos inconsistentes por accidente. Con tipos, TypeScript te ayuda a detectar errores antes.
 
-The `TaskFilter` type is also useful. It restricts the allowed filter values to:
+El tipo `TaskFilter` tambien es util. Restringe los valores permitidos del filtro a:
 
 - `"all"`
 - `"open"`
 - `"completed"`
 
-That makes the filtering logic easier to reason about and safer to maintain.
+Eso hace que la logica de filtrado sea mas facil de razonar y mas segura de mantener.
 
-## Understanding the Root Component
+## Entender el componente raiz
 
-The main lesson lives in `src/app/app.component.ts`.
+La leccion principal vive en `src/app/app.component.ts`.
 
-This file defines the root component of the app.
+Este archivo define el componente raiz de la app.
 
-At the top, the `@Component(...)` decorator tells Angular how this component should behave.
+En la parte superior, el decorador `@Component(...)` le dice a Angular como debe comportarse este componente.
 
-Important parts of that decorator are:
+Las partes importantes de ese decorador son:
 
-- `selector`: the HTML tag Angular uses for the component
-- `standalone: true`: this component does not need an Angular NgModule
-- `imports`: other Angular features this component uses
-- `templateUrl`: the HTML template file
-- `styleUrl`: the CSS file
+- `selector`: la etiqueta HTML que Angular usa para el componente
+- `standalone: true`: este componente no necesita un NgModule de Angular
+- `imports`: otras capacidades de Angular que este componente usa
+- `templateUrl`: el archivo de la plantilla HTML
+- `styleUrl`: el archivo CSS
 
-### Why `standalone: true` matters
+### Por que importa `standalone: true`
 
-Modern Angular often uses standalone components instead of older NgModule-heavy patterns.
+Angular moderno suele usar componentes standalone en lugar de patrones antiguos muy centrados en NgModules.
 
-That means the component declares its own dependencies directly.
+Eso significa que el componente declara directamente sus propias dependencias.
 
-For example, this lesson imports:
+Por ejemplo, esta leccion importa:
 
 - `CommonModule`
 - `FormsModule`
 
-That tells Angular which template features are available in this component.
+Eso le dice a Angular que capacidades de plantilla estan disponibles en este componente.
 
-## Component State
+## Estado del componente
 
-Inside the class, you will see several properties.
+Dentro de la clase veras varias propiedades.
 
-These properties are the component state.
+Esas propiedades son el estado del componente.
 
 ### `newTaskTitle`
 
-This stores what the user is typing in the input field.
+Esto guarda lo que el usuario esta escribiendo en el campo de entrada.
 
-Angular connects it to the template with `[(ngModel)]`, which is a two-way binding feature from `FormsModule`.
+Angular lo conecta con la plantilla mediante `[(ngModel)]`, que es una capacidad de two-way binding proveniente de `FormsModule`.
 
-That means:
+Eso significa:
 
-- when the user types, `newTaskTitle` updates
-- when `newTaskTitle` changes in code, the input updates too
+- cuando el usuario escribe, `newTaskTitle` se actualiza
+- cuando `newTaskTitle` cambia en el codigo, la entrada tambien se actualiza
 
-For a beginner, this is one of the clearest examples of Angular linking UI and state.
+Para una persona principiante, este es uno de los ejemplos mas claros de como Angular conecta UI y estado.
 
 ### `selectedFilter`
 
-This stores which filter is currently active.
+Esto guarda que filtro esta activo actualmente.
 
-It is not domain data like the tasks themselves. It is view state.
+No es dato de dominio como las tareas mismas. Es estado de vista.
 
-That distinction is useful:
+Esa distincion es util:
 
-- domain data describes the business objects in the app
-- view state describes how the user is currently looking at the app
+- los datos de dominio describen los objetos de negocio de la app
+- el estado de vista describe como el usuario esta viendo actualmente la app
 
-Real Angular applications almost always have both kinds.
+Las aplicaciones Angular reales casi siempre tienen ambos tipos.
 
 ### `tasks`
 
-This is the main list of task data.
+Esta es la lista principal de datos de tareas.
 
-The lesson starts with seed data so the UI is meaningful immediately.
+La leccion empieza con datos semilla para que la UI tenga sentido de inmediato.
 
-That is a good teaching choice because beginners can explore rendering and interaction without first needing to create data manually.
+Esa es una buena decision didactica porque las personas principiantes pueden explorar renderizado e interaccion sin tener que crear datos manualmente primero.
 
-## Derived State with Getters
+## Estado derivado con getters
 
-The component also includes getters:
+El componente tambien incluye getters:
 
 - `totalTasks`
 - `completedTasks`
 - `openTasks`
 - `visibleTasks`
 
-These are not stored separately. They are calculated from the existing state.
+No se almacenan por separado. Se calculan a partir del estado existente.
 
-This is called derived state.
+A esto se le llama estado derivado.
 
-For example, `completedTasks` is derived from `tasks` by counting how many are completed.
+Por ejemplo, `completedTasks` se deriva de `tasks` contando cuantas estan completadas.
 
-This is often better than storing both the tasks and a separate completed count, because duplicated state can get out of sync.
+Esto suele ser mejor que guardar tanto las tareas como un conteo separado de completadas, porque el estado duplicado puede desincronizarse.
 
-If Angular can compute a value from a single source of truth, that is usually simpler.
+Si Angular puede calcular un valor a partir de una sola fuente de verdad, normalmente eso es mas simple.
 
-## Template Basics
+## Conceptos basicos de plantillas
 
-The template in `src/app/app.component.html` is where Angular expressions and bindings appear.
+La plantilla en `src/app/app.component.html` es donde aparecen las expresiones y bindings de Angular.
 
-This lesson introduces several of the most important template ideas.
+Esta leccion introduce varias de las ideas mas importantes de las plantillas.
 
-### Interpolation
+### Interpolacion
 
-Interpolation uses `{{ ... }}`.
+La interpolacion usa `{{ ... }}`.
 
-It lets you display a value from the component inside the template.
+Te permite mostrar un valor del componente dentro de la plantilla.
 
-Examples in a lesson like this usually include:
+En una leccion como esta, los ejemplos suelen incluir:
 
-- counters
-- task titles
-- labels derived from state
+- contadores
+- titulos de tareas
+- etiquetas derivadas del estado
 
-When the component value changes, Angular updates the displayed text.
+Cuando cambia el valor del componente, Angular actualiza el texto mostrado.
 
-### Event Binding
+### Event binding
 
-Event binding uses syntax like `(click)="..."`.
+El event binding usa una sintaxis como `(click)="..."`.
 
-It tells Angular to run some component code when a browser event happens.
+Le dice a Angular que ejecute codigo del componente cuando ocurre un evento del navegador.
 
-In this task tracker, button clicks trigger actions such as:
+En este gestor de tareas, los clics en botones activan acciones como:
 
-- adding a task
-- toggling completion
-- removing a task
-- changing the filter
+- anadir una tarea
+- alternar completado
+- eliminar una tarea
+- cambiar el filtro
 
-This is how user interaction enters the component logic.
+Asi es como la interaccion del usuario entra en la logica del componente.
 
-### Two-Way Binding with `[(ngModel)]`
+### Two-way binding con `[(ngModel)]`
 
-Two-way binding is a combination of:
+El two-way binding es una combinacion de:
 
-- reading a value from the component
-- writing changes back to the component
+- leer un valor del componente
+- escribir cambios de vuelta en el componente
 
-This lesson uses it for the input where the user types a new task title.
+Esta leccion lo usa para el campo donde el usuario escribe un nuevo titulo de tarea.
 
-This is a good early teaching tool because it makes form input easy to understand before moving to more advanced forms in later lessons.
+Es una herramienta didactica temprana muy util porque hace que la entrada de formularios sea facil de entender antes de pasar a formularios mas avanzados en lecciones posteriores.
 
-## Modern Angular Control Flow
+## Flujo de control moderno en Angular
 
-This lesson also introduces modern Angular control flow.
+Esta leccion tambien introduce el flujo de control moderno de Angular.
 
-Instead of older structural directive syntax like `*ngIf` and `*ngFor`, newer Angular versions support block syntax such as:
+En lugar de la sintaxis antigua de directivas estructurales como `*ngIf` y `*ngFor`, las versiones nuevas de Angular admiten sintaxis por bloques como:
 
 - `@if`
 - `@for`
 
-These make templates feel more explicit and closer to normal programming flow.
+Esto hace que las plantillas se sientan mas explicitas y mas cercanas al flujo normal de programacion.
 
 ### `@if`
 
-Use `@if` when part of the UI should only appear in certain conditions.
+Usa `@if` cuando una parte de la UI solo deba aparecer bajo ciertas condiciones.
 
-Example ideas in a task tracker include:
+Algunos ejemplos en un gestor de tareas incluyen:
 
-- showing an empty-state message when no tasks match the filter
-- showing one area only when there are tasks to display
+- mostrar un mensaje de estado vacio cuando ninguna tarea coincide con el filtro
+- mostrar un area solo cuando hay tareas para visualizar
 
 ### `@for`
 
-Use `@for` when you want to render repeated UI from an array.
+Usa `@for` para renderizar listas a partir del estado.
 
-In this lesson, the task list is produced from the `visibleTasks` array.
+En esta leccion, eso significa iterar sobre las tareas visibles y mostrar una fila por cada una.
 
-This is a core Angular pattern:
+Una leccion importante aqui es que Angular no necesita que construyas nodos del DOM manualmente para una coleccion. Tu describes la lista y Angular la renderiza.
 
-Take a collection of data and describe how one item should be rendered.
+## Logica de acciones
 
-Angular repeats that UI for each item.
+Metodos como `addTask`, `toggleTask` y `removeTask` representan acciones del usuario.
 
-## Understanding the Methods
+Esos metodos cambian el estado, y despues Angular actualiza la plantilla.
 
-The component methods are a good place to learn how state changes drive the UI.
+Ese ciclo se repetira una y otra vez a lo largo de toda la serie:
 
-### `addTask()`
+1. el usuario hace algo
+2. el componente actualiza el estado
+3. Angular actualiza la UI
 
-This method:
+## Por que esta leccion importa
 
-1. trims the input text
-2. checks whether the value is empty
-3. creates a new task object
-4. adds it to the task list
-5. clears the input
+Esta primera leccion no trata de complejidad. Trata de construir un modelo mental correcto.
 
-One especially useful detail is that the task list is updated immutably.
+Si entiendes bien esta parte, las lecciones posteriores sobre formularios, servicios, routing y estado reactivo seran mucho mas faciles.
 
-Instead of mutating the array with something like `push`, the code creates a new array:
+## Ejercicios
 
-- the new task first
-- the previous tasks after it
+1. Anade un nuevo filtro para tareas creadas recientemente.
+2. Muestra un mensaje distinto cuando todas las tareas esten completadas.
+3. Agrega un campo opcional de descripcion al modelo `Task`.
+4. Ordena las tareas abiertas antes que las completadas.
 
-This makes the state transition clearer and is a very common frontend pattern.
+## Antes de continuar
 
-### `toggleTask(taskId)`
+Asegurate de entender:
 
-This method updates a task by mapping over the array.
+- que hace `bootstrapApplication`
+- como se relaciona la plantilla con el estado del componente
+- como `[(ngModel)]` conecta UI y datos
+- por que los valores derivados son mejores cuando se calculan a partir de una unica fuente de verdad
 
-If the task id matches, it creates a new object with the `completed` flag flipped.
-
-If not, it returns the task unchanged.
-
-Again, the important lesson is:
-
-Change application state through explicit transformations.
-
-### `removeTask(taskId)`
-
-This method filters the array and removes the matching task.
-
-This is another example of immutable state updates.
-
-## The Flow of Data in This Lesson
-
-It is helpful to think about the app in this sequence:
-
-1. The component starts with some state.
-2. Angular renders the template from that state.
-3. The user interacts with the page.
-4. Event bindings call component methods.
-5. Those methods update the state.
-6. Angular updates the UI to match the new state.
-
-That loop is one of the most important mental models in Angular.
-
-## Why This Lesson Matters
-
-Lesson 1 is not only about building a to-do style app.
-
-It is really about learning the foundation for almost everything that comes later:
-
-- components
-- templates
-- state
-- user interaction
-- typed data
-- list rendering
-- conditional UI
-
-If these ideas feel natural, later lessons on services, routing, HTTP, signals, and testing will make much more sense.
-
-## What to Try Yourself
-
-To understand the lesson more deeply, try these small experiments:
-
-1. Change the starter tasks in `tasks` and see how the template updates.
-2. Add another getter such as `hasCompletedTasks` and show it in the UI.
-3. Change the default filter from `"all"` to `"open"`.
-4. Add another property to `Task`, such as `priority`, and display it.
-5. Change the order in which new tasks are inserted.
-
-These exercises are useful because they force you to connect the TypeScript code to the template behavior.
-
-## Before Moving to Lesson 2
-
-Make sure you are comfortable with these questions:
-
-- What is a component?
-- What is component state?
-- How does Angular update the UI when state changes?
-- What is interpolation?
-- What is event binding?
-- What does `[(ngModel)]` do?
-- Why is the task list rendered from an array instead of hardcoded in HTML?
-- Why are derived values like counts implemented as getters?
-
-If you can answer those confidently, you are ready for the next lesson.
+La siguiente leccion tomara una sola pagina y la dividira en componentes reutilizables.

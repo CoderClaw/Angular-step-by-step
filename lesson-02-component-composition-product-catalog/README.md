@@ -1,43 +1,43 @@
-# Lesson 02: Component Composition with a Product Catalog
+# Leccion 02: Composicion de componentes con un catalogo de productos
 
-This lesson is a Vite-based Angular application that teaches how to split a page into reusable standalone components.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como dividir una pagina en componentes standalone reutilizables.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How a parent component owns the source of truth
-- How child components receive data through typed `input()` bindings
-- How child components send events upward through typed `output()` bindings
-- How to organize a screen into focused, reusable UI pieces
-- How typed models help several components share the same data safely
-- How parent components coordinate selection, filtering, and derived views
+- Como un componente padre posee la fuente de verdad
+- Como los componentes hijos reciben datos mediante bindings tipados con `input()`
+- Como los componentes hijos envian eventos hacia arriba mediante `output()` tipados
+- Como organizar una pantalla en piezas de UI enfocadas y reutilizables
+- Como los modelos tipados ayudan a que varios componentes compartan los mismos datos de forma segura
+- Como los componentes padre coordinan seleccion, filtrado y vistas derivadas
 
-## Main components
+## Componentes principales
 
-- `app.component`: owns product data, filtering state, and selection state
-- `product-filter.component`: emits search and category changes
-- `product-list.component`: renders the collection and forwards child events
-- `product-card.component`: renders one reusable product card
-- `product-detail.component`: displays the selected product summary
+- `app.component`: posee los datos de productos, el estado de filtrado y el estado de seleccion
+- `product-filter.component`: emite cambios de busqueda y categoria
+- `product-list.component`: renderiza la coleccion y reenvia eventos de hijos
+- `product-card.component`: renderiza una tarjeta de producto reutilizable
+- `product-detail.component`: muestra el resumen del producto seleccionado
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `src/app/product.model.ts` and inspect the shared types.
-2. Read `src/app/app.component.ts` and find the source-of-truth state.
-3. Follow the inputs and outputs across the child components.
-4. Run the app and select products, change filters, and toggle shortlist state.
-5. Move one piece of markup mentally between components and notice what data it needs from the parent.
+1. Abre `src/app/product.model.ts` e inspecciona los tipos compartidos.
+2. Lee `src/app/app.component.ts` y encuentra el estado que actua como fuente de verdad.
+3. Sigue los inputs y outputs a traves de los componentes hijos.
+4. Ejecuta la app y selecciona productos, cambia filtros y alterna el estado de shortlist.
+5. Mueve mentalmente una pieza de marcado entre componentes y observa que datos necesita del padre.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Real Angular applications rarely keep a whole page inside one component. Product catalogs, dashboards, admin screens, and internal tools all benefit from being split into smaller components with clear responsibilities.
+Las aplicaciones Angular reales rara vez mantienen una pagina completa dentro de un solo componente. Los catalogos de productos, dashboards, pantallas de administracion y herramientas internas se benefician de dividirse en componentes mas pequenos con responsabilidades claras.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 03 will introduce Angular forms in more depth with validation and typed reactive form structure.
+La Leccion 03 introducira los formularios de Angular con mayor profundidad, incluyendo validacion y estructura tipada de formularios reactivos.

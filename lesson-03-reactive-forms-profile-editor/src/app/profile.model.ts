@@ -1,8 +1,8 @@
 export type NotificationChannel = "email" | "slack" | "none";
 
-// This interface represents the shape we want to save after validation passes.
-// Keeping it separate from the form definition helps beginners distinguish
-// between domain data and Angular's form control types.
+// Esta interfaz representa la forma que queremos guardar despues de que la validacion sea correcta.
+// Mantenerla separada de la definicion del formulario ayuda a distinguir
+// entre datos de dominio y los tipos de controles de formulario de Angular.
 export interface TeamProfile {
   fullName: string;
   email: string;

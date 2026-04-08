@@ -1,46 +1,46 @@
-# Lesson 01: Angular Foundations with Vite
+# Leccion 01: Fundamentos de Angular con Vite
 
-This lesson is a small Angular task tracker built with TypeScript and Vite.
+Esta leccion es un pequeno gestor de tareas en Angular construido con TypeScript y Vite.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How a standalone Angular application is structured
-- How `bootstrapApplication` starts the app
-- How component state drives the template
-- How interpolation displays values in the UI
-- How event binding reacts to user actions
-- How `[(ngModel)]` supports simple form input
-- How modern Angular control flow uses `@if` and `@for`
-- How TypeScript interfaces keep application data explicit
+- Como se estructura una aplicacion Angular standalone
+- Como `bootstrapApplication` inicia la aplicacion
+- Como el estado del componente impulsa la plantilla
+- Como la interpolacion muestra valores en la UI
+- Como el event binding reacciona a las acciones del usuario
+- Como `[(ngModel)]` permite una entrada de formulario simple
+- Como el flujo de control moderno de Angular usa `@if` y `@for`
+- Como las interfaces de TypeScript mantienen explicitos los datos de la aplicacion
 
-## Project structure
+## Estructura del proyecto
 
-- `src/main.ts`: application entry point
-- `src/app/app.config.ts`: global app configuration
-- `src/app/task.model.ts`: typed task model for the lesson
-- `src/app/app.component.ts`: lesson logic and state
-- `src/app/app.component.html`: commented template examples
-- `src/app/app.component.css`: simple, responsive styling
+- `src/main.ts`: punto de entrada de la aplicacion
+- `src/app/app.config.ts`: configuracion global de la aplicacion
+- `src/app/task.model.ts`: modelo tipado de tareas para la leccion
+- `src/app/app.component.ts`: logica y estado de la leccion
+- `src/app/app.component.html`: ejemplos de plantilla comentados
+- `src/app/app.component.css`: estilos simples y adaptables
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `src/app/task.model.ts` and inspect the `Task` interface.
-2. Read `src/app/app.component.ts` and identify the component state.
-3. Match each property and method to where it is used in the template.
-4. Run the app and test adding, toggling, filtering, and removing tasks.
-5. Change the starter data to see how Angular updates the page.
+1. Abre `src/app/task.model.ts` e inspecciona la interfaz `Task`.
+2. Lee `src/app/app.component.ts` e identifica el estado del componente.
+3. Relaciona cada propiedad y metodo con el lugar donde se usa en la plantilla.
+4. Ejecuta la app y prueba anadir, alternar, filtrar y eliminar tareas.
+5. Cambia los datos iniciales para ver como Angular actualiza la pagina.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Even simple business applications often start with screens like this: a form, a list, a filter, and derived counters. The lesson stays small, but the patterns are the same ones used in larger Angular applications.
+Incluso las aplicaciones de negocio simples suelen empezar con pantallas como esta: un formulario, una lista, un filtro y contadores derivados. La leccion se mantiene pequena, pero los patrones son los mismos que se usan en aplicaciones Angular mas grandes.
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 02 will split a larger page into reusable components and introduce typed parent-child communication.
+La Leccion 02 dividira una pagina mayor en componentes reutilizables e introducira la comunicacion tipada entre padre e hijo.

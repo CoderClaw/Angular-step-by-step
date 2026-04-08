@@ -1,5 +1,5 @@
 import { ApplicationConfig } from "@angular/core";
 
-// This file stays intentionally small. It mirrors the layout used by real
-// Angular applications, where global providers are registered in one place.
+// Este archivo se mantiene intencionalmente pequeno. Refleja la estructura usada por
+// aplicaciones Angular reales, donde los providers globales se registran en un solo lugar.
 export const appConfig: ApplicationConfig = {};

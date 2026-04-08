@@ -19,9 +19,9 @@ import { CatalogFilter, Product, ProductCategory } from "./product.model";
   styleUrl: "./app.component.css",
 })
 export class AppComponent {
-  // The parent component owns the source of truth.
-  // Child components receive data through inputs and send user actions back
-  // through typed outputs.
+  // El componente padre posee la fuente de verdad.
+  // Los componentes hijos reciben datos mediante inputs y devuelven acciones del usuario
+  // mediante outputs tipados.
   searchTerm = "";
   selectedCategory: CatalogFilter = "All";
   selectedProductId: number | null = 101;

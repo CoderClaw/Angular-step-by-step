@@ -1,8 +1,8 @@
 export type ProductCategory = "Audio" | "Display" | "Workspace";
 export type CatalogFilter = ProductCategory | "All";
 
-// A typed model gives every component the same vocabulary.
-// This becomes more important as apps grow and more components share the data.
+// Un modelo tipado le da a cada componente el mismo vocabulario.
+// Esto se vuelve mas importante a medida que la app crece y mas componentes comparten los datos.
 export interface Product {
   id: number;
   name: string;

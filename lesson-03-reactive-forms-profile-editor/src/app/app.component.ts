@@ -47,8 +47,8 @@ export class AppComponent {
   submitAttempted = false;
   savedProfile: TeamProfile | null = null;
 
-  // Typed reactive forms make every control explicit.
-  // That becomes valuable as forms grow and refactors become more frequent.
+  // Los formularios reactivos tipados hacen explicito cada control.
+  // Eso se vuelve valioso a medida que los formularios crecen y los refactors se vuelven mas frecuentes.
   readonly profileForm = new FormGroup<ProfileFormModel>(
     {
       fullName: new FormControl("Alicia Stone", {
@@ -145,7 +145,7 @@ export class AppComponent {
       return;
     }
 
-    // getRawValue preserves the typed shape of the full form payload.
+    // getRawValue conserva la forma tipada del payload completo del formulario.
     this.savedProfile = this.profileForm.getRawValue();
   }
 

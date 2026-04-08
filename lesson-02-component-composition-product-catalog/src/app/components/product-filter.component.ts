@@ -16,8 +16,8 @@ export class ProductFilterComponent {
   readonly categoryChanged = output<CatalogFilter>();
   readonly searchChanged = output<string>();
 
-  // Child components should stay focused on presentation and UI events.
-  // They do not mutate catalog state directly; they simply emit intent.
+  // Los componentes hijos deben mantenerse enfocados en la presentacion y en los eventos de UI.
+  // No mutan directamente el estado del catalogo; simplemente emiten intencion.
   onSearchInput(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.searchChanged.emit(target.value);

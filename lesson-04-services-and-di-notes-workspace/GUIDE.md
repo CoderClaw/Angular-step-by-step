@@ -1,174 +1,174 @@
-# Lesson 04 Guide: Services and Dependency Injection
+# Guia de la Leccion 04: Servicios e inyeccion de dependencias
 
-This lesson introduces a new kind of Angular building block: the service.
+Esta leccion introduce un nuevo tipo de bloque de construccion en Angular: el servicio.
 
-Until now, most of the application behavior lived directly inside components. That works for small demos, but real applications usually need logic that should not belong to the UI layer.
+Hasta ahora, la mayor parte del comportamiento de la aplicacion vivia directamente dentro de componentes. Eso funciona para demos pequenas, pero las aplicaciones reales suelen necesitar logica que no deberia pertenecer a la capa de UI.
 
-## Why Services Exist
+## Por que existen los servicios
 
-Components are mainly responsible for presentation and interaction.
+Los componentes son principalmente responsables de la presentacion y la interaccion.
 
-They should answer questions like:
+Deben responder preguntas como:
 
-- what should the user see?
-- what happens when a button is clicked?
-- which values are currently shown?
+- que deberia ver el usuario?
+- que pasa cuando se hace clic en un boton?
+- que valores se estan mostrando actualmente?
 
-But they should not necessarily own everything else.
+Pero no necesariamente deben poseer todo lo demas.
 
-For example:
+Por ejemplo:
 
-- persistence
-- data transformations
-- shared business logic
-- state used in more than one place
+- persistencia
+- transformaciones de datos
+- logica de negocio compartida
+- estado usado en mas de un lugar
 
-Those responsibilities often belong in a service.
+Esas responsabilidades suelen pertenecer a un servicio.
 
-## What This Lesson Demonstrates
+## Lo que demuestra esta leccion
 
-The example is a notes workspace.
+El ejemplo es un espacio de notas.
 
-That is a good service lesson because the app needs to:
+Es una buena leccion sobre servicios porque la app necesita:
 
-- store notes
-- add, remove, and update notes
-- persist notes in local storage
-- keep those responsibilities organized
+- almacenar notas
+- anadir, eliminar y actualizar notas
+- persistir notas en local storage
+- mantener organizadas esas responsabilidades
 
-Instead of putting all of that directly in the component, the lesson places the note logic in a service.
+En lugar de poner todo eso directamente en el componente, la leccion coloca la logica de notas en un servicio.
 
-## What a Service Is
+## Que es un servicio
 
-A service is usually a plain TypeScript class that Angular manages through dependency injection.
+Un servicio suele ser una clase TypeScript simple que Angular gestiona mediante inyeccion de dependencias.
 
-That means Angular can create the class for you and provide it wherever it is needed.
+Eso significa que Angular puede crear la clase por ti y proporcionarla donde haga falta.
 
-The service becomes a shared place for logic that is not primarily about rendering HTML.
+El servicio se convierte en un lugar compartido para la logica que no trata principalmente de renderizar HTML.
 
 ## `@Injectable`
 
-The `@Injectable(...)` decorator tells Angular that the class participates in the dependency injection system.
+El decorador `@Injectable(...)` le dice a Angular que la clase participa en el sistema de inyeccion de dependencias.
 
-In this lesson, you will likely see:
+En esta leccion probablemente veras:
 
 - `providedIn: 'root'`
 
-That means Angular creates one application-wide instance in the root injector.
+Eso significa que Angular crea una sola instancia de toda la aplicacion en el inyector raiz.
 
-This matters because every component that injects the service gets access to the same shared instance.
+Esto importa porque todo componente que inyecte el servicio obtiene acceso a la misma instancia compartida.
 
-That is how a service can act as a central logic or state owner.
+Asi es como un servicio puede actuar como un propietario central de logica o de estado.
 
-## Dependency Injection
+## Inyeccion de dependencias
 
-Dependency injection is the mechanism Angular uses to supply objects to classes that need them.
+La inyeccion de dependencias es el mecanismo que Angular usa para suministrar objetos a las clases que los necesitan.
 
-Instead of doing this manually:
+En lugar de hacer esto manualmente:
 
 - `const service = new NotesService()`
 
-Angular lets you declare the dependency and it provides the instance.
+Angular te permite declarar la dependencia y proporciona la instancia.
 
-This is useful because Angular can control:
+Esto es util porque Angular puede controlar:
 
-- how the instance is created
-- how long it lives
-- whether it is shared
-- what implementation should be used
+- como se crea la instancia
+- cuanto tiempo vive
+- si es compartida
+- que implementacion debe usarse
 
-That leads to cleaner code and easier testing.
+Eso produce codigo mas limpio y testing mas facil.
 
-## The Main Design Lesson
+## La principal leccion de diseno
 
-The biggest lesson here is not just how to use a service.
+La mayor leccion aqui no es solo como usar un servicio.
 
-It is how to separate responsibilities.
+Es como separar responsabilidades.
 
-The notes component should mostly describe the interface.
+El componente de notas deberia describir principalmente la interfaz.
 
-The notes service should mostly describe the note behavior and persistence.
+El servicio de notas deberia describir principalmente el comportamiento de las notas y la persistencia.
 
-This kind of separation makes apps easier to read and change.
+Este tipo de separacion hace que las apps sean mas faciles de leer y cambiar.
 
-## Local Storage as a Teaching Tool
+## Local storage como herramienta didactica
 
-This lesson uses local storage.
+Esta leccion usa local storage.
 
-That is a good educational choice because it introduces persistence without needing a real backend.
+Esa es una buena eleccion educativa porque introduce persistencia sin necesitar un backend real.
 
-You can learn the core architectural idea:
+Puedes aprender la idea arquitectonica central:
 
-The component asks for data and triggers actions, but the persistence details stay elsewhere.
+El componente pide datos y dispara acciones, pero los detalles de persistencia permanecen en otro lugar.
 
-Later, local storage could be replaced with HTTP or another backend source without forcing the component to own all that logic.
+Mas adelante, local storage podria reemplazarse por HTTP u otra fuente backend sin obligar al componente a poseer toda esa logica.
 
-## How to Read the Lesson
+## Como leer la leccion
 
-Study it in this order:
+Estudiala en este orden:
 
-1. Read the model file and understand what a note looks like.
-2. Read the service and identify every responsibility it owns.
-3. Notice where local storage is read and written.
-4. Then read the component and compare how much smaller it becomes because the service exists.
+1. Lee el archivo de modelo y entiende como luce una nota.
+2. Lee el servicio e identifica cada responsabilidad que posee.
+3. Observa donde se lee y se escribe local storage.
+4. Luego lee el componente y compara cuanto mas pequeno se vuelve porque el servicio existe.
 
-That comparison is the real value of the lesson.
+Esa comparacion es el valor real de la leccion.
 
-## The Service API
+## La API del servicio
 
-A good service exposes a clear set of methods.
+Un buen servicio expone un conjunto claro de metodos.
 
-In a notes example, that usually means methods like:
+En un ejemplo de notas, eso suele significar metodos como:
 
-- get all notes
-- add a note
-- update a note
-- delete a note
-- toggle a flag like pinned or archived
+- obtener todas las notas
+- anadir una nota
+- actualizar una nota
+- eliminar una nota
+- alternar una bandera como pinned o archived
 
-This is useful because the component does not need to know the implementation details. It just asks the service to perform meaningful actions.
+Esto es util porque el componente no necesita conocer los detalles de implementacion. Solo le pide al servicio que realice acciones significativas.
 
-## Why This Pattern Scales
+## Por que este patron escala
 
-As applications grow, the same pattern becomes more valuable.
+A medida que crecen las aplicaciones, el mismo patron se vuelve mas valioso.
 
-If logic stays inside components, the app becomes harder to maintain.
+Si la logica permanece dentro de los componentes, la app se vuelve mas dificil de mantener.
 
-If logic is moved into services where appropriate, the code tends to become:
+Si la logica se mueve a servicios cuando corresponde, el codigo tiende a ser:
 
-- more organized
-- easier to test
-- easier to reuse
-- easier to extend
+- mas organizado
+- mas facil de probar
+- mas facil de reutilizar
+- mas facil de extender
 
-## Common Mistakes to Avoid
+## Errores comunes que conviene evitar
 
-When beginners first learn services, they sometimes:
+Cuando las personas principiantes aprenden servicios por primera vez, a veces:
 
-- move every piece of code into a service even when it belongs in the component
-- let components and services both partially own the same logic
-- create services with unclear responsibilities
+- mueven cada pieza de codigo a un servicio incluso cuando pertenece al componente
+- dejan que componentes y servicios posean parcialmente la misma logica
+- crean servicios con responsabilidades poco claras
 
-The goal is balance.
+La meta es el equilibrio.
 
-Use a service when logic should live outside the UI layer, especially when it is about data, coordination, or persistence.
+Usa un servicio cuando la logica deba vivir fuera de la capa de UI, especialmente cuando trate de datos, coordinacion o persistencia.
 
-## Exercises
+## Ejercicios
 
-Try these changes:
+Prueba estos cambios:
 
-1. Add a method that edits an existing note.
-2. Add a new property to the note model and persist it.
-3. Create a derived service method that returns only archived notes.
-4. Replace starter data with your own categories.
+1. Anade un metodo que edite una nota existente.
+2. Anade una nueva propiedad al modelo de nota y persiste su valor.
+3. Crea un metodo derivado del servicio que devuelva solo notas archivadas.
+4. Sustituye los datos iniciales por tus propias categorias.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you can answer:
+Asegurate de poder responder:
 
-- what a service is
-- why dependency injection is useful
-- what `providedIn: 'root'` means
-- why local storage logic belongs in the service rather than the component
+- que es un servicio
+- por que la inyeccion de dependencias es util
+- que significa `providedIn: 'root'`
+- por que la logica de local storage pertenece al servicio y no al componente
 
-The next lesson introduces routing, which expands Angular from a single page into a multi-page application structure.
+La siguiente leccion introduce routing, que expande Angular desde una sola pagina hacia una estructura de aplicacion multipagina.

@@ -1,43 +1,43 @@
-# Lesson 05: Routing with a Knowledge Base Application Shell
+# Leccion 05: Routing con un shell de aplicacion de base de conocimiento
 
-This lesson is a Vite-based Angular application that teaches how routing turns a single screen into a multi-page application with a persistent shell.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como el routing convierte una sola pantalla en una aplicacion multipagina con un shell persistente.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to register routes with `provideRouter`
-- How to create an application shell with `RouterOutlet`
-- How to navigate with `routerLink`
-- How to highlight active links with `routerLinkActive`
-- How redirects work for default routes
-- How route parameters drive detail pages
-- How a wildcard route handles unknown URLs
+- Como registrar rutas con `provideRouter`
+- Como crear un shell de aplicacion con `RouterOutlet`
+- Como navegar con `routerLink`
+- Como resaltar enlaces activos con `routerLinkActive`
+- Como funcionan las redirecciones para rutas por defecto
+- Como los parametros de ruta impulsan paginas de detalle
+- Como una ruta comodin maneja URLs desconocidas
 
-## Main files
+## Archivos principales
 
-- `src/app/app.config.ts`: router registration with `provideRouter`
-- `src/app/app.routes.ts`: route table for the app
-- `src/app/app.component.html`: persistent shell and navigation
-- `src/app/pages/article-detail-page.component.ts`: route parameter usage through `ActivatedRoute`
+- `src/app/app.config.ts`: registro del router con `provideRouter`
+- `src/app/app.routes.ts`: tabla de rutas de la app
+- `src/app/app.component.html`: shell persistente y navegacion
+- `src/app/pages/article-detail-page.component.ts`: uso de parametros de ruta mediante `ActivatedRoute`
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `src/app/app.routes.ts` and inspect the route table.
-2. Read `src/app/app.config.ts` to see where routing is registered.
-3. Read `src/app/app.component.html` and identify the persistent app shell.
-4. Open the articles list and navigate into an article detail route.
-5. Visit an invalid URL manually to see the wildcard route.
+1. Abre `src/app/app.routes.ts` e inspecciona la tabla de rutas.
+2. Lee `src/app/app.config.ts` para ver donde se registra el routing.
+3. Lee `src/app/app.component.html` e identifica el shell persistente de la app.
+4. Abre la lista de articulos y navega hacia una ruta de detalle de articulo.
+5. Visita manualmente una URL invalida para ver la ruta comodin.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Most Angular applications are not single pages. They have navigation, default landing routes, detail pages based on identifiers, and fallback behavior when a URL does not exist. This lesson introduces that structure without adding unnecessary complexity.
+La mayoria de las aplicaciones Angular no son paginas unicas. Tienen navegacion, rutas de aterrizaje por defecto, paginas de detalle basadas en identificadores y comportamiento de respaldo cuando una URL no existe. Esta leccion introduce esa estructura sin agregar complejidad innecesaria.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 06 will connect Angular to an API and introduce HTTP-based async data flows.
+La Leccion 06 conectara Angular con una API e introducira flujos de datos asincronos basados en HTTP.

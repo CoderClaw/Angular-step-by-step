@@ -1,5 +1,5 @@
 import { ApplicationConfig } from "@angular/core";
 
-// Keeping the application config in its own file mirrors real Angular apps.
-// Later lessons can add providers here for routing, HTTP, or global services.
+// Mantener la configuracion de la aplicacion en su propio archivo refleja apps Angular reales.
+// Lecciones posteriores podran anadir aqui providers para routing, HTTP o servicios globales.
 export const appConfig: ApplicationConfig = {};

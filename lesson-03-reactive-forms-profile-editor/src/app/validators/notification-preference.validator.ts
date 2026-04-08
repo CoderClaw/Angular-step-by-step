@@ -2,8 +2,8 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 import { NotificationChannel } from "../profile.model";
 
-// Cross-field validators are a common reason teams choose reactive forms.
-// Here we express a business rule that depends on more than one control.
+// Los validadores entre campos son una razon comun por la que los equipos eligen formularios reactivos.
+// Aqui expresamos una regla de negocio que depende de mas de un control.
 export function notificationPreferenceValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const channel = control.get("notificationChannel")?.value as

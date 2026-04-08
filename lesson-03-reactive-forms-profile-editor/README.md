@@ -1,42 +1,42 @@
-# Lesson 03: Reactive Forms with a Profile Editor
+# Leccion 03: Formularios reactivos con un editor de perfil
 
-This lesson is a Vite-based Angular application that teaches typed reactive forms, validation, and form submission with a realistic profile editor.
+Esta leccion es una aplicacion Angular basada en Vite que ensena formularios reactivos tipados, validacion y envio de formularios con un editor de perfil realista.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to build a typed reactive form with `FormGroup` and `FormControl`
-- How Angular validators work on individual controls
-- How to create a custom cross-field validator for business rules
-- How to display validation feedback in the template
-- How to submit only valid form data
-- How `getRawValue()` returns a typed payload that matches your domain model
+- Como construir un formulario reactivo tipado con `FormGroup` y `FormControl`
+- Como funcionan los validadores de Angular sobre controles individuales
+- Como crear un validador personalizado entre campos para reglas de negocio
+- Como mostrar retroalimentacion de validacion en la plantilla
+- Como enviar solo datos de formulario validos
+- Como `getRawValue()` devuelve un payload tipado que coincide con tu modelo de dominio
 
-## Main files
+## Archivos principales
 
-- `src/app/app.component.ts`: typed form definition and submit logic
-- `src/app/app.component.html`: form bindings and validation messages
-- `src/app/profile.model.ts`: saved payload types
-- `src/app/validators/notification-preference.validator.ts`: custom business validator
+- `src/app/app.component.ts`: definicion del formulario tipado y logica de envio
+- `src/app/app.component.html`: bindings del formulario y mensajes de validacion
+- `src/app/profile.model.ts`: tipos del payload guardado
+- `src/app/validators/notification-preference.validator.ts`: validador de negocio personalizado
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `src/app/profile.model.ts` and inspect the saved data shape.
-2. Read `src/app/app.component.ts` and identify each typed form control.
-3. Inspect the custom validator and see why it belongs at the form-group level.
-4. Run the app and intentionally trigger validation errors.
-5. Submit a valid form and compare the saved preview with the form definition.
+1. Abre `src/app/profile.model.ts` e inspecciona la forma de los datos guardados.
+2. Lee `src/app/app.component.ts` e identifica cada control tipado del formulario.
+3. Inspecciona el validador personalizado y observa por que pertenece al nivel de form-group.
+4. Ejecuta la app y provoca errores de validacion a proposito.
+5. Envia un formulario valido y compara la vista previa guardada con la definicion del formulario.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Many Angular applications include profile editors, admin settings, onboarding screens, or configuration forms. Reactive forms are useful when a screen needs explicit validation, predictable state, and cross-field rules.
+Muchas aplicaciones Angular incluyen editores de perfil, configuraciones de administracion, pantallas de onboarding o formularios de configuracion. Los formularios reactivos son utiles cuando una pantalla necesita validacion explicita, estado predecible y reglas entre campos.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 04 will move logic out of the component and into services using Angular dependency injection.
+La Leccion 04 sacara logica fuera del componente y la llevara a servicios mediante la inyeccion de dependencias de Angular.

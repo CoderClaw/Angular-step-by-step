@@ -12,22 +12,22 @@ import { Task, TaskFilter } from "./task.model";
   styleUrl: "./app.component.css",
 })
 export class AppComponent {
-  // This property is connected to the input with ngModel.
-  // Beginners can inspect how changing the input updates this field immediately.
+  // Esta propiedad esta conectada a la entrada mediante ngModel.
+  // Quienes empiezan pueden observar como cambiar la entrada actualiza este campo al instante.
   newTaskTitle = "";
 
-  // A realistic app almost always has view state, not only domain data.
+  // Una app realista casi siempre tiene estado de vista, no solo datos de dominio.
   selectedFilter: TaskFilter = "all";
 
-  // Seed data makes the first screen useful and helps explain list rendering.
+  // Los datos semilla hacen util la primera pantalla y ayudan a explicar el renderizado de listas.
   tasks: Task[] = [
     { id: 1, title: "Read the lesson overview", completed: true },
     { id: 2, title: "Add a new task with the form", completed: false },
     { id: 3, title: "Mark one task as completed", completed: false },
   ];
 
-  // Getters are a simple way to derive UI data from the source state.
-  // Later lessons will revisit derived state using signals and RxJS.
+  // Los getters son una forma simple de derivar datos de UI a partir del estado fuente.
+  // Lecciones posteriores retomaran el estado derivado usando signals y RxJS.
   get totalTasks(): number {
     return this.tasks.length;
   }
@@ -58,7 +58,7 @@ export class AppComponent {
       return;
     }
 
-    // The new task is added immutably so Angular sees a clean state transition.
+    // La tarea nueva se anade de forma inmutable para que Angular vea una transicion de estado limpia.
     this.tasks = [
       {
         id: Date.now(),

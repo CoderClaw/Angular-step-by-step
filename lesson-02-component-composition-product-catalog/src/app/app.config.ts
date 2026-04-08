@@ -1,5 +1,5 @@
 import { ApplicationConfig } from "@angular/core";
 
-// Keeping this separate matches how larger Angular applications accumulate
-// providers over time. Later lessons can add router or HTTP providers here.
+// Mantener esto separado refleja como las aplicaciones Angular mas grandes
+// acumulan providers con el tiempo. Lecciones posteriores podran anadir aqui providers de router o HTTP.
 export const appConfig: ApplicationConfig = {};

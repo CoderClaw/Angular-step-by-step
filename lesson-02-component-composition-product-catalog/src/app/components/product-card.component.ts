@@ -22,8 +22,8 @@ export class ProductCardComponent {
   }
 
   toggleShortlist(event: Event): void {
-    // The button sits inside a clickable card, so we stop propagation to keep
-    // the two interactions separate and easy to explain.
+    // El boton vive dentro de una tarjeta clicable, por eso detenemos la propagacion para mantener
+    // separadas las dos interacciones y que resulten faciles de explicar.
     event.stopPropagation();
     this.shortlistToggled.emit(this.product().id);
   }

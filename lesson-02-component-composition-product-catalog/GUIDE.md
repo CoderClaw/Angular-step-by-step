@@ -1,161 +1,161 @@
-# Lesson 02 Guide: Component Composition
+# Guia de la Leccion 02: Composicion de componentes
 
-This lesson builds on Lesson 1. You already know that Angular apps are made of components. Now the goal is to learn that a real page is usually not one giant component.
+Esta leccion se apoya en la Leccion 1. Ya sabes que las apps de Angular estan hechas de componentes. Ahora el objetivo es aprender que una pagina real normalmente no es un unico componente gigante.
 
-Instead, Angular applications are usually composed from smaller components with clear responsibilities.
+En su lugar, las aplicaciones Angular suelen componerse de componentes mas pequenos con responsabilidades claras.
 
-## What Changes in This Lesson
+## Que cambia en esta leccion
 
-In Lesson 1, one root component handled the whole page.
+En la Leccion 1, un componente raiz manejaba toda la pagina.
 
-In Lesson 2, the page is split into smaller pieces such as:
+En la Leccion 2, la pagina se divide en piezas mas pequenas como:
 
-- a filtering area
-- a product list
-- a product card or summary
-- a product detail area
+- un area de filtrado
+- una lista de productos
+- una tarjeta o resumen de producto
+- un area de detalle del producto
 
-This teaches one of the most important frontend design ideas:
+Esto ensena una de las ideas de diseno frontend mas importantes:
 
-Break a large screen into smaller units that are easier to understand, reuse, and test.
+Divide una pantalla grande en unidades mas pequenas que sean mas faciles de entender, reutilizar y probar.
 
-## The Main Problem This Lesson Solves
+## El problema principal que resuelve esta leccion
 
-If one component does everything, it becomes difficult to maintain.
+Si un solo componente hace todo, se vuelve dificil de mantener.
 
-A large component usually has these problems:
+Un componente grande suele tener estos problemas:
 
-- too many properties in one class
-- too much template logic in one file
-- repeated UI blocks
-- unclear ownership of state and events
+- demasiadas propiedades en una sola clase
+- demasiada logica de plantilla en un solo archivo
+- bloques de UI repetidos
+- propiedad poco clara del estado y de los eventos
 
-Component composition solves this by letting each component focus on one part of the page.
+La composicion de componentes resuelve esto permitiendo que cada componente se enfoque en una parte de la pagina.
 
-## Parent and Child Components
+## Componentes padre e hijo
 
-This lesson introduces a parent-child relationship.
+Esta leccion introduce una relacion padre-hijo.
 
-The parent component usually:
+El componente padre normalmente:
 
-- owns the main state
-- decides what data to pass down
-- reacts to events coming back up
+- posee el estado principal
+- decide que datos pasar hacia abajo
+- reacciona a los eventos que regresan hacia arriba
 
-The child component usually:
+El componente hijo normalmente:
 
-- receives data from the parent
-- renders one focused part of the UI
-- emits events when the user interacts with it
+- recibe datos del padre
+- renderiza una parte enfocada de la UI
+- emite eventos cuando el usuario interactua con el
 
-This creates a very common Angular pattern:
+Esto crea un patron Angular muy comun:
 
-Data flows down. Events flow up.
+Los datos fluyen hacia abajo. Los eventos fluyen hacia arriba.
 
 ## `input()`
 
-Child components need a way to receive data.
+Los componentes hijos necesitan una forma de recibir datos.
 
-Modern Angular provides this through `input()`.
+Angular moderno la proporciona mediante `input()`.
 
-You can think of an input as:
+Puedes pensar en un input como:
 
-"A value the parent gives to the child."
+"Un valor que el padre le da al hijo."
 
-Examples in a product catalog might include:
+En un catalogo de productos, algunos ejemplos pueden ser:
 
-- the list of products to show
-- the selected product
-- the current filter value
-- the details for one card
+- la lista de productos que se debe mostrar
+- el producto seleccionado
+- el valor actual del filtro
+- los detalles de una tarjeta
 
-Inputs make components configurable. The child does not need to know where the data came from. It only needs to know how to render it.
+Los inputs hacen que los componentes sean configurables. El hijo no necesita saber de donde vienen los datos. Solo necesita saber como renderizarlos.
 
 ## `output()`
 
-Child components also need a way to communicate user actions back to the parent.
+Los componentes hijos tambien necesitan una forma de comunicar las acciones del usuario de vuelta al padre.
 
-That is what `output()` is for.
+Para eso sirve `output()`.
 
-You can think of an output as:
+Puedes pensar en un output como:
 
-"An event the child raises so the parent can respond."
+"Un evento que el hijo lanza para que el padre responda."
 
-Examples in this lesson likely include:
+En esta leccion, los ejemplos probablemente incluyen:
 
-- the user selected a product
-- the user changed a filter
-- the user clicked a card
+- el usuario selecciono un producto
+- el usuario cambio un filtro
+- el usuario hizo clic en una tarjeta
 
-This is important because child components should not directly control parent state. Instead, they notify the parent, and the parent decides what to do.
+Esto es importante porque los componentes hijos no deben controlar directamente el estado del padre. En su lugar, notifican al padre y el padre decide que hacer.
 
-## Why This Pattern Matters
+## Por que importa este patron
 
-This is not just an Angular-specific detail. It is a broader UI architecture principle.
+Esto no es solo un detalle especifico de Angular. Es un principio mas amplio de arquitectura de UI.
 
-When components have clear inputs and outputs:
+Cuando los componentes tienen inputs y outputs claros:
 
-- they are easier to reuse
-- they are easier to reason about
-- they are easier to test
-- they are less tightly coupled
+- son mas faciles de reutilizar
+- son mas faciles de razonar
+- son mas faciles de probar
+- quedan menos acoplados
 
-In other words, component composition is how you prevent a growing app from turning into one massive, fragile file.
+En otras palabras, la composicion de componentes es como evitas que una app en crecimiento se convierta en un archivo enorme y fragil.
 
-## How to Read This Lesson
+## Como leer esta leccion
 
-A good way to study this project is:
+Una buena forma de estudiar este proyecto es:
 
-1. Find the top-level page component.
-2. Identify which parts of the screen were extracted into child components.
-3. For each child, ask two questions:
-   What data does it receive?
-   What events does it emit?
-4. Trace how the parent updates its own state when those outputs fire.
+1. Encuentra el componente principal de la pagina.
+2. Identifica que partes de la pantalla se extrajeron a componentes hijos.
+3. Para cada hijo, haz dos preguntas:
+   Que datos recibe?
+   Que eventos emite?
+4. Sigue como el padre actualiza su propio estado cuando esos outputs se disparan.
 
-That reading strategy is more useful than memorizing syntax.
+Esa estrategia de lectura es mas util que memorizar sintaxis.
 
-## The Mental Model to Keep
+## El modelo mental que debes conservar
 
-In Lesson 1, the key mental model was:
+En la Leccion 1, el modelo mental clave era:
 
-State changes, then Angular updates the template.
+El estado cambia, luego Angular actualiza la plantilla.
 
-In Lesson 2, add this second mental model:
+En la Leccion 2, anade este segundo modelo mental:
 
-The parent coordinates state, while child components focus on presentation and interaction boundaries.
+El padre coordina el estado, mientras los componentes hijos se enfocan en la presentacion y en los limites de interaccion.
 
-## Common Beginner Mistakes
+## Errores comunes de principiantes
 
-When learning component composition, beginners often:
+Al aprender composicion de componentes, las personas principiantes suelen:
 
-- put too much logic inside child components
-- mutate parent-owned data from a child
-- create too many tiny components too early
-- pass too much unrelated data into one child
+- poner demasiada logica dentro de los componentes hijos
+- mutar datos que pertenecen al padre desde un hijo
+- crear demasiados componentes diminutos demasiado pronto
+- pasar demasiados datos no relacionados a un solo hijo
 
-The lesson should help you see a better balance.
+La leccion deberia ayudarte a encontrar un mejor equilibrio.
 
-A component should be extracted when it represents a meaningful UI unit, not just because a file got a little longer.
+Un componente debe extraerse cuando representa una unidad significativa de UI, no solo porque un archivo se haya vuelto un poco mas largo.
 
-## What to Practice
+## Que practicar
 
-Try these exercises after reading the code:
+Prueba estos ejercicios despues de leer el codigo:
 
-1. Add one more product field and pass it through the component tree.
-2. Create a new output event for a secondary action.
-3. Move one repeated UI section into its own child component.
-4. Rename one input to make its purpose clearer and update every usage.
+1. Anade un campo mas al producto y pasalo por el arbol de componentes.
+2. Crea un nuevo output para una accion secundaria.
+3. Mueve una seccion repetida de UI a su propio componente hijo.
+4. Renombra un input para que su proposito sea mas claro y actualiza todos sus usos.
 
-These exercises strengthen your understanding of how components collaborate.
+Estos ejercicios refuerzan tu comprension de como colaboran los componentes.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you can answer these questions:
+Asegurate de poder responder estas preguntas:
 
-- Why split a page into child components?
-- What is the difference between an input and an output?
-- Why should the parent usually own the main state?
-- How do child components stay reusable?
+- Por que dividir una pagina en componentes hijos?
+- Cual es la diferencia entre un input y un output?
+- Por que el padre suele poseer el estado principal?
+- Como se mantienen reutilizables los componentes hijos?
 
-Once those ideas are comfortable, reactive forms in the next lesson will make much more sense.
+Una vez que estas ideas te resulten comodas, los formularios reactivos de la siguiente leccion tendran mucho mas sentido.

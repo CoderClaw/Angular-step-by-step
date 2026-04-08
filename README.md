@@ -1,99 +1,99 @@
-# Modern Angular Tutorial Series
+# Serie Moderna de Tutoriales de Angular
 
-This workspace contains a complete beginner-to-advanced Angular tutorial series built with TypeScript and Vite.
+Este espacio de trabajo contiene una serie completa de tutoriales de Angular, desde nivel inicial hasta avanzado, construida con TypeScript y Vite.
 
-Each lesson lives in its own folder as a small self-contained Angular application. The projects stay intentionally focused, but each one uses patterns that are common in real Angular codebases.
+Cada leccion vive en su propia carpeta como una pequena aplicacion Angular autocontenida. Los proyectos se mantienen intencionalmente enfocados, pero cada uno usa patrones comunes en bases de codigo Angular reales.
 
-## Series Goals
+## Objetivos de la serie
 
-- Teach modern Angular progressively from foundations to integrated app architecture
-- Use standalone Angular patterns throughout the series
-- Keep examples small enough to study quickly
-- Show realistic frontend structure, state, routing, forms, HTTP, and UI behavior
-- Use Vite for every lesson in the series
+- Ensenar Angular moderno de forma progresiva, desde los fundamentos hasta la arquitectura integrada de aplicaciones
+- Usar patrones de Angular standalone en toda la serie
+- Mantener los ejemplos lo bastante pequenos como para estudiarlos rapido
+- Mostrar estructura frontend realista, estado, routing, formularios, HTTP y comportamiento de UI
+- Usar Vite en todas las lecciones de la serie
 
-## How to Use This Series
+## Como usar esta serie
 
-1. Start at Lesson 1 and move in order.
-2. For each lesson, read that folder’s README first.
-3. Run `npm install` and `npm run dev` inside the lesson folder you want to explore.
-4. Compare the progression between lessons instead of treating them as isolated examples.
+1. Empieza en la Leccion 1 y avanza en orden.
+2. Para cada leccion, lee primero el README de esa carpeta.
+3. Ejecuta `npm install` y `npm run dev` dentro de la carpeta de la leccion que quieras explorar.
+4. Compara la progresion entre lecciones en lugar de tratarlas como ejemplos aislados.
 
-## Lesson Roadmap
+## Hoja de ruta de las lecciones
 
 1. [lesson-01-angular-foundations-task-tracker](./lesson-01-angular-foundations-task-tracker/README.md)
-   Angular foundations, bindings, events, `ngModel`, modern control flow.
+   Fundamentos de Angular, bindings, eventos, `ngModel` y flujo de control moderno.
 
 2. [lesson-02-component-composition-product-catalog](./lesson-02-component-composition-product-catalog/README.md)
-   Component composition, `input()`, `output()`, and parent-child communication.
+   Composicion de componentes, `input()`, `output()` y comunicacion entre padre e hijo.
 
 3. [lesson-03-reactive-forms-profile-editor](./lesson-03-reactive-forms-profile-editor/README.md)
-   Typed reactive forms, validators, and custom validation rules.
+   Formularios reactivos tipados, validadores y reglas de validacion personalizadas.
 
 4. [lesson-04-services-and-di-notes-workspace](./lesson-04-services-and-di-notes-workspace/README.md)
-   Services, dependency injection, and persistence through a simple data layer.
+   Servicios, inyeccion de dependencias y persistencia mediante una capa de datos simple.
 
 5. [lesson-05-routing-knowledge-base-shell](./lesson-05-routing-knowledge-base-shell/README.md)
-   Routing, app shells, redirects, route params, and page composition.
+   Routing, shells de aplicacion, redirecciones, parametros de ruta y composicion de paginas.
 
 6. [lesson-06-http-async-release-feed](./lesson-06-http-async-release-feed/README.md)
-   `HttpClient`, async data loading, and loading/error UI states.
+   `HttpClient`, carga asincrona de datos y estados de carga/error en la UI.
 
 7. [lesson-07-rxjs-live-search-dashboard](./lesson-07-rxjs-live-search-dashboard/README.md)
-   RxJS streams, filtering, `switchMap`, combined state, and async templates.
+   Streams de RxJS, filtrado, `switchMap`, estado combinado y plantillas asincronas.
 
 8. [lesson-08-signals-dashboard-preferences](./lesson-08-signals-dashboard-preferences/README.md)
-   Signals, `computed`, `effect`, and persisted local preferences.
+   Signals, `computed`, `effect` y preferencias locales persistidas.
 
 9. [lesson-09-shared-state-booking-flow](./lesson-09-shared-state-booking-flow/README.md)
-   Shared application state and store-like coordination across components.
+   Estado compartido de aplicacion y coordinacion tipo store entre componentes.
 
 10. [lesson-10-advanced-templates-operations-center](./lesson-10-advanced-templates-operations-center/README.md)
-    Content projection, `ng-template`, `ngTemplateOutlet`, and reusable template-driven UI.
+    Proyeccion de contenido, `ng-template`, `ngTemplateOutlet` y UI reutilizable guiada por plantillas.
 
 11. [lesson-11-directives-pipes-support-inbox](./lesson-11-directives-pipes-support-inbox/README.md)
-    Custom directives, pipes, host bindings, and template reuse.
+    Directivas personalizadas, pipes, host bindings y reutilizacion de plantillas.
 
 12. [lesson-12-performance-change-detection-review-board](./lesson-12-performance-change-detection-review-board/README.md)
-    `OnPush`, immutable updates, tracked lists, and performance-oriented rendering.
+    `OnPush`, actualizaciones inmutables, listas con tracking y renderizado orientado al rendimiento.
 
 13. [lesson-13-auth-protected-portal](./lesson-13-auth-protected-portal/README.md)
-    Authentication flow, route guards, redirects, and protected pages.
+    Flujo de autenticacion, guards de ruta, redirecciones y paginas protegidas.
 
 14. [lesson-14-interceptors-api-infrastructure](./lesson-14-interceptors-api-infrastructure/README.md)
-    Interceptors, centralized request behavior, shared headers, and normalized HTTP errors.
+    Interceptors, comportamiento centralizado de peticiones, cabeceras compartidas y errores HTTP normalizados.
 
 15. [lesson-15-testing-release-readiness](./lesson-15-testing-release-readiness/README.md)
-    Service and component testing with Vitest and Angular TestBed.
+    Pruebas de servicios y componentes con Vitest y Angular TestBed.
 
 16. [lesson-16-feature-architecture-support-workspace](./lesson-16-feature-architecture-support-workspace/README.md)
-    Scalable folder structure with `core`, `shared`, `layout`, and `features`.
+    Estructura de carpetas escalable con `core`, `shared`, `layout` y `features`.
 
 17. [lesson-17-advanced-ui-operations-board](./lesson-17-advanced-ui-operations-board/README.md)
-    Advanced UI integration with Angular CDK drag-and-drop and browser APIs.
+    Integracion avanzada de UI con Angular CDK drag-and-drop y APIs del navegador.
 
 18. [lesson-18-capstone-customer-success-hub](./lesson-18-capstone-customer-success-hub/README.md)
-    Capstone app combining routing, API infrastructure, shared state, reactive forms, and persisted preferences.
+    Aplicacion final que combina routing, infraestructura de API, estado compartido, formularios reactivos y preferencias persistidas.
 
 19. [lesson-19-ngrx-incident-command-center](./lesson-19-ngrx-incident-command-center/README.md)
-    NgRx state management with actions, reducers, selectors, effects, and formal global-state architecture.
+    Gestion de estado con NgRx usando actions, reducers, selectors, effects y una arquitectura formal de estado global.
 
-## Recommended Milestones
+## Hitos recomendados
 
-- Lessons 1 to 5: Core Angular application building blocks
-- Lessons 6 to 9: Data flow, async patterns, and shared state
-- Lessons 10 to 13: Reuse, performance, and application security patterns
-- Lessons 14 to 19: Infrastructure, testing, scalable architecture, advanced UI, capstone integration, and formal NgRx state management
+- Lecciones 1 a 5: Bloques fundamentales para construir aplicaciones Angular
+- Lecciones 6 a 9: Flujo de datos, patrones asincronos y estado compartido
+- Lecciones 10 a 13: Reutilizacion, rendimiento y patrones de seguridad de aplicaciones
+- Lecciones 14 a 19: Infraestructura, testing, arquitectura escalable, UI avanzada, integracion tipo capstone y gestion formal de estado con NgRx
 
-## Tooling Notes
+## Notas sobre herramientas
 
-- All lessons use TypeScript.
-- All lessons use Vite.
-- Angular integration is based on `@analogjs/vite-plugin-angular`.
-- Testing lessons use Vitest with Angular TestBed setup.
+- Todas las lecciones usan TypeScript.
+- Todas las lecciones usan Vite.
+- La integracion de Angular se basa en `@analogjs/vite-plugin-angular`.
+- Las lecciones de testing usan Vitest con configuracion de Angular TestBed.
 
-## Suggested Next Improvements
+## Siguientes mejoras sugeridas
 
-- Add a top-level script or helper to run a selected lesson more quickly.
-- Add tests to additional later lessons beyond Lesson 15.
-- Add diagrams that compare how state and routing evolve across the series.
+- Anadir un script o helper de nivel superior para ejecutar una leccion seleccionada mas rapidamente.
+- Anadir pruebas a mas lecciones posteriores, ademas de la Leccion 15.
+- Anadir diagramas que comparen como evolucionan el estado y el routing a lo largo de la serie.

@@ -1,179 +1,179 @@
-# Lesson 03 Guide: Reactive Forms
+# Guia de la Leccion 03: Formularios reactivos
 
-This lesson introduces a more structured way to handle forms in Angular.
+Esta leccion introduce una forma mas estructurada de manejar formularios en Angular.
 
-Lesson 1 used `ngModel`, which is useful for simple inputs. But as forms become more complex, Angular applications often switch to reactive forms because they make form state explicit and programmable.
+La Leccion 1 uso `ngModel`, que es util para entradas simples. Pero a medida que los formularios se vuelven mas complejos, las aplicaciones Angular suelen pasar a formularios reactivos porque hacen que el estado del formulario sea explicito y programable.
 
-## What This Lesson Is About
+## De que trata esta leccion
 
-The project is a profile editor.
+El proyecto es un editor de perfil.
 
-That makes it a good form example because real applications often need:
+Eso lo convierte en un buen ejemplo de formularios porque las aplicaciones reales suelen necesitar:
 
-- multiple fields
-- validation rules
-- cross-field rules
-- controlled submission behavior
-- user feedback when the form is invalid
+- multiples campos
+- reglas de validacion
+- reglas entre campos
+- comportamiento de envio controlado
+- retroalimentacion para el usuario cuando el formulario es invalido
 
-This lesson is about treating the form itself as application state.
+Esta leccion trata de considerar el formulario mismo como estado de la aplicacion.
 
-## Template-Driven vs Reactive Forms
+## Formularios guiados por plantilla vs formularios reactivos
 
-You have already seen a simpler style in Lesson 1.
+Ya viste un estilo mas simple en la Leccion 1.
 
-Reactive forms are different because the form is created in TypeScript first.
+Los formularios reactivos son diferentes porque el formulario se crea primero en TypeScript.
 
-That means the component defines:
+Eso significa que el componente define:
 
-- what controls exist
-- what their initial values are
-- what validation rules apply
-- how the form should be read and submitted
+- que controles existen
+- cuales son sus valores iniciales
+- que reglas de validacion aplican
+- como debe leerse y enviarse el formulario
 
-The template then connects to that pre-defined structure.
+Luego la plantilla se conecta a esa estructura predefinida.
 
-This is why reactive forms feel more explicit and scalable.
+Por eso los formularios reactivos se sienten mas explicitos y escalables.
 
-## `FormGroup` and `FormControl`
+## `FormGroup` y `FormControl`
 
-At the center of reactive forms are two important ideas.
+En el centro de los formularios reactivos hay dos ideas importantes.
 
 ### `FormControl`
 
-A `FormControl` represents one field.
+Un `FormControl` representa un campo.
 
-Examples:
+Ejemplos:
 
-- a name field
-- an email field
-- a notification preference
+- un campo de nombre
+- un campo de correo electronico
+- una preferencia de notificacion
 
-Each control holds:
+Cada control contiene:
 
-- the current value
-- whether it is valid
-- whether it was touched
-- whether it is dirty
-- any validation errors
+- el valor actual
+- si es valido
+- si fue tocado
+- si esta dirty
+- cualquier error de validacion
 
 ### `FormGroup`
 
-A `FormGroup` is a collection of controls.
+Un `FormGroup` es una coleccion de controles.
 
-It lets Angular treat the whole form as one object while still keeping the fields separate.
+Le permite a Angular tratar el formulario completo como un objeto mientras mantiene los campos separados.
 
-This is important because many form decisions happen at the group level:
+Esto es importante porque muchas decisiones del formulario suceden a nivel de grupo:
 
-- can the form be submitted?
-- should we show a group-level error?
-- how do we read the entire value at once?
+- se puede enviar el formulario?
+- debemos mostrar un error a nivel de grupo?
+- como leemos el valor completo de una sola vez?
 
-## Validation
+## Validacion
 
-Validation is one of the main reasons developers choose reactive forms.
+La validacion es una de las principales razones por las que las personas desarrolladoras eligen formularios reactivos.
 
-This lesson likely includes:
+Esta leccion probablemente incluye:
 
-- required fields
-- field-level validation
-- a custom cross-field validator
+- campos obligatorios
+- validacion a nivel de campo
+- un validador personalizado entre campos
 
-### Field-Level Validation
+### Validacion a nivel de campo
 
-Field-level validation checks one control in isolation.
+La validacion a nivel de campo revisa un control de forma aislada.
 
-Examples:
+Ejemplos:
 
-- a field must not be empty
-- an email must have a valid format
-- a text input must be at least a certain length
+- un campo no debe estar vacio
+- un correo debe tener un formato valido
+- una entrada de texto debe tener una longitud minima
 
-### Cross-Field Validation
+### Validacion entre campos
 
-Cross-field validation checks whether multiple fields make sense together.
+La validacion entre campos comprueba si varios campos tienen sentido juntos.
 
-This is an important step up in complexity.
+Este es un paso importante de mayor complejidad.
 
-A form can have fields that are individually valid but still logically inconsistent when combined.
+Un formulario puede tener campos validos de forma individual y aun asi ser logicamente inconsistente cuando se combinan.
 
-That is why Angular supports custom validators at the group level.
+Por eso Angular admite validadores personalizados a nivel de grupo.
 
-## Why Typed Forms Matter
+## Por que importan los formularios tipados
 
-This lesson also introduces typed reactive forms.
+Esta leccion tambien introduce formularios reactivos tipados.
 
-That means TypeScript helps describe the shape of the form values.
+Eso significa que TypeScript ayuda a describir la forma de los valores del formulario.
 
-This gives you better safety because:
+Esto te da mayor seguridad porque:
 
-- you know what fields exist
-- you know what types those values should be
-- refactoring becomes easier
+- sabes que campos existen
+- sabes que tipos deberian tener esos valores
+- hacer refactor se vuelve mas facil
 
-Typed forms are especially valuable as form complexity grows.
+Los formularios tipados son especialmente valiosos a medida que crece la complejidad del formulario.
 
-## The Workflow of a Reactive Form
+## Flujo de trabajo de un formulario reactivo
 
-A useful mental model is:
+Un modelo mental util es:
 
-1. Build the form in TypeScript.
-2. Connect the template to the form controls.
-3. Let Angular track value and validation state.
-4. Read the form state when needed.
-5. Only submit when the form is valid.
+1. Construir el formulario en TypeScript.
+2. Conectar la plantilla con los controles del formulario.
+3. Dejar que Angular rastree el valor y el estado de validacion.
+4. Leer el estado del formulario cuando haga falta.
+5. Enviar solo cuando el formulario sea valido.
 
-That is much more controlled than manually reading DOM inputs.
+Eso esta mucho mas controlado que leer entradas del DOM manualmente.
 
-## Why This Matters in Real Apps
+## Por que importa esto en apps reales
 
-Profile editors, checkout flows, settings panels, onboarding forms, and admin tools all depend on reliable form state.
+Los editores de perfil, flujos de checkout, paneles de configuracion, formularios de onboarding y herramientas de administracion dependen de un estado de formulario confiable.
 
-If the form structure is weak, bugs appear quickly:
+Si la estructura del formulario es debil, los errores aparecen rapido:
 
-- inconsistent validation
-- confusing error states
-- duplicated logic in the template
-- accidental bad submissions
+- validacion inconsistente
+- estados de error confusos
+- logica duplicada en la plantilla
+- envios incorrectos por accidente
 
-Reactive forms help solve those problems by centralizing form logic in the component.
+Los formularios reactivos ayudan a resolver esos problemas centralizando la logica del formulario en el componente.
 
-## What to Look For in This Lesson
+## En que fijarte en esta leccion
 
-When reading the code, focus on:
+Al leer el codigo, enfocate en:
 
-- where the form is created
-- how controls are grouped
-- where validators are attached
-- how the custom validator works
-- how the submit logic reads the form value
+- donde se crea el formulario
+- como se agrupan los controles
+- donde se conectan los validadores
+- como funciona el validador personalizado
+- como la logica de envio lee el valor del formulario
 
-Do not just read the template. The TypeScript form setup is the real center of this lesson.
+No leas solo la plantilla. La configuracion del formulario en TypeScript es el verdadero centro de esta leccion.
 
-## Good Practice to Learn Here
+## Buena practica para aprender aqui
 
-This lesson teaches a discipline that matters later:
+Esta leccion ensena una disciplina que importa despues:
 
-The form should describe the rules of the UI, not just collect input.
+El formulario debe describir las reglas de la UI, no solo recopilar entrada.
 
-That means the form model should not be treated as an afterthought.
+Eso significa que el modelo del formulario no debe tratarse como una ocurrencia tardia.
 
-## Exercises
+## Ejercicios
 
-Try these after understanding the lesson:
+Prueba estos cambios despues de entender la leccion:
 
-1. Add one more field with its own validator.
-2. Add a second cross-field rule.
-3. Show a friendlier error message in the template.
-4. Reset the form after a successful save.
+1. Anade un campo mas con su propio validador.
+2. Anade una segunda regla entre campos.
+3. Muestra un mensaje de error mas amigable en la plantilla.
+4. Reinicia el formulario despues de un guardado exitoso.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you can explain:
+Asegurate de poder explicar:
 
-- why reactive forms are useful
-- the difference between a `FormControl` and a `FormGroup`
-- why validation can happen at both field and group level
-- why typed forms improve reliability
+- por que los formularios reactivos son utiles
+- la diferencia entre un `FormControl` y un `FormGroup`
+- por que la validacion puede ocurrir tanto a nivel de campo como a nivel de grupo
+- por que los formularios tipados mejoran la confiabilidad
 
-The next lesson moves away from forms and into services and dependency injection, which is another major Angular building block.
+La siguiente leccion se aleja de los formularios y entra en servicios e inyeccion de dependencias, que es otro bloque importante de Angular.

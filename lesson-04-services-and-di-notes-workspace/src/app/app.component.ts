@@ -15,8 +15,8 @@ import { NotesService } from "./services/notes.service";
 export class AppComponent {
   private readonly notesService = inject(NotesService);
 
-  // The component owns short-lived view state.
-  // Longer-lived data and persistence behavior stay in the service.
+  // El componente posee el estado de vista de corta duracion.
+  // Los datos de vida mas larga y el comportamiento de persistencia permanecen en el servicio.
   titleDraft = "";
   bodyDraft = "";
   categoryDraft: NoteCategory = "Product";

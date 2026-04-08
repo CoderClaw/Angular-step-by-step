@@ -1,167 +1,167 @@
-# Lesson 05 Guide: Routing
+# Guia de la Leccion 05: Routing
 
-This lesson is where the series starts to feel like a real application instead of a single-screen demo.
+Esta leccion es el punto en el que la serie empieza a sentirse como una aplicacion real en lugar de una demo de una sola pantalla.
 
-Routing lets Angular respond to different URLs and display different screens inside the same application.
+El routing permite que Angular responda a diferentes URLs y muestre distintas pantallas dentro de la misma aplicacion.
 
-## Why Routing Matters
+## Por que importa el routing
 
-Without routing, every feature has to live on one page or be manually shown and hidden.
+Sin routing, cada funcionalidad tendria que vivir en una sola pagina o mostrarse y ocultarse manualmente.
 
-That becomes difficult quickly.
+Eso se vuelve dificil rapidamente.
 
-Most real Angular applications need:
+La mayoria de las aplicaciones Angular reales necesitan:
 
-- multiple pages or views
-- navigation between sections
-- URLs that represent where the user is
-- the ability to link directly to a specific screen
+- multiples paginas o vistas
+- navegacion entre secciones
+- URLs que representen donde esta el usuario
+- la capacidad de enlazar directamente a una pantalla concreta
 
-Routing solves those problems.
+El routing resuelve esos problemas.
 
-## What This Lesson Builds
+## Que construye esta leccion
 
-The example is a knowledge base shell.
+El ejemplo es un shell de base de conocimiento.
 
-That is a good routing example because a knowledge base naturally fits multiple sections:
+Es un buen ejemplo de routing porque una base de conocimiento encaja de forma natural con multiples secciones:
 
-- a home or landing area
-- article lists
-- article detail pages
-- fallback behavior for unknown routes
+- un area de inicio o aterrizaje
+- listas de articulos
+- paginas de detalle de articulo
+- comportamiento de respaldo para rutas desconocidas
 
-It also introduces the idea of a persistent app shell around routed content.
+Tambien introduce la idea de un shell persistente alrededor del contenido enrutado.
 
-## The Router's Job
+## El trabajo del Router
 
-Angular Router watches the browser URL and decides which component should be displayed.
+Angular Router observa la URL del navegador y decide que componente debe mostrarse.
 
-At a high level, the process is:
+A alto nivel, el proceso es:
 
-1. The user navigates to a URL.
-2. Angular compares that URL against route definitions.
-3. The matching route determines which component to render.
-4. Angular places that component into a `RouterOutlet`.
+1. El usuario navega a una URL.
+2. Angular compara esa URL con las definiciones de ruta.
+3. La ruta coincidente determina que componente renderizar.
+4. Angular coloca ese componente dentro de un `RouterOutlet`.
 
-This is the core routing mental model.
+Este es el modelo mental central del routing.
 
-## Route Definitions
+## Definiciones de rutas
 
-Routes are usually configured as an array.
+Las rutas suelen configurarse como un arreglo.
 
-Each route typically answers questions like:
+Cada ruta normalmente responde preguntas como:
 
-- which path should match?
-- which component should render?
-- should this path redirect somewhere else?
-- does this route expect parameters?
+- que path debe coincidir?
+- que componente debe renderizarse?
+- debe esta ruta redirigir a otro lugar?
+- espera esta ruta parametros?
 
-This lesson likely includes:
+Esta leccion probablemente incluye:
 
-- a default route
-- one or more standard content routes
-- a route with a parameter
-- a wildcard route
+- una ruta por defecto
+- una o mas rutas de contenido estandar
+- una ruta con parametro
+- una ruta comodin
 
-That is a very realistic starting set.
+Ese es un conjunto inicial muy realista.
 
 ## `provideRouter(...)`
 
-The router is registered at the application level with `provideRouter(routes)`.
+El router se registra a nivel de aplicacion con `provideRouter(routes)`.
 
-This matters because routing is an app-wide concern, not a local component concern.
+Esto importa porque el routing es una preocupacion de toda la app, no una preocupacion local de un componente.
 
-When Angular receives that provider, it registers the services and route configuration needed for navigation to work.
+Cuando Angular recibe ese provider, registra los servicios y la configuracion de rutas necesarios para que la navegacion funcione.
 
 ## `RouterOutlet`
 
-The `RouterOutlet` is the placeholder where routed components appear.
+El `RouterOutlet` es el marcador de posicion donde aparecen los componentes enrutados.
 
-This is one of the most important pieces to understand.
+Esta es una de las piezas mas importantes que entender.
 
-The app shell stays visible, and the outlet is the place where the current route's component gets rendered.
+El shell de la app permanece visible, y el outlet es el lugar donde se renderiza el componente de la ruta actual.
 
-That is how Angular supports a layout with persistent navigation and changing page content.
+Asi es como Angular soporta un layout con navegacion persistente y contenido de pagina cambiante.
 
-## `routerLink` and `routerLinkActive`
+## `routerLink` y `routerLinkActive`
 
-Navigation in Angular usually uses `routerLink` instead of raw anchor tags.
+La navegacion en Angular suele usar `routerLink` en lugar de etiquetas anchor sin mas.
 
-That is because Angular wants to manage navigation inside the application without forcing a full page reload.
+Eso es porque Angular quiere gestionar la navegacion dentro de la aplicacion sin forzar una recarga completa de pagina.
 
-`routerLinkActive` is helpful because it lets the UI reflect which section is active.
+`routerLinkActive` es util porque permite que la UI refleje que seccion esta activa.
 
-This is useful for menus, tabs, and app shells.
+Esto es util para menus, tabs y shells de aplicacion.
 
-## Route Parameters
+## Parametros de ruta
 
-Some routes need dynamic values.
+Algunas rutas necesitan valores dinamicos.
 
-For example, an article detail page might need an id or slug.
+Por ejemplo, una pagina de detalle de articulo podria necesitar un id o un slug.
 
-Route parameters let one route definition support many specific URLs.
+Los parametros de ruta permiten que una definicion de ruta soporte muchas URLs concretas.
 
-This is an important step because it turns routing from simple page switching into data-aware navigation.
+Este es un paso importante porque transforma el routing, que pasa de ser simple cambio de paginas a navegacion consciente de los datos.
 
-## Redirects and Wildcards
+## Redirecciones y comodines
 
-Two practical routing features appear early for a good reason.
+Dos funciones practicas del routing aparecen temprano por una buena razon.
 
-### Redirects
+### Redirecciones
 
-Redirects are useful when:
+Las redirecciones son utiles cuando:
 
-- the empty path should go to a default page
-- an older route should point to a newer one
+- la ruta vacia debe ir a una pagina por defecto
+- una ruta antigua debe apuntar a una mas nueva
 
-### Wildcard routes
+### Rutas comodin
 
-Wildcard routes catch unmatched URLs.
+Las rutas comodin capturan URLs que no coinciden.
 
-This is important because users can type bad URLs, follow old links, or arrive from bookmarks.
+Esto importa porque el usuario puede escribir URLs erroneas, seguir enlaces antiguos o llegar desde marcadores.
 
-The app should respond gracefully instead of breaking.
+La app deberia responder de forma elegante en lugar de romperse.
 
-## The Big Architectural Lesson
+## La gran leccion arquitectonica
 
-Routing changes how you think about application structure.
+El routing cambia la forma en la que piensas la estructura de la aplicacion.
 
-Instead of one page with many toggled sections, the app becomes a set of navigable features connected by URLs.
+En lugar de una sola pagina con muchas secciones alternables, la app se convierte en un conjunto de funcionalidades navegables conectadas por URLs.
 
-That makes the application:
+Eso hace que la aplicacion sea:
 
-- easier to navigate
-- easier to share
-- easier to extend
-- easier to reason about
+- mas facil de navegar
+- mas facil de compartir
+- mas facil de extender
+- mas facil de razonar
 
-## How to Study This Lesson
+## Como estudiar esta leccion
 
-Use this reading order:
+Usa este orden de lectura:
 
-1. Read `app.routes.ts` first.
-2. Understand each path and which component it renders.
-3. Then read the shell component and locate the `RouterOutlet`.
-4. Finally, inspect how links are wired to the router.
+1. Lee primero `app.routes.ts`.
+2. Entiende cada path y que componente renderiza.
+3. Luego lee el componente shell y localiza el `RouterOutlet`.
+4. Finalmente, inspecciona como los enlaces estan conectados al router.
 
-This order mirrors how Angular itself thinks about navigation.
+Este orden refleja como Angular piensa la navegacion internamente.
 
-## Exercises
+## Ejercicios
 
-Try these changes:
+Prueba estos cambios:
 
-1. Add one new route and link to it from the shell.
-2. Change the default redirect.
-3. Add another route parameter and display it.
-4. Create a friendlier wildcard page.
+1. Anade una ruta nueva y enlazala desde el shell.
+2. Cambia la redireccion por defecto.
+3. Anade otro parametro de ruta y muestralo.
+4. Crea una pagina comodin mas amigable.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- what a route definition is
-- what `RouterOutlet` does
-- why `routerLink` is used instead of plain links inside the app
-- how route parameters let one page template handle many URLs
+- que es una definicion de ruta
+- que hace `RouterOutlet`
+- por que se usa `routerLink` en lugar de enlaces planos dentro de la app
+- como los parametros de ruta permiten que una sola plantilla de pagina maneje muchas URLs
 
-The next lesson introduces HTTP and async data, which is where Angular starts communicating with external data sources.
+La siguiente leccion introduce HTTP y datos asincronos, que es donde Angular empieza a comunicarse con fuentes de datos externas.

@@ -1,68 +1,68 @@
-# Angular Guide
+# Guia de Angular
 
-This document is a standalone guide to modern Angular. It is written as a theory-first companion for learning Angular from the ground up and then moving into more advanced architectural and application concerns.
+Este documento es una guia independiente sobre Angular moderno. Esta escrito como un acompanante teorico, pensado para aprender Angular desde cero y avanzar despues hacia preocupaciones mas avanzadas de arquitectura y de aplicaciones.
 
-It does not assume a specific project. Instead, it explains the concepts, mental models, and design decisions that matter when building Angular applications in real life.
-
----
-
-## 1. What Angular Is
-
-Angular is a frontend framework for building client-side applications with TypeScript.
-
-At its core, Angular helps you answer a simple question:
-
-How do I build a user interface that stays synchronized with application state as the user interacts with it?
-
-Angular gives you a structured answer through:
-
-- components for UI composition
-- templates for declarative rendering
-- dependency injection for object creation and sharing
-- routing for navigation
-- forms for user input
-- HTTP utilities for remote data
-- reactive tools such as RxJS and signals for state and async flows
-
-Angular is not just a collection of utilities. It is an opinionated system for organizing application code.
-
-That is one of its biggest strengths.
+No asume un proyecto concreto. En su lugar, explica los conceptos, modelos mentales y decisiones de diseno que importan al construir aplicaciones Angular en situaciones reales.
 
 ---
 
-## 2. The Core Angular Mental Model
+## 1. Que es Angular
 
-The most important Angular idea is:
+Angular es un framework frontend para construir aplicaciones del lado del cliente con TypeScript.
 
-The UI is a function of application state.
+En esencia, Angular te ayuda a responder una pregunta simple:
 
-That means you usually do not manually update the DOM element by element. Instead, you update component state, and Angular recalculates what should appear on screen.
+Como construyo una interfaz de usuario que permanezca sincronizada con el estado de la aplicacion mientras la persona usuaria interactua con ella?
 
-The general flow looks like this:
+Angular ofrece una respuesta estructurada mediante:
 
-1. A component holds state.
-2. A template reads that state.
-3. The user interacts with the UI.
-4. The component updates its state.
-5. Angular updates the rendered output.
+- componentes para componer la UI
+- plantillas para renderizado declarativo
+- inyeccion de dependencias para crear y compartir objetos
+- routing para navegacion
+- formularios para entrada del usuario
+- utilidades HTTP para datos remotos
+- herramientas reactivas como RxJS y signals para estado y flujos asincronos
 
-This sounds simple, but it is the foundation for almost every Angular feature.
+Angular no es solo una coleccion de utilidades. Es un sistema con opinion para organizar el codigo de una aplicacion.
+
+Esa es una de sus mayores fortalezas.
 
 ---
 
-## 3. TypeScript in Angular
+## 2. El modelo mental central de Angular
 
-Angular is designed to work well with TypeScript.
+La idea mas importante de Angular es:
 
-TypeScript matters in Angular because Angular applications often have:
+La UI es una funcion del estado de la aplicacion.
 
-- structured domain models
-- forms with known field shapes
-- services returning typed data
-- reusable component APIs
-- route and state models that benefit from explicit contracts
+Eso significa que normalmente no actualizas el DOM manualmente elemento por elemento. En su lugar, actualizas el estado del componente y Angular vuelve a calcular que debe aparecer en pantalla.
 
-For example:
+El flujo general se ve asi:
+
+1. Un componente contiene estado.
+2. Una plantilla lee ese estado.
+3. La persona usuaria interactua con la UI.
+4. El componente actualiza su estado.
+5. Angular actualiza la salida renderizada.
+
+Suena simple, pero es la base de casi cualquier funcionalidad de Angular.
+
+---
+
+## 3. TypeScript en Angular
+
+Angular esta disenado para trabajar bien con TypeScript.
+
+TypeScript importa en Angular porque las aplicaciones Angular suelen tener:
+
+- modelos de dominio estructurados
+- formularios con formas conocidas de campos
+- servicios que devuelven datos tipados
+- APIs de componentes reutilizables
+- modelos de rutas y de estado que se benefician de contratos explicitos
+
+Por ejemplo:
 
 ```ts
 export interface UserProfile {
@@ -73,510 +73,297 @@ export interface UserProfile {
 }
 ```
 
-This type makes several things clearer:
+Este tipo hace que varias cosas sean mas claras:
 
-- what fields exist
-- what type each field has
-- what other code can safely assume
+- que campos existen
+- que tipo tiene cada campo
+- que puede asumir con seguridad el resto del codigo
 
-Angular becomes easier to reason about when application data has explicit shapes.
-
----
-
-## 4. Components
-
-Components are the main building blocks of Angular user interfaces.
-
-A component usually includes:
-
-- a TypeScript class for state and behavior
-- an HTML template for rendering
-- optional CSS for presentation
-
-Example:
-
-```ts
-import { Component, signal } from "@angular/core";
-
-@Component({
-  selector: "app-counter",
-  standalone: true,
-  template: `
-    <h2>Count: {{ count() }}</h2>
-    <button type="button" (click)="increment()">Increment</button>
-  `,
-})
-export class CounterComponent {
-  readonly count = signal(0);
-
-  increment(): void {
-    this.count.update((value) => value + 1);
-  }
-}
-```
-
-### What a component should own
-
-A component usually owns:
-
-- UI state
-- event handling
-- derived values used directly by the template
-- orchestration of service calls or shared state
-
-A component usually should not own:
-
-- repeated business logic used elsewhere
-- low-level persistence details
-- application-wide infrastructure concerns
-
-Those often belong in services or other shared layers.
+Angular se vuelve mas facil de razonar cuando los datos de la aplicacion tienen formas explicitas.
 
 ---
 
-## 5. Standalone Components
+## 4. Componentes
 
-Modern Angular prefers standalone components.
+Los componentes son los bloques principales de las interfaces de usuario en Angular.
 
-Older Angular applications often centered around NgModules. Standalone components reduce that extra indirection by letting a component declare its own dependencies directly.
+Un componente normalmente incluye:
 
-Example:
+- una clase TypeScript para estado y comportamiento
+- una plantilla HTML para el renderizado
+- CSS opcional para la presentacion
 
-```ts
-import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+### Que debe poseer un componente
 
-@Component({
-  selector: "app-example",
-  standalone: true,
-  imports: [CommonModule],
-  template: `<p>Hello Angular</p>`,
-})
-export class ExampleComponent {}
-```
+Un componente normalmente posee:
 
-This style is easier to read because the component explicitly shows what Angular features it depends on.
+- estado de UI
+- manejo de eventos
+- valores derivados usados directamente por la plantilla
+- orquestacion de llamadas a servicios o a estado compartido
 
----
+Un componente normalmente no deberia poseer:
 
-## 6. Bootstrapping an Angular App
+- logica de negocio repetida que se usa en otros lugares
+- detalles de persistencia de bajo nivel
+- preocupaciones de infraestructura de toda la aplicacion
 
-Angular applications need an entry point.
-
-Modern Angular commonly uses `bootstrapApplication(...)`.
-
-Example:
-
-```ts
-import { bootstrapApplication } from "@angular/platform-browser";
-import { AppComponent } from "./app/app.component";
-
-bootstrapApplication(AppComponent).catch((error) => {
-  console.error(error);
-});
-```
-
-This means:
-
-Start Angular and use this component as the root of the application.
-
-Application-level configuration is often added through an `app.config.ts` file using `ApplicationConfig`.
+Eso suele pertenecer a servicios u otras capas compartidas.
 
 ---
 
-## 7. Templates
+## 5. Componentes standalone
 
-Angular templates are declarative. They describe what should appear based on component state.
+Angular moderno prefiere componentes standalone.
 
-Important features include:
+Las aplicaciones Angular antiguas solian girar alrededor de NgModules. Los componentes standalone reducen esa indirección extra permitiendo que un componente declare sus dependencias directamente.
 
-- interpolation
+Este estilo es mas facil de leer porque el componente muestra explicitamente de que capacidades de Angular depende.
+
+---
+
+## 6. Arranque de una app Angular
+
+Las aplicaciones Angular necesitan un punto de entrada.
+
+Angular moderno suele usar `bootstrapApplication(...)`.
+
+Eso significa: iniciar Angular y usar un componente como raiz de la aplicacion.
+
+La configuracion a nivel de aplicacion suele anadirse mediante un archivo `app.config.ts` usando `ApplicationConfig`.
+
+---
+
+## 7. Plantillas
+
+Las plantillas de Angular son declarativas. Describen que debe aparecer segun el estado del componente.
+
+Entre las capacidades importantes se incluyen:
+
+- interpolacion
 - property binding
 - event binding
 - two-way binding
-- control flow
+- flujo de control
 
-### Interpolation
+### Interpolacion
 
-Interpolation uses `{{ ... }}`.
-
-```html
-<h1>{{ title }}</h1>
-```
-
-It is used to display a value in text content.
+La interpolacion usa `{{ ... }}` para mostrar un valor dentro del contenido de texto.
 
 ### Property binding
 
-Property binding sends a component value into a DOM or component property.
-
-```html
-<button [disabled]="isSaving">Save</button>
-```
+El property binding envia un valor del componente a una propiedad del DOM o de otro componente.
 
 ### Event binding
 
-Event binding listens to browser or component events.
-
-```html
-<button (click)="save()">Save</button>
-```
+El event binding escucha eventos del navegador o del componente.
 
 ### Two-way binding
 
-For simple form scenarios, Angular supports `[(ngModel)]`.
+Para escenarios simples de formularios, Angular admite `[(ngModel)]`.
 
-```html
-<input [(ngModel)]="searchText" />
-```
+Eso significa:
 
-This means:
-
-- update the input when `searchText` changes
-- update `searchText` when the user types
+- actualizar la entrada cuando cambie el valor
+- actualizar el valor cuando la persona usuaria escriba
 
 ---
 
-## 8. Modern Control Flow
+## 8. Flujo de control moderno
 
-Modern Angular provides block syntax such as `@if` and `@for`.
+Angular moderno proporciona sintaxis por bloques como `@if` y `@for`.
 
-These replace older structural syntax in many codebases and often read more clearly.
+Estas reemplazan en muchos proyectos la sintaxis estructural mas antigua y suelen leerse con mayor claridad.
 
-Example:
-
-```html
-@if (items.length === 0) {
-<p>No results found.</p>
-} @else {
-<ul>
-  @for (item of items; track item.id) {
-  <li>{{ item.name }}</li>
-  }
-</ul>
-}
-```
-
-This style makes Angular templates feel closer to ordinary programming control flow while still remaining declarative.
+Este estilo hace que las plantillas de Angular se sientan mas cercanas al flujo de control normal de la programacion sin dejar de ser declarativas.
 
 ---
 
-## 9. Component State and Derived State
+## 9. Estado del componente y estado derivado
 
-Angular components often have two kinds of state.
+Los componentes Angular suelen tener dos tipos de estado.
 
-### Source state
+### Estado fuente
 
-This is the core stored state.
+Es el estado principal almacenado.
 
-Examples:
+Ejemplos:
 
-- the array of tasks
-- the selected item id
-- the current filter value
-- the loading flag
+- el arreglo de tareas
+- el id del elemento seleccionado
+- el valor actual del filtro
+- la bandera de carga
 
-### Derived state
+### Estado derivado
 
-This is calculated from source state.
+Se calcula a partir del estado fuente.
 
-Examples:
+Ejemplos:
 
-- completed task count
-- filtered list
-- current selected object
-- summary labels
+- conteo de tareas completadas
+- lista filtrada
+- objeto seleccionado actual
+- etiquetas de resumen
 
-Derived state should usually not be duplicated if it can be computed safely from a single source of truth.
-
----
-
-## 10. Parent-Child Communication
-
-Real Angular pages are usually composed of multiple components.
-
-The most common communication pattern is:
-
-- data flows down through inputs
-- events flow up through outputs
-
-Example:
-
-```ts
-import { Component, input, output } from "@angular/core";
-
-@Component({
-  selector: "app-user-card",
-  standalone: true,
-  template: `
-    <article>
-      <h3>{{ name() }}</h3>
-      <button type="button" (click)="selected.emit()">Select</button>
-    </article>
-  `,
-})
-export class UserCardComponent {
-  readonly name = input.required<string>();
-  readonly selected = output<void>();
-}
-```
-
-This keeps boundaries clear:
-
-- the parent owns the broader state
-- the child renders focused UI and emits meaningful actions
+El estado derivado normalmente no deberia duplicarse si puede calcularse con seguridad a partir de una sola fuente de verdad.
 
 ---
 
-## 11. Forms
+## 10. Comunicacion padre-hijo
 
-Angular supports two broad styles of forms.
+Las paginas Angular reales suelen componerse de varios componentes.
 
-### Template-driven forms
+El patron de comunicacion mas comun es:
 
-These are simple and useful for basic input handling.
+- los datos fluyen hacia abajo mediante inputs
+- los eventos fluyen hacia arriba mediante outputs
 
-They are often a good beginner choice.
+Esto mantiene limites claros:
 
-### Reactive forms
-
-These are more explicit and scalable.
-
-Reactive forms are especially useful when you need:
-
-- many fields
-- complex validation
-- cross-field rules
-- explicit form-state control
-
-Example:
-
-```ts
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-
-const profileForm = new FormGroup({
-  displayName: new FormControl("", {
-    nonNullable: true,
-    validators: [Validators.required],
-  }),
-  email: new FormControl("", {
-    nonNullable: true,
-    validators: [Validators.required, Validators.email],
-  }),
-});
-```
-
-Reactive forms treat the form itself as structured application state.
+- el padre posee el estado mas amplio
+- el hijo renderiza una UI enfocada y emite acciones significativas
 
 ---
 
-## 12. Validation
+## 11. Formularios
 
-Validation can happen at multiple levels.
+Angular admite dos estilos generales de formularios.
 
-### Field-level validation
+### Formularios guiados por plantilla
 
-Examples:
+Son simples y utiles para manejar entradas basicas.
 
-- required
-- minimum length
-- email format
+### Formularios reactivos
 
-### Group-level validation
+Son mas explicitos y escalables.
 
-Examples:
+Los formularios reactivos son especialmente utiles cuando necesitas:
 
-- two fields must agree with each other
-- one field becomes required only when another field has a certain value
+- muchos campos
+- validacion compleja
+- reglas entre campos
+- control explicito del estado del formulario
 
-Validation is not only about preventing bad input. It is also about expressing business rules clearly in the form model.
-
----
-
-## 13. Services
-
-Services hold logic that does not primarily belong in the template or visual component layer.
-
-Common service responsibilities include:
-
-- data access
-- persistence
-- business rules
-- shared state coordination
-- infrastructure concerns
-
-Example:
-
-```ts
-import { Injectable } from "@angular/core";
-
-@Injectable({
-  providedIn: "root",
-})
-export class SettingsService {
-  private readonly storageKey = "app-settings";
-
-  load(): string | null {
-    return localStorage.getItem(this.storageKey);
-  }
-}
-```
-
-Services are one of the main ways Angular separates concerns.
+Los formularios reactivos tratan al formulario mismo como estado estructurado de la aplicacion.
 
 ---
 
-## 14. Dependency Injection
+## 12. Validacion
 
-Angular uses dependency injection to create and supply objects.
+La validacion puede ocurrir en multiples niveles.
 
-Instead of manually constructing every dependency, you declare what a class needs and Angular provides it.
+### Validacion a nivel de campo
 
-This improves:
+Ejemplos:
 
-- reuse
-- flexibility
+- requerido
+- longitud minima
+- formato de correo
+
+### Validacion a nivel de grupo
+
+Ejemplos:
+
+- dos campos deben coincidir entre si
+- un campo se vuelve obligatorio solo cuando otro tiene cierto valor
+
+La validacion no consiste solo en evitar entradas incorrectas. Tambien consiste en expresar claramente las reglas de negocio dentro del modelo del formulario.
+
+---
+
+## 13. Servicios
+
+Los servicios contienen logica que no pertenece principalmente a la plantilla ni a la capa visual del componente.
+
+Responsabilidades comunes de un servicio incluyen:
+
+- acceso a datos
+- persistencia
+- reglas de negocio
+- coordinacion de estado compartido
+- preocupaciones de infraestructura
+
+Los servicios son una de las maneras principales en las que Angular separa responsabilidades.
+
+---
+
+## 14. Inyeccion de dependencias
+
+Angular usa inyeccion de dependencias para crear y suministrar objetos.
+
+En lugar de construir manualmente cada dependencia, declaras lo que necesita una clase y Angular lo proporciona.
+
+Esto mejora:
+
+- reutilizacion
+- flexibilidad
 - testing
-- lifetime management
+- gestion del ciclo de vida
 
-Example:
-
-```ts
-import { Component, inject } from "@angular/core";
-import { SettingsService } from "./settings.service";
-
-@Component({
-  selector: "app-settings-panel",
-  standalone: true,
-  template: `...`,
-})
-export class SettingsPanelComponent {
-  private readonly settingsService = inject(SettingsService);
-}
-```
-
-### Providers
-
-Providers tell Angular how to create or supply a dependency.
-
-At runtime, Angular uses injectors to resolve these dependencies.
-
-The root injector is application-wide. Feature-level or component-level providers can create narrower scopes when needed.
+Los providers le dicen a Angular como crear o suministrar una dependencia. En tiempo de ejecucion, Angular usa injectores para resolverlas.
 
 ---
 
 ## 15. Routing
 
-Routing lets Angular map URLs to components.
+El routing permite que Angular relacione URLs con componentes.
 
-The router solves several important problems:
+El router resuelve varios problemas importantes:
 
-- navigation between screens
+- navegacion entre pantallas
 - deep linking
-- route parameters
-- redirects
-- guarded access
-
-Example route configuration:
-
-```ts
-import { Routes } from "@angular/router";
-
-export const routes: Routes = [
-  { path: "", redirectTo: "dashboard", pathMatch: "full" },
-  {
-    path: "dashboard",
-    loadComponent: () =>
-      import("./dashboard.component").then((m) => m.DashboardComponent),
-  },
-  {
-    path: "users/:id",
-    loadComponent: () =>
-      import("./user-page.component").then((m) => m.UserPageComponent),
-  },
-  { path: "**", redirectTo: "dashboard" },
-];
-```
+- parametros de ruta
+- redirecciones
+- acceso protegido
 
 ### `RouterOutlet`
 
-The `RouterOutlet` is the placeholder where routed components are rendered.
+El `RouterOutlet` es el marcador de posicion donde se renderizan los componentes enrutados.
 
 ### `routerLink`
 
-Use `routerLink` for internal Angular navigation so the router can manage transitions properly.
+Usa `routerLink` para la navegacion interna en Angular para que el router pueda gestionar correctamente las transiciones.
 
 ---
 
-## 16. Route Guards and Protected Flows
+## 16. Guards de ruta y flujos protegidos
 
-Angular applications often need to restrict access to certain routes.
+Las aplicaciones Angular a menudo necesitan restringir el acceso a ciertas rutas.
 
-Route guards help decide whether navigation should continue.
+Los guards ayudan a decidir si la navegacion debe continuar.
 
-Example:
-
-```ts
-import { CanActivateFn, Router } from "@angular/router";
-import { inject } from "@angular/core";
-
-export const authGuard: CanActivateFn = () => {
-  const router = inject(Router);
-  const isAuthenticated = false;
-
-  return isAuthenticated ? true : router.createUrlTree(["/login"]);
-};
-```
-
-Guards are useful because authentication is not only a UI concern. It is also a navigation concern.
+Los guards son utiles porque la autenticacion no es solo una preocupacion de UI. Tambien es una preocupacion de navegacion.
 
 ---
 
-## 17. HTTP and `HttpClient`
+## 17. HTTP y `HttpClient`
 
-Angular uses `HttpClient` for remote data access.
+Angular usa `HttpClient` para el acceso a datos remotos.
 
-This service returns Observables rather than immediate synchronous values.
+Este servicio devuelve Observables en lugar de valores sincronos inmediatos.
 
-Example:
+El cambio importante es que el componente debe manejar estados asincronos como:
 
-```ts
-import { HttpClient } from "@angular/common/http";
-import { Injectable, inject } from "@angular/core";
-import { Observable } from "rxjs";
-
-@Injectable({ providedIn: "root" })
-export class UserApiService {
-  private readonly http = inject(HttpClient);
-
-  getUsers(): Observable<{ id: string; name: string }[]> {
-    return this.http.get<{ id: string; name: string }[]>("/api/users");
-  }
-}
-```
-
-The important shift is that the component must handle async states such as:
-
-- loading
-- success
+- carga
+- exito
 - error
 
 ---
 
-## 18. Observables and RxJS
+## 18. Observables y RxJS
 
-RxJS is Angular's main toolkit for asynchronous and stream-based programming.
+RxJS es la principal herramienta de Angular para programacion asincrona y basada en streams.
 
-An Observable represents a stream of values over time.
+Un Observable representa un flujo de valores a lo largo del tiempo.
 
-This is useful for:
+Esto es util para:
 
-- HTTP responses
-- user input streams
-- route parameter changes
-- combined filter behavior
+- respuestas HTTP
+- flujos de entrada del usuario
+- cambios en parametros de ruta
+- comportamiento combinado de filtros
 
-Common operators include:
+Entre los operadores comunes se incluyen:
 
 - `map`
 - `filter`
@@ -586,1050 +373,325 @@ Common operators include:
 - `switchMap`
 - `shareReplay`
 
-Example:
-
-```ts
-import { combineLatest, map } from "rxjs";
-
-const viewModel$ = combineLatest([query$, status$]).pipe(
-  map(([query, status]) => ({ query, status })),
-);
-```
-
-RxJS is especially valuable when several changing values must be coordinated over time.
+RxJS es especialmente valioso cuando varios valores cambiantes deben coordinarse a lo largo del tiempo.
 
 ---
 
-## 19. Subscriptions
+## 19. Suscripciones
 
-A subscription starts an Observable execution and listens for its results.
+Una suscripcion inicia la ejecucion de un Observable y escucha sus resultados.
 
-For HTTP, the component often defines handlers such as:
+Para HTTP, el componente suele definir handlers como:
 
-- `next` for success
-- `error` for failure
+- `next` para el exito
+- `error` para el fallo
 
-Example:
-
-```ts
-this.userApiService.getUsers().subscribe({
-  next: (users) => {
-    this.users = users;
-    this.isLoading = false;
-  },
-  error: () => {
-    this.errorMessage = "Could not load users.";
-    this.isLoading = false;
-  },
-});
-```
-
-Manual subscriptions are sometimes fine, but Angular developers often prefer `AsyncPipe`, signals, or well-scoped cleanup patterns for long-lived streams.
+Las suscripciones manuales a veces son razonables, pero en Angular suele preferirse `AsyncPipe`, signals o patrones de limpieza bien acotados para streams de larga duracion.
 
 ---
 
 ## 20. Signals
 
-Signals are Angular's reactive primitive for local state.
+Los signals son la primitiva reactiva de Angular para estado local.
 
-The three main concepts are:
+Los tres conceptos principales son:
 
-- `signal()` for stored reactive state
-- `computed()` for derived reactive state
-- `effect()` for side effects based on signal changes
+- `signal()` para estado reactivo almacenado
+- `computed()` para estado reactivo derivado
+- `effect()` para efectos secundarios basados en cambios de signals
 
-Example:
-
-```ts
-import { computed, signal } from "@angular/core";
-
-const tasks = signal([{ completed: true }, { completed: false }]);
-
-const completedCount = computed(
-  () => tasks().filter((task) => task.completed).length,
-);
-```
-
-Signals are especially useful for local synchronous state and template-facing reactive values.
+Los signals son especialmente utiles para estado local sincronico y valores reactivos expuestos a plantilla.
 
 ---
 
-## 21. Shared State
+## 21. Estado compartido
 
-When multiple components need the same state, it is often useful to centralize that state in a shared service or store-like abstraction.
+Cuando varios componentes necesitan el mismo estado, suele ser util centralizarlo en un servicio compartido o en una abstraccion tipo store.
 
-The key principle is a single source of truth.
+El principio clave es una sola fuente de verdad.
 
-Instead of several components storing overlapping versions of the same information, the shared state owner exposes:
+En lugar de que varios componentes almacenen versiones superpuestas de la misma informacion, el propietario del estado compartido expone:
 
-- source state
-- derived state
-- update methods
+- estado fuente
+- estado derivado
+- metodos de actualizacion
 
-This improves consistency and coordination.
-
----
-
-## 22. Global State with an RxJS Store
-
-For application-wide state, a common Angular approach is to build a small store service on top of RxJS.
-
-The core idea is simple:
-
-- keep one private stream of state
-- expose read-only streams derived from that state
-- update state only through explicit store methods
-
-This gives you many of the benefits people want from "global state" without introducing a heavier library too early.
-
-An RxJS store is often a good fit when:
-
-- multiple distant components need the same state
-- async workflows update the same state from different places
-- derived data should stay consistent across screens
-- you want predictable updates and a single source of truth
-
-### A minimal store shape
-
-Most RxJS stores start with a typed state object and a `BehaviorSubject`.
-
-```ts
-import { Injectable, inject } from "@angular/core";
-import {
-  BehaviorSubject,
-  catchError,
-  distinctUntilChanged,
-  map,
-  of,
-  tap,
-} from "rxjs";
-import { UserApiService } from "./user-api.service";
-
-interface UsersState {
-  users: { id: string; name: string; active: boolean }[];
-  selectedUserId: string | null;
-  isLoading: boolean;
-  errorMessage: string | null;
-}
-
-const initialState: UsersState = {
-  users: [],
-  selectedUserId: null,
-  isLoading: false,
-  errorMessage: null,
-};
-
-@Injectable({ providedIn: "root" })
-export class UsersStore {
-  private readonly api = inject(UserApiService);
-  private readonly stateSubject = new BehaviorSubject<UsersState>(initialState);
-
-  readonly state$ = this.stateSubject.asObservable();
-
-  readonly users$ = this.state$.pipe(
-    map((state) => state.users),
-    distinctUntilChanged(),
-  );
-
-  readonly isLoading$ = this.state$.pipe(
-    map((state) => state.isLoading),
-    distinctUntilChanged(),
-  );
-
-  readonly selectedUser$ = this.state$.pipe(
-    map(
-      (state) =>
-        state.users.find((user) => user.id === state.selectedUserId) ?? null,
-    ),
-    distinctUntilChanged(),
-  );
-
-  loadUsers(): void {
-    this.patchState({ isLoading: true, errorMessage: null });
-
-    this.api
-      .getUsers()
-      .pipe(
-        tap((users) => {
-          this.patchState({ users, isLoading: false });
-        }),
-        catchError(() => {
-          this.patchState({
-            isLoading: false,
-            errorMessage: "Could not load users.",
-          });
-
-          return of([]);
-        }),
-      )
-      .subscribe();
-  }
-
-  selectUser(userId: string): void {
-    this.patchState({ selectedUserId: userId });
-  }
-
-  private patchState(patch: Partial<UsersState>): void {
-    this.stateSubject.next({
-      ...this.stateSubject.value,
-      ...patch,
-    });
-  }
-}
-```
-
-This store has the main building blocks you usually want:
-
-- one private source of truth in `stateSubject`
-- selector streams such as `users$` and `selectedUser$`
-- imperative methods that are the only place allowed to change state
-
-### Why selectors matter
-
-The biggest mistake in homegrown stores is exposing the whole state everywhere and making every component understand too much.
-
-Selectors reduce coupling.
-
-Instead of every component reading the entire state object, a component subscribes only to the slice it needs:
-
-```ts
-readonly users$ = this.usersStore.users$;
-readonly selectedUser$ = this.usersStore.selectedUser$;
-readonly isLoading$ = this.usersStore.isLoading$;
-```
-
-That keeps component code simpler and lets the store own the derivation logic.
-
-### Example component usage
-
-A component using the store should usually read from selector streams and trigger intent methods.
-
-```ts
-import { Component, inject } from "@angular/core";
-import { AsyncPipe } from "@angular/common";
-import { UsersStore } from "./users.store";
-
-@Component({
-  selector: "app-users-page",
-  standalone: true,
-  imports: [AsyncPipe],
-  template: `
-    <button type="button" (click)="reload()">Reload</button>
-
-    @if (isLoading$ | async) {
-      <p>Loading users...</p>
-    }
-
-    <ul>
-      @for (user of (users$ | async) ?? []; track user.id) {
-        <li>
-          <button type="button" (click)="selectUser(user.id)">
-            {{ user.name }}
-          </button>
-        </li>
-      }
-    </ul>
-  `,
-})
-export class UsersPageComponent {
-  private readonly usersStore = inject(UsersStore);
-
-  readonly users$ = this.usersStore.users$;
-  readonly isLoading$ = this.usersStore.isLoading$;
-
-  constructor() {
-    this.usersStore.loadUsers();
-  }
-
-  reload(): void {
-    this.usersStore.loadUsers();
-  }
-
-  selectUser(userId: string): void {
-    this.usersStore.selectUser(userId);
-  }
-}
-```
-
-Notice the boundary:
-
-- the component does not know how state is stored internally
-- the component does not mutate arrays directly
-- the component expresses user intent by calling store methods
-
-That separation is what keeps global state manageable.
-
-### Modeling async state
-
-Global state is not only about storing data collections. It should usually model the whole async situation:
-
-- the data
-- loading status
-- selected ids or filters
-- error state
-
-That is why `isLoading` and `errorMessage` belong in the store example above.
-
-Without those fields, components often fall back to ad hoc booleans and duplicated error handling, which breaks the single source of truth.
-
-### Good practices for an RxJS store
-
-- Keep the writable subject private. Components should never call `.next(...)` directly.
-- Expose selector observables, not the raw mutable state object when you can avoid it.
-- Keep updates immutable. Create new arrays and objects instead of mutating existing ones in place.
-- Put derived state in selectors. Do not make every component recalculate the same filtered lists or counts.
-- Treat loading and error as real state, not temporary afterthoughts.
-- Keep store methods intention-based, such as `selectUser`, `loadUsers`, or `updateFilter`, instead of generic "set anything" methods.
-- Be careful with subscriptions inside the store. Short-lived HTTP subscriptions are acceptable, but long-lived streams should have clear lifecycle management.
-- Do not put every piece of state in a global store. Keep purely local UI state local unless multiple parts of the app truly need it.
-- Keep side effects separated from pure derivation. Selectors should derive data; store methods should coordinate updates and async work.
-
-### When this approach starts to strain
-
-A custom RxJS store works well for many Angular applications, but it can become harder to manage when you need:
-
-- complex cross-feature coordination
-- time-travel-style debugging or stricter action logs
-- many async workflows with consistent effect handling
-- team-wide conventions around reducers, actions, and dev tooling
-
-At that point, a more formal library such as NgRx may be worth the extra structure.
-
-The important lesson is not that every app needs a heavy state library. It is that global state should have clear ownership, predictable updates, and explicit read paths.
+Esto mejora la consistencia y la coordinacion.
 
 ---
 
-## 23. NgRx Deep Dive
+## 22. Estado global con un store basado en RxJS
 
-NgRx is a formal state management library for Angular built around a few core ideas:
+Para el estado de toda la aplicacion, un enfoque comun en Angular es construir un pequeno servicio store sobre RxJS.
 
-- state is stored centrally
-- state changes happen through explicit actions
-- reducers describe how state changes
-- selectors expose slices and derived values
-- effects handle async work and other side effects
+La idea central es simple:
 
-Compared with a lightweight RxJS store, NgRx adds more structure, more ceremony, and better consistency for larger teams or more complex applications.
+- mantener un stream privado de estado
+- exponer streams de solo lectura derivados de ese estado
+- actualizar el estado solo mediante metodos explicitos del store
 
-NgRx is often worth considering when:
+Esto da muchos de los beneficios del "estado global" sin introducir una libreria mas pesada demasiado pronto.
 
-- many features share state across the application
-- async workflows are complex and happen in many places
-- you want consistent state transitions through named actions
-- debugging state history and behavior matters
-- the team needs strong conventions for how data flows
+Un store de RxJS suele ser adecuado cuando:
 
-### The core mental model
+- multiples componentes distantes necesitan el mismo estado
+- flujos asincronos actualizan el mismo estado desde distintos lugares
+- los datos derivados deben permanecer consistentes entre pantallas
+- quieres actualizaciones predecibles y una sola fuente de verdad
 
-The usual NgRx flow looks like this:
+### Buenas practicas para un store RxJS
 
-1. A component dispatches an action.
-2. A reducer updates state synchronously based on that action.
-3. Selectors expose the new state to components.
-4. Effects react to some actions to perform async work such as HTTP requests.
-5. Effects dispatch follow-up success or failure actions.
-
-The important boundary is that components describe intent, reducers update state, and effects handle side effects.
-
-### Example state and actions
-
-An NgRx feature usually starts by defining its state shape and the actions that can happen.
-
-```ts
-import { createActionGroup, emptyProps, props } from "@ngrx/store";
-
-export interface UsersState {
-  users: { id: string; name: string; active: boolean }[];
-  selectedUserId: string | null;
-  isLoading: boolean;
-  errorMessage: string | null;
-}
-
-export const initialUsersState: UsersState = {
-  users: [],
-  selectedUserId: null,
-  isLoading: false,
-  errorMessage: null,
-};
-
-export const UsersActions = createActionGroup({
-  source: "Users",
-  events: {
-    "Load Users": emptyProps(),
-    "Load Users Success": props<{
-      users: { id: string; name: string; active: boolean }[];
-    }>(),
-    "Load Users Failure": props<{ errorMessage: string }>(),
-    "Select User": props<{ userId: string }>(),
-  },
-});
-```
-
-This is useful because the application now has explicit names for the events that can affect this feature.
-
-Instead of "something changed somewhere," you get a traceable action such as `UsersActions.loadUsers()` or `UsersActions.selectUser({ userId })`.
-
-### Example reducer
-
-A reducer is a pure function that takes the previous state and an action and returns the next state.
-
-```ts
-import { createReducer, on } from "@ngrx/store";
-
-export const usersReducer = createReducer(
-  initialUsersState,
-  on(UsersActions.loadUsers, (state) => ({
-    ...state,
-    isLoading: true,
-    errorMessage: null,
-  })),
-  on(UsersActions.loadUsersSuccess, (state, { users }) => ({
-    ...state,
-    users,
-    isLoading: false,
-  })),
-  on(UsersActions.loadUsersFailure, (state, { errorMessage }) => ({
-    ...state,
-    isLoading: false,
-    errorMessage,
-  })),
-  on(UsersActions.selectUser, (state, { userId }) => ({
-    ...state,
-    selectedUserId: userId,
-  })),
-);
-```
-
-Reducers should stay boring and predictable.
-
-That is a good thing.
-
-They should not call services, start HTTP requests, or perform hidden side effects. Their job is only to compute the next state.
-
-### Example selectors
-
-Selectors are how components read state without knowing the store structure in too much detail.
-
-```ts
-import { createFeature, createSelector } from "@ngrx/store";
-
-export const usersFeature = createFeature({
-  name: "users",
-  reducer: usersReducer,
-});
-
-export const {
-  name: usersFeatureKey,
-  reducer: usersFeatureReducer,
-  selectUsersState,
-  selectUsers,
-  selectSelectedUserId,
-  selectIsLoading,
-  selectErrorMessage,
-} = usersFeature;
-
-export const selectSelectedUser = createSelector(
-  selectUsers,
-  selectSelectedUserId,
-  (users, selectedUserId) =>
-    users.find((user) => user.id === selectedUserId) ?? null,
-);
-
-export const selectActiveUsers = createSelector(selectUsers, (users) =>
-  users.filter((user) => user.active),
-);
-```
-
-This is one of the biggest strengths of NgRx.
-
-Derived state has one clear home, and components consume selectors instead of duplicating filtering and lookup logic everywhere.
-
-### Example effects
-
-Effects listen for actions, run async work, and dispatch new actions with the results.
-
-```ts
-import { Injectable, inject } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap } from "rxjs";
-import { UserApiService } from "./user-api.service";
-
-@Injectable()
-export class UsersEffects {
-  private readonly actions$ = inject(Actions);
-  private readonly api = inject(UserApiService);
-
-  readonly loadUsers$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UsersActions.loadUsers),
-      switchMap(() =>
-        this.api.getUsers().pipe(
-          map((users) => UsersActions.loadUsersSuccess({ users })),
-          catchError(() =>
-            of(
-              UsersActions.loadUsersFailure({
-                errorMessage: "Could not load users.",
-              }),
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
-}
-```
-
-This keeps HTTP logic out of reducers and out of presentational components.
-
-Effects are where you coordinate side effects such as:
-
-- HTTP requests
-- router navigation
-- analytics events
-- persistence to storage
-
-### Example component usage
-
-A component using NgRx usually selects state and dispatches actions.
-
-```ts
-import { AsyncPipe } from "@angular/common";
-import { Component, inject } from "@angular/core";
-import { Store } from "@ngrx/store";
-
-@Component({
-  selector: "app-users-page",
-  standalone: true,
-  imports: [AsyncPipe],
-  template: `
-    <button type="button" (click)="reload()">Reload</button>
-
-    @if (isLoading$ | async) {
-      <p>Loading users...</p>
-    }
-
-    <ul>
-      @for (user of (users$ | async) ?? []; track user.id) {
-        <li>
-          <button type="button" (click)="selectUser(user.id)">
-            {{ user.name }}
-          </button>
-        </li>
-      }
-    </ul>
-  `,
-})
-export class UsersPageComponent {
-  private readonly store = inject(Store);
-
-  readonly users$ = this.store.select(selectUsers);
-  readonly isLoading$ = this.store.select(selectIsLoading);
-
-  constructor() {
-    this.store.dispatch(UsersActions.loadUsers());
-  }
-
-  reload(): void {
-    this.store.dispatch(UsersActions.loadUsers());
-  }
-
-  selectUser(userId: string): void {
-    this.store.dispatch(UsersActions.selectUser({ userId }));
-  }
-}
-```
-
-The component boundary is now even stricter than in a simple RxJS store:
-
-- read through selectors
-- write through actions
-- leave side effects to effects
-
-That discipline is why NgRx scales well in larger applications.
-
-### Store setup
-
-At the application level, NgRx is typically registered through providers.
-
-```ts
-import { ApplicationConfig } from "@angular/core";
-import { provideStore } from "@ngrx/store";
-import { provideEffects } from "@ngrx/effects";
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideStore({ users: usersFeatureReducer }),
-    provideEffects([UsersEffects]),
-  ],
-};
-```
-
-This makes the store and its effects available across the application.
-
-### Good practices with NgRx
-
-- Keep actions event-like when possible. Prefer names such as `Load Users Success` or `Select User` over vague mutation commands.
-- Keep reducers pure. No service calls, no random values, no navigation, and no hidden mutations.
-- Keep selectors as the home for derivation. Counts, filtered collections, and selected entities usually belong there.
-- Keep effects focused on side effects and orchestration. Avoid turning them into a second reducer layer full of business state branching.
-- Normalize complex collections when appropriate. Entity-style state often scales better than repeatedly scanning large arrays.
-- Model loading and error state explicitly. Async workflows should have success and failure paths in the state model.
-- Organize by feature. Keep actions, reducer, selectors, and effects close to the feature they belong to.
-- Do not dispatch actions from everywhere without discipline. The action stream should still tell a coherent story about the application.
-
-### Common mistakes with NgRx
-
-- Putting temporary local UI state in the global store even when only one component needs it.
-- Writing selectors directly inside components instead of reusing shared selectors.
-- Performing state derivation repeatedly in effects instead of selectors.
-- Treating every user interaction as a reason to introduce NgRx even in small applications.
-- Creating huge action sets with weak naming that make the event flow harder to understand.
-
-### When NgRx is the right tradeoff
-
-NgRx adds overhead.
-
-You write more files, more types, and more explicit wiring than with a custom RxJS store or local signals.
-
-That cost is worthwhile when the structure pays you back through predictability, maintainability, and shared team conventions.
-
-If the application is small and the state graph is simple, NgRx may be more machinery than you need. If the application is large, feature-rich, and heavily asynchronous, the added discipline can be a major advantage.
+- Mantener privado el subject escribible.
+- Exponer observables selectores en lugar del estado mutable bruto siempre que sea posible.
+- Mantener las actualizaciones inmutables.
+- Colocar el estado derivado en selectores.
+- Tratar carga y error como estado real.
+- No poner todo el estado de la app en un store global.
 
 ---
 
-## 24. Advanced Templates
+## 23. NgRx en profundidad
 
-Angular provides tools for reusable template structure beyond ordinary component inputs.
+NgRx es una libreria formal de gestion de estado para Angular.
 
-Important mechanisms include:
+Se basa en algunas ideas centrales:
 
-- content projection with `ng-content`
-- template fragments with `ng-template`
-- dynamic rendering with `ngTemplateOutlet`
+- el estado se almacena centralmente
+- los cambios ocurren mediante actions explicitas
+- los reducers describen como cambia el estado
+- los selectors exponen fragmentos y valores derivados
+- los effects manejan trabajo asincrono y otros efectos secundarios
 
-These are useful when a reusable component should provide structure while letting the parent define some UI details.
+NgRx suele merecer la pena cuando:
 
-This is a different kind of reuse than simply passing data.
+- muchas funcionalidades comparten estado en toda la aplicacion
+- los flujos asincronos son complejos
+- quieres transiciones de estado consistentes mediante actions con nombre
+- importa depurar el historial y el comportamiento del estado
+- el equipo necesita convenciones fuertes sobre como fluyen los datos
 
-### Example: `ng-content`
+### Buenas practicas con NgRx
 
-Content projection lets a parent pass actual markup into a child component.
-
-For example, a reusable panel component can own the frame while the parent provides the inner content:
-
-```ts
-@Component({
-  selector: "app-panel",
-  standalone: true,
-  template: `
-    <section class="panel">
-      <header class="panel-header">
-        <ng-content select="[panelTitle]"></ng-content>
-      </header>
-
-      <div class="panel-body">
-        <ng-content></ng-content>
-      </div>
-    </section>
-  `,
-})
-export class PanelComponent {}
-```
-
-The parent can then decide what to project into those slots:
-
-```html
-<app-panel>
-  <h2 panelTitle>Quarterly Metrics</h2>
-  <p>Revenue is up 12% compared with last quarter.</p>
-</app-panel>
-```
-
-This is useful when the child should control layout, but the parent should control some of the displayed markup.
-
-### Example: `ng-template`
-
-`ng-template` defines a template fragment without rendering it immediately.
-
-For example, you might define an empty-state fragment that only appears when there are no items:
-
-```html
-<ng-template #emptyState>
-  <p>No tasks are assigned yet.</p>
-</ng-template>
-
-@if (tasks.length === 0) {
-<ng-container [ngTemplateOutlet]="emptyState"></ng-container>
-} @else {
-<ul>
-  @for (task of tasks; track task.id) {
-  <li>{{ task.title }}</li>
-  }
-</ul>
-}
-```
-
-The key idea is that the fragment exists as reusable template content until you choose to render it.
-
-### Example: `ngTemplateOutlet`
-
-`ngTemplateOutlet` renders a template fragment dynamically, often with context data.
-
-For example, a list component can accept a row template from the parent so the parent controls how each item is displayed:
-
-```html
-<ng-template #userRow let-user>
-  <strong>{{ user.name }}</strong>
-  <span>{{ user.email }}</span>
-</ng-template>
-
-@for (user of users; track user.id) {
-<ng-container
-  [ngTemplateOutlet]="userRow"
-  [ngTemplateOutletContext]="{ $implicit: user }"
-></ng-container>
-}
-```
-
-Here, `userRow` is the template, `ngTemplateOutlet` renders it, and `ngTemplateOutletContext` supplies the current `user`.
-
-This pattern is useful when a reusable component should manage looping or structure while letting the caller define the row UI.
+- Mantener las actions con nombres tipo evento.
+- Mantener puros los reducers.
+- Mantener los selectors como hogar del estado derivado.
+- Mantener los effects enfocados en efectos secundarios y orquestacion.
+- Modelar explicitamente estados de carga y de error.
+- Organizar por feature.
+- No introducir NgRx en interacciones pequenas o puramente locales si no hace falta.
 
 ---
 
-## 25. Directives and Pipes
+## 24. Plantillas avanzadas
 
-### Directives
+Angular proporciona herramientas para reutilizar estructura de plantilla mas alla de los inputs ordinarios de componentes.
 
-Directives add behavior to existing elements.
+Los mecanismos importantes incluyen:
 
-They do not usually create an entirely new visual component. Instead, they enhance or control an element that is already present in the template.
+- proyeccion de contenido con `ng-content`
+- fragmentos de plantilla con `ng-template`
+- renderizado dinamico con `ngTemplateOutlet`
 
-In practice, directives are useful when you want to reuse behavior without wrapping everything in another component.
+Son utiles cuando un componente reutilizable debe proporcionar estructura mientras permite que el padre defina algunos detalles de la UI.
 
-They are good for:
+---
 
-- dynamic styling
-- host event handling
-- reusable UI behavior
+## 25. Directivas y pipes
 
-For example, a status badge directive can add classes based on an input value:
+### Directivas
 
-```ts
-import { Directive, HostBinding, input } from "@angular/core";
+Las directivas anaden comportamiento a elementos existentes.
 
-@Directive({
-  selector: "[appStatusTone]",
-  standalone: true,
-})
-export class StatusToneDirective {
-  readonly appStatusTone = input<"success" | "warning" | "error">("success");
+Son buenas para:
 
-  @HostBinding("class")
-  get hostClasses(): string {
-    return `badge badge-${this.appStatusTone()}`;
-  }
-}
-```
-
-Used in a template:
-
-```html
-<span [appStatusTone]="ticket.status">{{ ticket.status }}</span>
-```
-
-This keeps the template simple while centralizing the styling rule in one reusable place.
-
-Another common directive pattern is reacting to host events.
-
-For example, a highlight directive can respond when the user hovers:
-
-```ts
-import { Directive, HostBinding, HostListener } from "@angular/core";
-
-@Directive({
-  selector: "[appHoverHighlight]",
-  standalone: true,
-})
-export class HoverHighlightDirective {
-  @HostBinding("style.backgroundColor")
-  backgroundColor = "transparent";
-
-  @HostListener("mouseenter")
-  handleMouseEnter(): void {
-    this.backgroundColor = "#fff4cc";
-  }
-
-  @HostListener("mouseleave")
-  handleMouseLeave(): void {
-    this.backgroundColor = "transparent";
-  }
-}
-```
-
-Used like this:
-
-```html
-<li appHoverHighlight>{{ notification.message }}</li>
-```
-
-The main idea is that a directive attaches behavior to an existing element rather than defining a whole new UI boundary.
+- estilos dinamicos
+- manejo de eventos en el host
+- comportamiento reutilizable de UI
 
 ### Pipes
 
-Pipes transform values for display in templates.
+Los pipes transforman valores para mostrarlos en plantillas.
 
-They are most useful when the component should keep raw domain data, but the template needs a presentation-friendly version of that data.
+Son buenos para:
 
-This helps keep formatting logic out of the component class and avoids repeating display transformations all over the template.
+- formatear etiquetas de estado
+- mostrar tiempo relativo
+- transformaciones de presentacion especificas del dominio
 
-They are good for:
-
-- formatting status labels
-- relative time display
-- domain-specific presentational transformations
-
-Angular includes many built-in pipes.
-
-For example, the `date` pipe formats a timestamp for display:
-
-```html
-<p>Updated: {{ release.updatedAt | date: "medium" }}</p>
-```
-
-If `release.updatedAt` is a `Date` or ISO string, the component can keep that raw value while the template decides how it should look to the user.
-
-You can also create custom pipes for repeated domain formatting.
-
-For example, a priority label pipe can turn internal codes into clearer text:
-
-```ts
-import { Pipe, PipeTransform } from "@angular/core";
-
-@Pipe({
-  name: "priorityLabel",
-  standalone: true,
-})
-export class PriorityLabelPipe implements PipeTransform {
-  transform(value: "low" | "medium" | "high"): string {
-    switch (value) {
-      case "low":
-        return "Low Priority";
-      case "medium":
-        return "Medium Priority";
-      case "high":
-        return "High Priority";
-    }
-  }
-}
-```
-
-Used in a template:
-
-```html
-<span>{{ incident.priority | priorityLabel }}</span>
-```
-
-Without the pipe, that mapping logic might end up repeated in several templates or pushed into the component even though it is only a display concern.
-
-Pipes are usually the right tool when the value stays the same in meaning, but needs a different representation for the UI.
-
-These features help keep templates cleaner and more reusable.
+Estas capacidades ayudan a mantener las plantillas mas limpias y reutilizables.
 
 ---
 
-## 26. Performance and Change Detection
+## 26. Rendimiento y deteccion de cambios
 
-Angular change detection decides when components should be checked and rerendered.
+La deteccion de cambios de Angular decide cuando deben comprobarse y volver a renderizarse los componentes.
 
-One important performance tool is `ChangeDetectionStrategy.OnPush`.
+Una herramienta importante de rendimiento es `ChangeDetectionStrategy.OnPush`.
 
-This encourages clearer update patterns and can reduce unnecessary work.
+Otras ideas importantes incluyen:
 
-Other important performance ideas include:
+- actualizaciones inmutables
+- renderizado de listas con tracking
+- limitar recomputaciones innecesarias
+- mantener enfocados los componentes repetidos
 
-- immutable updates
-- tracked list rendering
-- limiting unnecessary recomputation
-- keeping repeated row components focused
-
-Performance is not only about making code work. It is about making updates efficient as the UI scales.
+El rendimiento consiste en hacer que las actualizaciones sean eficientes a medida que escala la UI.
 
 ---
 
-## 27. Interceptors and HTTP Infrastructure
+## 27. Interceptors e infraestructura HTTP
 
-Interceptors handle shared HTTP concerns in one place.
+Los interceptors manejan preocupaciones HTTP compartidas en un solo lugar.
 
-They are useful for:
+Son utiles para:
 
-- attaching headers
-- rewriting URLs
-- logging requests
-- normalizing errors
+- anadir cabeceras
+- reescribir URLs
+- registrar peticiones
+- normalizar errores
 
-Example:
-
-```ts
-import { HttpInterceptorFn } from "@angular/common/http";
-
-export const authInterceptor: HttpInterceptorFn = (request, next) => {
-  const nextRequest = request.clone({
-    setHeaders: {
-      Authorization: "Bearer demo-token",
-    },
-  });
-
-  return next(nextRequest);
-};
-```
-
-Interceptors keep services and components cleaner by centralizing cross-cutting HTTP behavior.
+Los interceptors mantienen servicios y componentes mas limpios al centralizar comportamiento HTTP transversal.
 
 ---
 
 ## 28. Testing
 
-Angular applications benefit from testing at several levels.
+Las aplicaciones Angular se benefician de pruebas en varios niveles.
 
-Two especially common levels are:
+Dos niveles especialmente comunes son:
 
-- service tests for business logic
-- component tests for rendered behavior
+- pruebas de servicios para logica de negocio
+- pruebas de componentes para comportamiento renderizado
 
-Angular TestBed provides an Angular-aware environment for tests, while tools like Vitest or Jest run the test suite.
+Angular TestBed proporciona un entorno consciente de Angular para pruebas, mientras herramientas como Vitest o Jest ejecutan la suite.
 
-Testing is easier when responsibilities are clearly separated.
-
-That is one reason good architecture matters.
+Probar es mas facil cuando las responsabilidades estan claramente separadas.
 
 ---
 
-## 29. Application Architecture
+## 29. Arquitectura de aplicacion
 
-As applications grow, a flat file structure becomes harder to maintain.
+A medida que crecen las aplicaciones, una estructura plana de archivos se vuelve mas dificil de mantener.
 
-A scalable Angular architecture often separates code into areas such as:
+Una arquitectura Angular escalable suele separar el codigo en areas como:
 
-- `core` for app-wide services and models
-- `shared` for reusable UI
-- `layout` for shells and framing
-- `features` for domain-specific functionality
+- `core` para servicios y modelos de toda la aplicacion
+- `shared` para UI reutilizable
+- `layout` para shells y estructura
+- `features` para funcionalidad especifica del dominio
 
-The deeper idea is not only about folders. It is about ownership and boundaries.
+La idea profunda no es solo sobre carpetas. Trata de propiedad y limites.
 
-Good structure makes change safer.
-
----
-
-## 30. Advanced UI Integration
-
-Angular applications often need more than forms and tables.
-
-They may integrate with:
-
-- drag-and-drop systems
-- clipboard APIs
-- browser storage
-- media APIs
-- complex dashboard interactions
-
-The main challenge in these interfaces is not only feature count. It is coordinated state.
-
-Rich interactions need clear state models and deliberate update logic.
+Una buena estructura hace que cambiar sea mas seguro.
 
 ---
 
-## 31. Practical Design Principles in Angular
+## 30. Integracion avanzada de UI
 
-Several principles appear again and again in strong Angular codebases.
+Las aplicaciones Angular a menudo necesitan mas que formularios y tablas.
 
-### Single source of truth
+Pueden integrarse con:
 
-Avoid duplicated state when one source can safely drive the rest.
+- sistemas de arrastrar y soltar
+- APIs de portapapeles
+- almacenamiento del navegador
+- APIs de medios
+- interacciones complejas de dashboard
 
-### Clear ownership
-
-Every important piece of logic should have an obvious home.
-
-### Separation of concerns
-
-Components should not own every concern.
-
-### Explicit data contracts
-
-Use TypeScript types for domain clarity.
-
-### Prefer meaningful abstractions
-
-Do not add abstraction just because you can. Add it when it improves clarity, reuse, or maintainability.
-
-### Keep async state visible
-
-Loading and error states are normal application states and should be modeled explicitly.
+El principal reto en estas interfaces no es solo la cantidad de funcionalidades. Es el estado coordinado.
 
 ---
 
-## 32. Common Angular Mistakes
+## 31. Principios practicos de diseno en Angular
 
-Some common mistakes include:
+Varios principios aparecen una y otra vez en bases de codigo Angular solidas.
 
-- putting too much logic in components
-- duplicating derived state
-- mutating shared state carelessly
-- using services without clear responsibility boundaries
-- treating routing as an afterthought
-- ignoring error and loading states
-- adding abstractions before the code actually needs them
+### Una sola fuente de verdad
 
-Angular becomes much easier to use well when you focus on responsibility boundaries instead of only memorizing syntax.
+Evita duplicar estado cuando una sola fuente puede impulsar con seguridad el resto.
+
+### Propiedad clara
+
+Toda pieza importante de logica debe tener un hogar evidente.
+
+### Separacion de responsabilidades
+
+Los componentes no deben poseer todas las preocupaciones.
+
+### Contratos de datos explicitos
+
+Usa tipos TypeScript para claridad del dominio.
+
+### Preferir abstracciones significativas
+
+No anadas abstraccion solo porque puedes. Anadela cuando mejore claridad, reutilizacion o mantenibilidad.
+
+### Mantener visible el estado asincrono
+
+Los estados de carga y error son estados normales de la aplicacion y deberian modelarse de forma explicita.
 
 ---
 
-## 33. A Suggested Learning Path
+## 32. Errores comunes en Angular
 
-If you are learning Angular from scratch, this order works well:
+Algunos errores comunes incluyen:
 
-1. Components and templates
-2. State, events, and list rendering
-3. Parent-child communication
-4. Forms
-5. Services and dependency injection
+- poner demasiada logica en componentes
+- duplicar estado derivado
+- mutar estado compartido sin cuidado
+- usar servicios sin limites claros de responsabilidad
+- tratar el routing como una ocurrencia tardia
+- ignorar estados de error y de carga
+- anadir abstracciones antes de que el codigo realmente las necesite
+
+Angular se vuelve mucho mas facil de usar bien cuando te enfocas en los limites de responsabilidad en lugar de solo memorizar sintaxis.
+
+---
+
+## 33. Ruta de aprendizaje sugerida
+
+Si estas aprendiendo Angular desde cero, este orden funciona bien:
+
+1. Componentes y plantillas
+2. Estado, eventos y renderizado de listas
+3. Comunicacion padre-hijo
+4. Formularios
+5. Servicios e inyeccion de dependencias
 6. Routing
-7. HTTP and async state
-8. RxJS and streams
-9. Signals and shared state
-10. Reuse through templates, directives, and pipes
-11. Performance patterns
-12. Auth and infrastructure
+7. HTTP y estado asincrono
+8. RxJS y streams
+9. Signals y estado compartido
+10. Reutilizacion mediante plantillas, directivas y pipes
+11. Patrones de rendimiento
+12. Autenticacion e infraestructura
 13. Testing
-14. Architecture and advanced UI integration
+14. Arquitectura e integracion avanzada de UI
 
-This progression mirrors how Angular knowledge tends to become useful in real applications.
+Esta progresion refleja como el conocimiento de Angular suele volverse util en aplicaciones reales.
 
 ---
 
-## 34. Final Perspective
+## 34. Perspectiva final
 
-Angular is easiest to misunderstand if you treat it only as a set of APIs.
+Angular es mas facil de malinterpretar si lo tratas solo como un conjunto de APIs.
 
-Its real value comes from the combination of:
+Su valor real proviene de la combinacion de:
 
-- a component model
-- explicit state
-- declarative templates
-- strong dependency injection
-- built-in structure for navigation, forms, HTTP, and architecture
+- un modelo de componentes
+- estado explicito
+- plantillas declarativas
+- una fuerte inyeccion de dependencias
+- estructura incorporada para navegacion, formularios, HTTP y arquitectura
 
-If you learn to think in terms of:
+Si aprendes a pensar en terminos de:
 
-- state
-- ownership
-- boundaries
-- derived data
-- async flow
-- reusable UI structure
+- estado
+- propiedad
+- limites
+- datos derivados
+- flujo asincrono
+- estructura reutilizable de UI
 
-then Angular stops feeling like a large framework full of separate features and starts feeling like one coherent way to design applications.
+entonces Angular deja de sentirse como un framework grande lleno de funcionalidades separadas y empieza a sentirse como una forma coherente de disenar aplicaciones.
 
-That is the real goal of learning Angular deeply.
+Ese es el verdadero objetivo de aprender Angular en profundidad.
