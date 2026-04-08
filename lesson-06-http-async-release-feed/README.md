@@ -1,42 +1,42 @@
-# Lesson 06: HTTP and Async Data with a Release Feed
+# Leccion 06: HTTP y datos asincronos con un feed de lanzamientos
 
-This lesson is a Vite-based Angular application that teaches how to load API data with `HttpClient` and how to represent loading, success, and error states in the UI.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como cargar datos de API con `HttpClient` y como representar en la UI los estados de carga, exito y error.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to register `HttpClient` with `provideHttpClient`
-- How to create an Angular service that wraps an HTTP request
-- How `HttpClient.get<T>()` uses typed API responses
-- How a component reacts to loading, success, and error states
-- How to keep API logic inside a service instead of in the template
-- How to use a mock API endpoint during frontend development
+- Como registrar `HttpClient` con `provideHttpClient`
+- Como crear un servicio Angular que envuelva una peticion HTTP
+- Como `HttpClient.get<T>()` usa respuestas de API tipadas
+- Como un componente reacciona a los estados de carga, exito y error
+- Como mantener la logica de API dentro de un servicio en lugar de ponerla en la plantilla
+- Como usar un endpoint de API simulado durante el desarrollo frontend
 
-## Main files
+## Archivos principales
 
-- `src/app/app.config.ts`: global `HttpClient` registration
-- `src/app/services/release-feed.service.ts`: typed API request and response transformation
-- `src/app/app.component.ts`: async UI state and request lifecycle
-- `public/mock-api/release-feed.json`: mock API payload served by Vite
+- `src/app/app.config.ts`: registro global de `HttpClient`
+- `src/app/services/release-feed.service.ts`: peticion de API tipada y transformacion de la respuesta
+- `src/app/app.component.ts`: estado asincrono de UI y ciclo de vida de la peticion
+- `public/mock-api/release-feed.json`: payload de API simulado servido por Vite
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `public/mock-api/release-feed.json` and inspect the response shape.
-2. Read `src/app/release-item.model.ts` and compare it to the mock payload.
-3. Read `src/app/services/release-feed.service.ts` and inspect the typed HTTP call.
-4. Read `src/app/app.component.ts` and trace the loading, success, and error states.
-5. Run the app, refresh the feed, and watch how the UI responds during the async request.
+1. Abre `public/mock-api/release-feed.json` e inspecciona la forma de la respuesta.
+2. Lee `src/app/release-item.model.ts` y comparalo con el payload simulado.
+3. Lee `src/app/services/release-feed.service.ts` e inspecciona la llamada HTTP tipada.
+4. Lee `src/app/app.component.ts` y sigue los estados de carga, exito y error.
+5. Ejecuta la app, recarga el feed y observa como responde la UI durante la peticion asincrona.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Many Angular applications need to fetch dashboards, release notes, notifications, or content feeds from an API. Even when the backend is still in progress, frontend teams often develop against a mock endpoint first and keep the same `HttpClient` structure.
+Muchas aplicaciones Angular necesitan obtener dashboards, notas de lanzamiento, notificaciones o feeds de contenido desde una API. Incluso cuando el backend aun esta en progreso, los equipos frontend suelen desarrollar primero contra un endpoint simulado y mantener la misma estructura basada en `HttpClient`.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 07 will focus on RxJS essentials for Angular, including stream composition and live search behavior.
+La Leccion 07 se centrara en los conceptos esenciales de RxJS para Angular, incluyendo composicion de streams y comportamiento de busqueda en vivo.

@@ -1,40 +1,40 @@
-# Lesson 10: Advanced Templates with an Operations Center
+# Leccion 10: Plantillas avanzadas con un centro de operaciones
 
-This lesson is a Vite-based Angular application that teaches advanced template reuse with content projection and parent-supplied templates.
+Esta leccion es una aplicacion Angular basada en Vite que ensena reutilizacion avanzada de plantillas con proyeccion de contenido y plantillas proporcionadas por el padre.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to project content into reusable components with `ng-content`
-- How to create parent-owned rendering blocks with `ng-template`
-- How a reusable component can render those blocks with `ngTemplateOutlet`
-- How to expose flexible action slots without hard-coding buttons into a reusable component
-- How to keep layout structure reusable while leaving row rendering to the consuming screen
+- Como proyectar contenido en componentes reutilizables con `ng-content`
+- Como crear bloques de renderizado propiedad del padre con `ng-template`
+- Como un componente reutilizable puede renderizar esos bloques con `ngTemplateOutlet`
+- Como exponer slots flexibles de acciones sin fijar botones dentro de un componente reutilizable
+- Como mantener reutilizable la estructura del layout dejando el renderizado de filas a la pantalla consumidora
 
-## Main files
+## Archivos principales
 
-- `src/app/components/panel-shell.component.ts`: reusable layout shell using content projection
-- `src/app/components/template-grid.component.ts`: reusable grid component driven by template inputs
-- `src/app/app.component.html`: parent-owned row templates and empty-state templates
+- `src/app/components/panel-shell.component.ts`: shell de layout reutilizable usando proyeccion de contenido
+- `src/app/components/template-grid.component.ts`: componente de grid reutilizable guiado por inputs de plantilla
+- `src/app/app.component.html`: plantillas de filas propiedad del padre y plantillas de estado vacio
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Read `panel-shell.component.html` and inspect the projected action slot.
-2. Read `template-grid.component.html` and follow how `ngTemplateOutlet` renders a parent template.
-3. Open `app.component.html` and compare the approval row template to the incident row template.
-4. Notice that both screens reuse the same surrounding components while customizing only the template blocks.
-5. Run the app and remove data in code to see the parent-defined empty states render.
+1. Lee `panel-shell.component.html` e inspecciona el slot proyectado de acciones.
+2. Lee `template-grid.component.html` y sigue como `ngTemplateOutlet` renderiza una plantilla del padre.
+3. Abre `app.component.html` y compara la plantilla de fila de aprobaciones con la plantilla de fila de incidentes.
+4. Observa que ambas pantallas reutilizan los mismos componentes circundantes mientras personalizan solo los bloques de plantilla.
+5. Ejecuta la app y elimina datos en el codigo para ver como se renderizan los estados vacios definidos por el padre.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Admin tools, internal operations screens, and dashboards often need the same layout or grid shell reused across many feature areas while each feature still controls its own row content, action buttons, and empty states. Angular templates are well suited to that style of reuse.
+Las herramientas de administracion, pantallas internas de operaciones y dashboards suelen necesitar que el mismo layout o shell de grid se reutilice en muchas areas funcionales mientras cada area sigue controlando su propio contenido de filas, botones de accion y estados vacios. Las plantillas de Angular se adaptan bien a ese estilo de reutilizacion.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 11 will introduce custom directives and pipes for reusable presentation behavior.
+La Leccion 11 introducira directivas personalizadas y pipes para comportamiento de presentacion reutilizable.

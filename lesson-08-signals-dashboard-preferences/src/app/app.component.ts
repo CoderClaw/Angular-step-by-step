@@ -24,8 +24,8 @@ export class AppComponent {
     "Revenue",
   ];
 
-  // Signals are a direct way to model local component state.
-  // Reading them in the template is synchronous and does not require subscriptions.
+  // Los signals son una forma directa de modelar el estado local del componente.
+  // Leerlos en la plantilla es sincronico y no requiere suscripciones.
   readonly query = signal(this.loadPreferences().query);
   readonly selectedTeam = signal<TileTeam>(this.loadPreferences().team);
   readonly showSavedOnly = signal(this.loadPreferences().showSavedOnly);
@@ -69,8 +69,8 @@ export class AppComponent {
     },
   ]);
 
-  // Computed values derive state from source signals.
-  // Angular recalculates them only when one of the dependencies changes.
+  // Los valores computados derivan estado a partir de los signals fuente.
+  // Angular los vuelve a calcular solo cuando cambia una de sus dependencias.
   readonly visibleTiles = computed(() => {
     const normalizedQuery = this.query().trim().toLowerCase();
 
@@ -93,8 +93,8 @@ export class AppComponent {
   );
   readonly visibleCount = computed(() => this.visibleTiles().length);
 
-  // Effects are useful for reacting to signal changes with side effects.
-  // Persisting preferences is a good example because it should not live in a computed.
+  // Los effects son utiles para reaccionar a cambios de signals con efectos secundarios.
+  // Persistir preferencias es un buen ejemplo porque no deberia vivir dentro de un computed.
   readonly persistPreferences = effect(() => {
     if (typeof localStorage === "undefined") {
       return;

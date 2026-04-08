@@ -1,42 +1,42 @@
-# Lesson 07: RxJS Essentials with a Live Search Dashboard
+# Leccion 07: Conceptos esenciales de RxJS con un dashboard de busqueda en vivo
 
-This lesson is a Vite-based Angular application that teaches how RxJS streams combine user input, filter state, and async search results into one UI model.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como los streams de RxJS combinan la entrada del usuario, el estado de filtros y los resultados asincronos de busqueda en un unico modelo de UI.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to model user input as RxJS streams
-- How `debounceTime` reduces noisy input events
-- How `distinctUntilChanged` ignores repeated values
-- How `combineLatest` merges independent streams into one search context
-- How `switchMap` cancels old async searches when a new search begins
-- How `AsyncPipe` renders observable state directly in the template
-- How `shareReplay` helps keep a derived stream reusable
+- Como modelar la entrada del usuario como streams de RxJS
+- Como `debounceTime` reduce los eventos de entrada ruidosos
+- Como `distinctUntilChanged` ignora valores repetidos
+- Como `combineLatest` une streams independientes en un unico contexto de busqueda
+- Como `switchMap` cancela busquedas asincronas antiguas cuando empieza una nueva
+- Como `AsyncPipe` renderiza directamente en la plantilla el estado observable
+- Como `shareReplay` ayuda a mantener reutilizable un stream derivado
 
-## Main files
+## Archivos principales
 
-- `src/app/app.component.ts`: stream composition and view-model creation
-- `src/app/services/work-item-search.service.ts`: async search source used by the UI
-- `src/app/work-item.model.ts`: typed search result and view-model structures
+- `src/app/app.component.ts`: composicion de streams y creacion del view model
+- `src/app/services/work-item-search.service.ts`: fuente de busqueda asincrona usada por la UI
+- `src/app/work-item.model.ts`: estructuras tipadas de resultados de busqueda y view model
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `src/app/services/work-item-search.service.ts` and inspect the async search source.
-2. Read `src/app/app.component.ts` and follow `query$`, `statusFilter$`, and `vm$`.
-3. Inspect the `switchMap` block and note where loading state is introduced.
-4. Run the app and type quickly to see debounced searching in action.
-5. Change the status filter and watch how `combineLatest` drives a new result set.
+1. Abre `src/app/services/work-item-search.service.ts` e inspecciona la fuente de busqueda asincrona.
+2. Lee `src/app/app.component.ts` y sigue `query$`, `statusFilter$` y `vm$`.
+3. Inspecciona el bloque `switchMap` y observa donde se introduce el estado de carga.
+4. Ejecuta la app y escribe rapidamente para ver la busqueda con debounce en accion.
+5. Cambia el filtro de estado y observa como `combineLatest` impulsa un nuevo conjunto de resultados.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Search screens, dashboards, inboxes, and admin tools often depend on multiple changing inputs at once. RxJS becomes valuable when those inputs need to be combined, debounced, cancelled, and presented as a single stream-driven UI state.
+Las pantallas de busqueda, dashboards, bandejas de entrada y herramientas de administracion suelen depender de varios inputs cambiantes al mismo tiempo. RxJS se vuelve valioso cuando esos inputs necesitan combinarse, aplicarse con debounce, cancelarse y presentarse como un unico estado de UI basado en streams.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 08 will introduce Angular signals and compare signal-based state with stream-based state.
+La Leccion 08 introducira los signals de Angular y comparara el estado basado en signals con el estado basado en streams.

@@ -38,7 +38,7 @@ export class AppComponent {
     "Closed",
   ];
 
-  // The query stream is debounced so fast typing does not trigger immediate searches.
+  // El stream de consulta usa debounce para que escribir rapido no dispare busquedas inmediatas.
   readonly query$ = this.rawQueryInput$.pipe(
     startWith(""),
     debounceTime(250),
@@ -46,7 +46,7 @@ export class AppComponent {
     shareReplay({ bufferSize: 1, refCount: true }),
   );
 
-  // combineLatest joins multiple independent streams into one search request context.
+  // combineLatest une varios streams independientes en un unico contexto de peticion de busqueda.
   readonly vm$: Observable<SearchViewModel> = combineLatest([
     this.query$,
     this.statusFilter$,

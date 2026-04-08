@@ -1,41 +1,41 @@
-# Lesson 09: Shared State Patterns with a Booking Flow
+# Leccion 09: Patrones de estado compartido con un flujo de reservas
 
-This lesson is a Vite-based Angular application that teaches how multiple parts of a screen can share one centralized state service instead of passing everything through a parent component.
+Esta leccion es una aplicacion Angular basada en Vite que ensena como varias partes de una pantalla pueden compartir un servicio de estado centralizado en lugar de pasar todo a traves de un componente padre.
 
-## What this lesson teaches
+## Que ensena esta leccion
 
-- How to centralize state in a service that acts like a small store
-- How several standalone components can read and mutate the same shared state
-- How to separate source state, mutation methods, and derived state
-- How `computed()` can be used in a shared-state service, not only inside one component
-- How to avoid unnecessary parent-component coordination when state is truly shared
+- Como centralizar estado en un servicio que actua como un pequeno store
+- Como varios componentes standalone pueden leer y mutar el mismo estado compartido
+- Como separar estado fuente, metodos de mutacion y estado derivado
+- Como `computed()` puede usarse en un servicio de estado compartido, no solo dentro de un componente
+- Como evitar coordinacion innecesaria del componente padre cuando el estado es realmente compartido
 
-## Main files
+## Archivos principales
 
-- `src/app/services/booking-store.service.ts`: shared source of truth, mutations, and derived state
-- `src/app/components/booking-filters.component.ts`: filter controls that write into shared state
-- `src/app/components/booking-offers.component.ts`: offer list that reads filtered state and updates seat counts
-- `src/app/components/booking-summary.component.ts`: summary sidebar that reads the same state directly
+- `src/app/services/booking-store.service.ts`: fuente de verdad compartida, mutaciones y estado derivado
+- `src/app/components/booking-filters.component.ts`: controles de filtro que escriben en el estado compartido
+- `src/app/components/booking-offers.component.ts`: lista de ofertas que lee estado filtrado y actualiza conteos de asientos
+- `src/app/components/booking-summary.component.ts`: barra lateral de resumen que lee directamente el mismo estado
 
-## Suggested exploration order
+## Orden de exploracion sugerido
 
-1. Open `src/app/services/booking-store.service.ts` and identify source signals, mutations, and computed values.
-2. Read `booking-filters.component.ts` and note how it updates the store.
-3. Read `booking-offers.component.ts` and see how it reads and mutates selection state.
-4. Read `booking-summary.component.ts` and notice that it stays in sync without parent inputs.
-5. Run the app and observe how changes in one component immediately affect the others.
+1. Abre `src/app/services/booking-store.service.ts` e identifica signals fuente, mutaciones y valores computados.
+2. Lee `booking-filters.component.ts` y observa como actualiza el store.
+3. Lee `booking-offers.component.ts` y mira como lee y muta el estado de seleccion.
+4. Lee `booking-summary.component.ts` y observa que se mantiene sincronizado sin inputs del padre.
+5. Ejecuta la app y observa como los cambios en un componente afectan de inmediato a los demas.
 
-## Why this example is realistic
+## Por que este ejemplo es realista
 
-Booking flows, carts, multi-step checkouts, staffing planners, and internal scheduling tools often need multiple independent UI areas to stay synchronized. A small shared-state service is a practical pattern before introducing larger external state libraries.
+Los flujos de reserva, carritos, checkouts de varios pasos, planificadores de personal y herramientas internas de programacion suelen necesitar que varias areas independientes de la UI permanezcan sincronizadas. Un pequeno servicio de estado compartido es un patron practico antes de introducir librerias externas de estado mas grandes.
 
-## Run the lesson
+## Ejecutar la leccion
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Next lesson
+## Siguiente leccion
 
-Lesson 10 will focus on advanced templates and content reuse patterns.
+La Leccion 10 se centrara en plantillas avanzadas y patrones de reutilizacion de contenido.

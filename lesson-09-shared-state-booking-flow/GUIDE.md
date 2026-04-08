@@ -1,114 +1,114 @@
-# Lesson 09 Guide: Shared State Patterns
+# Guia de la Leccion 09: Patrones de estado compartido
 
-This lesson moves from local state inside one component to shared state used by multiple parts of the UI.
+Esta leccion pasa del estado local dentro de un componente al estado compartido usado por varias partes de la UI.
 
-That is a major architectural step.
+Ese es un paso arquitectonico importante.
 
-## Why Shared State Matters
+## Por que importa el estado compartido
 
-Many applications have several UI areas that all depend on the same underlying data.
+Muchas aplicaciones tienen varias areas de UI que dependen todas de los mismos datos subyacentes.
 
-Examples:
+Ejemplos:
 
-- a filter panel
-- a results list
-- a summary panel
-- a selected item preview
+- un panel de filtros
+- una lista de resultados
+- un panel de resumen
+- una vista previa del elemento seleccionado
 
-If each component keeps its own separate version of the data, the UI becomes inconsistent.
+Si cada componente mantiene su propia version separada de los datos, la UI se vuelve inconsistente.
 
-Shared state solves that by creating one central source of truth.
+El estado compartido resuelve eso creando una fuente central de verdad.
 
-## What This Lesson Builds
+## Que construye esta leccion
 
-The example is a booking flow.
+El ejemplo es un flujo de reservas.
 
-This is a strong shared-state example because booking interfaces often have several coordinated pieces:
+Es un ejemplo solido de estado compartido porque las interfaces de reserva suelen tener varias piezas coordinadas:
 
-- the current filters
-- the available offers
-- the selected option
-- the booking summary
+- los filtros actuales
+- las ofertas disponibles
+- la opcion seleccionada
+- el resumen de la reserva
 
-All those pieces must stay synchronized.
+Todas esas piezas deben permanecer sincronizadas.
 
-## The Main Pattern
+## El patron principal
 
-This lesson likely uses a store-like service.
+Es probable que esta leccion use un servicio tipo store.
 
-That service becomes the owner of state that multiple components care about.
+Ese servicio se convierte en el propietario del estado que importa a varios componentes.
 
-Instead of one component passing everything through many levels, each relevant component can read from the shared service.
+En lugar de que un componente pase todo a traves de muchos niveles, cada componente relevante puede leer desde el servicio compartido.
 
-This is helpful because it reduces tangled parent-child chains and keeps coordination logic in one place.
+Esto ayuda porque reduce cadenas enredadas entre padre e hijo y mantiene la logica de coordinacion en un solo lugar.
 
-## Why This Is Not Yet a Full State Library
+## Por que esto aun no es una libreria completa de estado
 
-This lesson is important because it teaches the pattern without requiring a large external state-management library.
+Esta leccion es importante porque ensena el patron sin exigir una gran libreria externa de gestion de estado.
 
-The idea is simpler:
+La idea es mas simple:
 
-- keep shared state in one place
-- expose read methods or computed state
-- expose meaningful update methods
+- mantener el estado compartido en un solo lugar
+- exponer metodos de lectura o estado computado
+- exponer metodos de actualizacion con significado
 
-That gives you the benefit of central coordination without unnecessary complexity.
+Eso te da el beneficio de una coordinacion central sin complejidad innecesaria.
 
-## The Role of a Store-Like Service
+## El papel de un servicio tipo store
 
-A store-like service usually answers questions like:
+Un servicio tipo store normalmente responde preguntas como:
 
-- what is the current filter state?
-- what item is selected?
-- what data should be visible right now?
-- how do I update one part of the shared state safely?
+- cual es el estado actual del filtro?
+- que elemento esta seleccionado?
+- que datos deberian ser visibles ahora mismo?
+- como actualizo una parte del estado compartido de forma segura?
 
-This is why the service often exposes both:
+Por eso el servicio suele exponer tanto:
 
-- current or computed data
-- methods that change that data
+- datos actuales o computados
+- metodos que cambian esos datos
 
-## Why This Pattern Is Better Than Duplicating State
+## Por que este patron es mejor que duplicar estado
 
-If the filter component owns one version of the current filter and the summary panel owns another, bugs appear quickly.
+Si el componente de filtros posee una version del filtro actual y el panel de resumen posee otra, los errores aparecen rapido.
 
-Shared state avoids that problem by making one place authoritative.
+El estado compartido evita ese problema haciendo que un solo lugar sea la referencia autoritativa.
 
-That is why people often call it a single source of truth.
+Por eso a menudo se habla de una sola fuente de verdad.
 
-## How to Study the Lesson
+## Como estudiar la leccion
 
-Read it this way:
+Leela asi:
 
-1. Identify what data is shared.
-2. Find where that state is owned.
-3. Find which components read it.
-4. Find which methods update it.
-5. Observe how one user action affects several UI regions.
+1. Identifica que datos son compartidos.
+2. Encuentra donde se posee ese estado.
+3. Encuentra que componentes lo leen.
+4. Encuentra que metodos lo actualizan.
+5. Observa como una accion del usuario afecta varias regiones de la UI.
 
-That last step is the most important one.
+Ese ultimo paso es el mas importante.
 
-## What This Teaches Beyond the Example
+## Lo que esto ensena mas alla del ejemplo
 
-The booking flow is just one scenario.
+El flujo de reservas es solo un escenario.
 
-The bigger lesson is about coordination.
+La leccion mas grande trata de coordinacion.
 
-Whenever several components must stay in sync, a central shared state owner is often the cleanest solution.
+Siempre que varios componentes deban permanecer sincronizados, un propietario central de estado compartido suele ser la solucion mas limpia.
 
-## Exercises
+## Ejercicios
 
-1. Add a new filter and make all dependent UI update correctly.
-2. Add another summary field derived from the selected booking.
-3. Add a reset action in the store.
-4. Move one piece of duplicated logic into the shared service.
+1. Anade un filtro nuevo y haz que toda la UI dependiente se actualice correctamente.
+2. Anade otro campo de resumen derivado de la reserva seleccionada.
+3. Anade una accion de reinicio en el store.
+4. Mueve una pieza de logica duplicada al servicio compartido.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- why several components should not own copies of the same state
-- what a single source of truth means
-- what responsibilities belong in the shared store service
+- por que varios componentes no deberian poseer copias del mismo estado
+- que significa una sola fuente de verdad
+- que responsabilidades pertenecen al servicio store compartido
 
-The next lesson explores advanced templates, which focuses more on flexible UI composition than shared state.
+La siguiente leccion explora plantillas avanzadas, que se enfocan mas en composicion flexible de UI que en estado compartido.

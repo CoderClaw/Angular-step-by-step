@@ -38,35 +38,35 @@ export class AppComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = "";
 
-    // The component reacts to async request states: loading, success, and error.
-    // getReleaseFeed() returns an Observable, which is a value source that may produce data later.
-    // Nothing actually happens until we subscribe: subscribe() tells Angular/RxJS that this
-    // component wants to listen for the result of the HTTP request.
+    // El componente reacciona a estados de peticion asincrona: carga, exito y error.
+    // getReleaseFeed() devuelve un Observable, que es una fuente de valores que puede producir datos mas tarde.
+    // No ocurre nada realmente hasta que nos suscribimos: subscribe() le dice a Angular/RxJS que este
+    // componente quiere escuchar el resultado de la peticion HTTP.
     //
-    // A subscription connects this component to the Observable execution.
-    // For HttpClient requests, that means Angular sends the request and then calls our handlers
-    // as the request finishes. In this object form of subscribe(), we provide callbacks for the
-    // outcomes we care about.
+    // Una suscripcion conecta este componente con la ejecucion del Observable.
+    // En las peticiones de HttpClient, eso significa que Angular envia la peticion y luego llama a nuestros handlers
+    // cuando la peticion termina. En esta forma basada en objeto de subscribe(), proporcionamos callbacks para los
+    // resultados que nos importan.
     this.releaseFeedService.getReleaseFeed().subscribe({
-      // next runs when the Observable successfully emits data.
-      // HttpClient usually emits one response value here, so this is our "success" path.
+      // next se ejecuta cuando el Observable emite datos con exito.
+      // HttpClient normalmente emite aqui un solo valor de respuesta, asi que esta es nuestra ruta de exito.
       next: (items) => {
         this.feedItems = items;
         this.selectedItemId = items[0]?.id ?? null;
         this.lastLoadedAt = new Date();
         this.isLoading = false;
       },
-      // error runs if the Observable fails before producing a successful result.
-      // This is where we switch the UI out of the loading state and show an error message.
+      // error se ejecuta si el Observable falla antes de producir un resultado exitoso.
+      // Aqui es donde sacamos la UI del estado de carga y mostramos un mensaje de error.
       error: () => {
         this.errorMessage = "The release feed could not be loaded. Try again.";
         this.isLoading = false;
       },
     });
 
-    // In this lesson we subscribe directly in the component because the example is small.
-    // In larger apps, subscriptions are often composed with the AsyncPipe, signals, or cleanup
-    // logic so long-lived streams do not stay connected longer than needed.
+    // En esta leccion nos suscribimos directamente en el componente porque el ejemplo es pequeno.
+    // En aplicaciones mas grandes, las suscripciones suelen componerse con AsyncPipe, signals o logica
+    // de limpieza para que los streams de larga duracion no permanezcan conectados mas tiempo del necesario.
   }
 
   selectItem(itemId: string): void {

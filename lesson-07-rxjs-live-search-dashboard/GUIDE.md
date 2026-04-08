@@ -1,176 +1,176 @@
-# Lesson 07 Guide: RxJS Essentials
+# Guia de la Leccion 07: Conceptos esenciales de RxJS
 
-This lesson builds directly on the async ideas from Lesson 6.
+Esta leccion se apoya directamente en las ideas asincronas de la Leccion 6.
 
-Lesson 6 showed how to subscribe to one HTTP request. Lesson 7 goes further and shows how Angular applications often coordinate multiple changing values over time.
+La Leccion 6 mostro como suscribirse a una peticion HTTP. La Leccion 7 va mas alla y muestra como las aplicaciones Angular suelen coordinar varios valores cambiantes a lo largo del tiempo.
 
-That is where RxJS becomes important.
+Ahi es donde RxJS se vuelve importante.
 
-## Why RxJS Exists
+## Por que existe RxJS
 
-Applications often have data that changes continuously:
+Las aplicaciones suelen tener datos que cambian continuamente:
 
-- user typing
-- filter changes
-- incoming HTTP responses
-- route changes
-- timers
-- interactions across multiple controls
+- el usuario escribiendo
+- cambios de filtros
+- respuestas HTTP entrantes
+- cambios de ruta
+- temporizadores
+- interacciones entre varios controles
 
-If you handle each event separately with manual code, the logic becomes difficult to manage.
+Si manejas cada evento por separado con codigo manual, la logica se vuelve dificil de mantener.
 
-RxJS gives you a vocabulary for describing streams of values over time.
+RxJS te da un vocabulario para describir flujos de valores a lo largo del tiempo.
 
-## What This Lesson Builds
+## Que construye esta leccion
 
-The example is a live search dashboard.
+El ejemplo es un dashboard de busqueda en vivo.
 
-That is a very good RxJS example because live search depends on multiple changing inputs:
+Es un muy buen ejemplo de RxJS porque la busqueda en vivo depende de varios inputs cambiantes:
 
-- the text query
-- one or more filters
-- the async search result
+- la consulta de texto
+- uno o mas filtros
+- el resultado asincrono de la busqueda
 
-Those values need to work together cleanly.
+Esos valores deben funcionar juntos de forma limpia.
 
-## What a Stream Is
+## Que es un stream
 
-A stream is a sequence of values over time.
+Un stream es una secuencia de valores a lo largo del tiempo.
 
-Examples:
+Ejemplos:
 
-- every new search term the user types
-- every filter change
-- every HTTP response
+- cada nuevo termino de busqueda que escribe el usuario
+- cada cambio de filtro
+- cada respuesta HTTP
 
-RxJS treats these as Observables and gives you operators to transform and combine them.
+RxJS trata estos valores como Observables y te da operadores para transformarlos y combinarlos.
 
-## Why RxJS Feels Different
+## Por que RxJS se siente distinto
 
-With regular imperative code, you might think like this:
+Con codigo imperativo tradicional, podrias pensar asi:
 
-"When the user types, do X. When the filter changes, do Y. Then manually keep them in sync."
+"Cuando el usuario escribe, haz X. Cuando el filtro cambie, haz Y. Luego mantenlos sincronizados manualmente."
 
-With RxJS, you often think more declaratively:
+Con RxJS, a menudo se piensa de forma mas declarativa:
 
-"The view model is the result of combining these streams."
+"El view model es el resultado de combinar estos streams."
 
-That is the major mental shift.
+Ese es el gran cambio mental.
 
-## Important Operators in This Lesson
+## Operadores importantes en esta leccion
 
-This lesson likely includes several key RxJS operators.
+Es probable que esta leccion incluya varios operadores clave de RxJS.
 
 ### `debounceTime`
 
-This waits briefly before reacting.
+Esto espera brevemente antes de reaccionar.
 
-In live search, that prevents a request on every single keystroke.
+En una busqueda en vivo, evita una peticion por cada pulsacion de tecla.
 
-This is useful because users type quickly, and the app should not overreact.
+Es util porque los usuarios escriben rapido y la app no deberia reaccionar en exceso.
 
 ### `distinctUntilChanged`
 
-This avoids repeated work when the value has not actually changed.
+Esto evita trabajo repetido cuando el valor en realidad no ha cambiado.
 
-It prevents unnecessary reprocessing or duplicate searches.
+Evita reprocesamientos innecesarios o busquedas duplicadas.
 
 ### `combineLatest`
 
-This combines multiple streams.
+Esto combina varios streams.
 
-For a search dashboard, it might combine:
+En un dashboard de busqueda, podria combinar:
 
-- the query stream
-- the filter stream
+- el stream de consulta
+- el stream de filtros
 
-This is powerful because the resulting logic can depend on all current inputs together.
+Es potente porque la logica resultante puede depender de todos los inputs actuales al mismo tiempo.
 
 ### `switchMap`
 
-This is one of the most important async operators for search.
+Este es uno de los operadores asincronos mas importantes para busqueda.
 
-It cancels the older inner work when a newer value arrives.
+Cancela el trabajo interno anterior cuando llega un valor mas reciente.
 
-That matters because live search should usually care about the latest request, not every old request still in progress.
+Eso importa porque la busqueda en vivo normalmente deberia preocuparse por la peticion mas reciente, no por todas las peticiones antiguas que siguen en progreso.
 
 ### `shareReplay`
 
-This helps share a stream result instead of recomputing it for every consumer.
+Esto ayuda a compartir el resultado de un stream en lugar de volver a calcularlo para cada consumidor.
 
-It is often used when a view model should be reused in the template efficiently.
+Suele usarse cuando un view model deberia reutilizarse eficientemente en la plantilla.
 
-## Subjects and BehaviorSubjects
+## Subjects y BehaviorSubjects
 
-This lesson may also use `Subject` or `BehaviorSubject`.
+Es posible que esta leccion tambien use `Subject` o `BehaviorSubject`.
 
-These are useful when your own code needs to push new values into a stream.
+Son utiles cuando tu propio codigo necesita empujar nuevos valores dentro de un stream.
 
-For example:
+Por ejemplo:
 
-- the user changes the current query
-- the user selects a filter
+- el usuario cambia la consulta actual
+- el usuario selecciona un filtro
 
-This creates a bridge between UI events and reactive stream logic.
+Esto crea un puente entre eventos de UI y logica reactiva basada en streams.
 
-## The View Model Idea
+## La idea de view model
 
-One of the most useful patterns in RxJS-based UI code is to create a single stream that represents what the template needs.
+Uno de los patrones mas utiles en codigo de UI basado en RxJS es crear un unico stream que represente lo que la plantilla necesita.
 
-Instead of manually updating many unrelated fields, the component can expose one combined stream of UI-ready data.
+En lugar de actualizar manualmente muchos campos no relacionados, el componente puede exponer un unico stream de datos listos para la UI.
 
-That stream is often called a view model.
+A ese stream se le suele llamar view model.
 
-This makes templates cleaner and state relationships more explicit.
+Esto hace que las plantillas sean mas limpias y que las relaciones de estado sean mas explicitas.
 
 ## `AsyncPipe`
 
-In Angular templates, the `AsyncPipe` is often used with Observables.
+En las plantillas de Angular, `AsyncPipe` suele usarse con Observables.
 
-It lets the template subscribe to a stream and use its latest value without manual subscription logic in the component.
+Permite que la plantilla se suscriba a un stream y use su valor mas reciente sin logica manual de suscripcion en el componente.
 
-This is a big step toward cleaner reactive UI code.
+Este es un gran paso hacia un codigo de UI reactivo mas limpio.
 
-## The Big Lesson Here
+## La gran leccion aqui
 
-RxJS is not just about syntax.
+RxJS no trata solo de sintaxis.
 
-It is about expressing time-based behavior clearly.
+Trata de expresar con claridad el comportamiento dependiente del tiempo.
 
-The key question is:
+La pregunta clave es:
 
-How do several changing values combine to produce the current UI state?
+Como se combinan varios valores cambiantes para producir el estado actual de la UI?
 
-That is what this lesson should help you understand.
+Eso es lo que esta leccion deberia ayudarte a entender.
 
-## How to Study the Project
+## Como estudiar el proyecto
 
-Read it in this order:
+Leelo en este orden:
 
-1. Identify each input stream.
-2. Find where those streams are transformed.
-3. Find where they are combined.
-4. Identify the final stream or view model used by the template.
-5. Then inspect the template and see how the `AsyncPipe` consumes it.
+1. Identifica cada stream de entrada.
+2. Encuentra donde se transforman esos streams.
+3. Encuentra donde se combinan.
+4. Identifica el stream final o view model que usa la plantilla.
+5. Luego inspecciona la plantilla y observa como `AsyncPipe` lo consume.
 
-If you follow that path, RxJS becomes much easier to understand.
+Si sigues ese camino, RxJS se vuelve mucho mas facil de entender.
 
-## Exercises
+## Ejercicios
 
-Try these experiments:
+Prueba estos experimentos:
 
-1. Add another filter stream.
-2. Change the debounce time.
-3. Add a derived stream for a result count.
-4. Replace one manual field update with a reactive stream.
+1. Anade otro stream de filtro.
+2. Cambia el tiempo de debounce.
+3. Anade un stream derivado para el conteo de resultados.
+4. Sustituye una actualizacion manual de un campo por un stream reactivo.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- what a stream is
-- why live search is a good RxJS example
-- what `combineLatest` and `switchMap` are solving
-- why `AsyncPipe` is cleaner than manual subscriptions in many cases
+- que es un stream
+- por que la busqueda en vivo es un buen ejemplo de RxJS
+- que problemas resuelven `combineLatest` y `switchMap`
+- por que `AsyncPipe` es mas limpio que las suscripciones manuales en muchos casos
 
-The next lesson moves into Angular signals, which offer another reactive model for local application state.
+La siguiente leccion pasa a los signals de Angular, que ofrecen otro modelo reactivo para el estado local de la aplicacion.

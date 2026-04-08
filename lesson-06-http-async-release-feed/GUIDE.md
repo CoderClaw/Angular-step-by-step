@@ -1,190 +1,190 @@
-# Lesson 06 Guide: HTTP and Async Data
+# Guia de la Leccion 06: HTTP y datos asincronos
 
-This lesson introduces one of the biggest transitions in frontend development: moving from local data to asynchronous data loaded from outside the component.
+Esta leccion introduce una de las mayores transiciones del desarrollo frontend: pasar de datos locales a datos asincronos cargados desde fuera del componente.
 
-So far, the lessons mostly used data already available in memory. This lesson shows what changes when the data must be requested first.
+Hasta ahora, las lecciones usaban sobre todo datos ya disponibles en memoria. Esta leccion muestra que cambia cuando primero hay que pedir los datos.
 
-## Why Async Data Matters
+## Por que importan los datos asincronos
 
-Most real Angular applications need to fetch information from somewhere else:
+La mayoria de las aplicaciones Angular reales necesitan obtener informacion desde algun otro lugar:
 
-- an API
-- a backend service
-- a JSON endpoint
-- a search service
-- a reporting service
+- una API
+- un servicio backend
+- un endpoint JSON
+- un servicio de busqueda
+- un servicio de reportes
 
-That means the component cannot assume the data already exists.
+Eso significa que el componente no puede asumir que los datos ya existen.
 
-Instead, the UI must handle a timeline:
+En su lugar, la UI debe manejar una linea temporal:
 
-1. the request starts
-2. the UI waits
-3. the request succeeds or fails
-4. the screen updates accordingly
+1. la peticion comienza
+2. la UI espera
+3. la peticion tiene exito o falla
+4. la pantalla se actualiza en consecuencia
 
-This lesson is about understanding that timeline.
+Esta leccion trata de entender esa linea temporal.
 
-## What the Example Builds
+## Que construye el ejemplo
 
-The project is a release feed.
+El proyecto es un feed de lanzamientos.
 
-That is a realistic example because operational dashboards often need to show:
+Es un ejemplo realista porque los dashboards operativos suelen necesitar mostrar:
 
-- recent updates
-- publishing status
-- currently selected item details
-- a refresh action
-- last loaded information
+- actualizaciones recientes
+- estado de publicacion
+- detalles del elemento actualmente seleccionado
+- una accion de recarga
+- informacion sobre la ultima carga
 
-This makes it a good lesson for combining remote data with simple UI state.
+Esto la convierte en una buena leccion para combinar datos remotos con estado de UI sencillo.
 
 ## `HttpClient`
 
-Angular uses `HttpClient` to make HTTP requests.
+Angular usa `HttpClient` para hacer peticiones HTTP.
 
-This service gives Angular applications a standard way to:
+Este servicio da a las aplicaciones Angular una forma estandar de:
 
-- send requests
-- receive typed responses
-- work with Observables
-- handle errors consistently
+- enviar peticiones
+- recibir respuestas tipadas
+- trabajar con Observables
+- manejar errores de forma consistente
 
-The important point is that `HttpClient` does not return the final data immediately.
+El punto importante es que `HttpClient` no devuelve inmediatamente los datos finales.
 
-It returns an Observable.
+Devuelve un Observable.
 
-That means the data may arrive later.
+Eso significa que los datos pueden llegar mas tarde.
 
-## Why the Response Is Async
+## Por que la respuesta es asincrona
 
-A network request takes time.
+Una peticion de red tarda tiempo.
 
-The browser has to:
+El navegador tiene que:
 
-- send the request
-- wait for the server or file response
-- parse the response
-- hand the result back to the application
+- enviar la peticion
+- esperar la respuesta del servidor o del archivo
+- interpretar la respuesta
+- devolver el resultado a la aplicacion
 
-Because of that, the component cannot treat the result like a normal synchronous return value.
+Debido a eso, el componente no puede tratar el resultado como un valor sincrono normal.
 
-That is why the lesson uses `subscribe(...)`.
+Por eso la leccion usa `subscribe(...)`.
 
-## Observable and Subscription
+## Observable y suscripcion
 
-An Observable is a source of values over time.
+Un Observable es una fuente de valores a lo largo del tiempo.
 
-For HTTP in Angular, it usually means:
+Para HTTP en Angular, normalmente significa:
 
-- one response value if successful
-- an error if the request fails
+- un valor de respuesta si tiene exito
+- un error si la peticion falla
 
-A subscription is how the component says:
+Una suscripcion es la forma en la que el componente dice:
 
-"Start this async work, and tell me what happens."
+"Inicia este trabajo asincrono y dime que ocurre."
 
-This is why the `subscribe` block is so important in the lesson.
+Por eso el bloque `subscribe` es tan importante en la leccion.
 
-Inside it, the component defines what to do for success and what to do for failure.
+Dentro de el, el componente define que hacer en caso de exito y que hacer en caso de fallo.
 
-## The Three Main UI States
+## Los tres estados principales de la UI
 
-This lesson is especially important because it teaches that async UI is not just about fetching data. It is about handling UI states.
+Esta leccion es especialmente importante porque ensena que una UI asincrona no trata solo de obtener datos. Trata de manejar estados de UI.
 
-The component usually needs at least three states:
+El componente normalmente necesita al menos tres estados:
 
-### Loading
+### Carga
 
-The request started, but the data has not arrived yet.
+La peticion comenzo, pero los datos aun no han llegado.
 
-The UI may show:
+La UI puede mostrar:
 
-- a loading message
-- a spinner
-- disabled controls
+- un mensaje de carga
+- un spinner
+- controles deshabilitados
 
-### Success
+### Exito
 
-The data arrived and can now be rendered.
+Los datos llegaron y ahora pueden renderizarse.
 
-The component updates properties like:
+El componente actualiza propiedades como:
 
-- the feed item list
-- the selected item
-- the last loaded timestamp
+- la lista de elementos del feed
+- el elemento seleccionado
+- la marca de tiempo de la ultima carga
 
 ### Error
 
-Something went wrong.
+Algo salio mal.
 
-The component should stop loading and show a useful message.
+El componente debe dejar de cargar y mostrar un mensaje util.
 
-This is important because failures are part of normal application behavior, not rare exceptions that UI code can ignore.
+Esto importa porque los fallos forman parte del comportamiento normal de la aplicacion, no son excepciones raras que el codigo de UI pueda ignorar.
 
-## Why a Service Is Still Useful Here
+## Por que un servicio sigue siendo util aqui
 
-The lesson likely uses a service to own the HTTP request.
+Es probable que la leccion use un servicio para poseer la peticion HTTP.
 
-That is good architecture because:
+Esa es una buena decision de arquitectura porque:
 
-- the component stays focused on UI state
-- the service stays focused on data access
+- el componente se mantiene enfocado en el estado de UI
+- el servicio se mantiene enfocado en el acceso a datos
 
-The component should not need to know every request detail. It should know that it wants the release feed.
+El componente no deberia necesitar conocer cada detalle de la peticion. Deberia saber que quiere obtener el feed de lanzamientos.
 
-## Typed Responses
+## Respuestas tipadas
 
-One of the best Angular habits is to give HTTP responses explicit types.
+Uno de los mejores habitos en Angular es dar tipos explicitos a las respuestas HTTP.
 
-That way, the rest of the app knows what kind of data to expect.
+Asi, el resto de la app sabe que tipo de datos debe esperar.
 
-This improves:
+Esto mejora:
 
-- editor help
-- refactoring safety
-- readability
-- consistency between model and UI
+- la ayuda del editor
+- la seguridad al refactorizar
+- la legibilidad
+- la consistencia entre el modelo y la UI
 
-## The Main Learning Goal
+## El objetivo principal de aprendizaje
 
-Do not reduce this lesson to:
+No reduzcas esta leccion a:
 
-"How do I call `.get()`?"
+"Como llamo a `.get()`?"
 
-The deeper lesson is:
+La leccion mas profunda es:
 
-How should a component behave when its data is not available immediately?
+Como deberia comportarse un componente cuando sus datos no estan disponibles de inmediato?
 
-That question appears in almost every business application.
+Esa pregunta aparece en casi cualquier aplicacion de negocio.
 
-## How to Read the Lesson
+## Como leer la leccion
 
-Study it in this order:
+Estudiala en este orden:
 
-1. Read the model for the release items.
-2. Read the service and understand what endpoint it calls.
-3. Read the component and focus on loading, success, and error state transitions.
-4. Then inspect the template and see how those states are reflected in the UI.
+1. Lee el modelo de los elementos del feed.
+2. Lee el servicio y entiende a que endpoint llama.
+3. Lee el componente y centrate en las transiciones entre carga, exito y error.
+4. Luego inspecciona la plantilla y observa como esos estados se reflejan en la UI.
 
-The important learning happens in the relationship between service, subscription, and template state.
+El aprendizaje importante ocurre en la relacion entre servicio, suscripcion y estado de la plantilla.
 
-## Exercises
+## Ejercicios
 
-Try these changes:
+Prueba estos cambios:
 
-1. Add a manual refresh button.
-2. Show a different empty state when the response returns no items.
-3. Display more metadata in the selected item panel.
-4. Add another derived getter based on the feed items.
+1. Anade un boton de recarga manual.
+2. Muestra un estado vacio distinto cuando la respuesta no devuelva elementos.
+3. Muestra mas metadatos en el panel del elemento seleccionado.
+4. Anade otro getter derivado basado en los elementos del feed.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you can explain:
+Asegurate de poder explicar:
 
-- why `HttpClient` returns an Observable
-- what `subscribe(...)` is doing
-- why loading and error states belong in the component
-- why HTTP logic usually belongs in a service
+- por que `HttpClient` devuelve un Observable
+- que esta haciendo `subscribe(...)`
+- por que los estados de carga y error pertenecen al componente
+- por que la logica HTTP suele pertenecer a un servicio
 
-The next lesson goes deeper into Observables and RxJS by composing multiple streams together instead of handling only one HTTP request.
+La siguiente leccion profundiza en Observables y RxJS componiendo varios streams en lugar de manejar una sola peticion HTTP.

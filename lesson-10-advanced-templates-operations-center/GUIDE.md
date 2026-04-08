@@ -1,106 +1,106 @@
-# Lesson 10 Guide: Advanced Templates
+# Guia de la Leccion 10: Plantillas avanzadas
 
-This lesson explores a different side of Angular reuse.
+Esta leccion explora un lado diferente de la reutilizacion en Angular.
 
-Earlier lessons reused logic and components. This lesson focuses on reusing template structure in more flexible ways.
+Las lecciones anteriores reutilizaban logica y componentes. Esta leccion se centra en reutilizar estructura de plantilla de maneras mas flexibles.
 
-## Why Advanced Templates Matter
+## Por que importan las plantillas avanzadas
 
-Sometimes a component should provide structure without fully controlling the content inside it.
+A veces un componente debe proporcionar estructura sin controlar completamente el contenido interior.
 
-Examples:
+Ejemplos:
 
-- a panel shell that always has a consistent frame
-- a list container that lets the parent decide how rows render
-- a reusable area for actions, headers, or empty states
+- un shell de panel que siempre tiene un marco consistente
+- un contenedor de lista que permite al padre decidir como se renderizan las filas
+- un area reutilizable para acciones, cabeceras o estados vacios
 
-This is where Angular template features become very useful.
+Aqui es donde las capacidades de plantilla de Angular se vuelven muy utiles.
 
-## Main Concepts in This Lesson
+## Conceptos principales en esta leccion
 
-This lesson likely includes:
+Es probable que esta leccion incluya:
 
 - `ng-content`
 - `ng-template`
 - `ngTemplateOutlet`
 
-These features are about making components flexible without turning them into copy-pasted markup.
+Estas capacidades tratan de hacer que los componentes sean flexibles sin convertirlos en marcado copiado y pegado.
 
 ## `ng-content`
 
-`ng-content` lets a parent project content into a child component.
+`ng-content` permite que un padre proyecte contenido dentro de un componente hijo.
 
-You can think of it as giving the child a slot where the parent can place custom markup.
+Puedes pensar en ello como darle al hijo un slot donde el padre puede colocar marcado personalizado.
 
-This is useful when the child should own the outer structure, but not every inner detail.
+Esto es util cuando el hijo debe poseer la estructura exterior, pero no cada detalle interior.
 
 ## `ng-template`
 
-`ng-template` defines a piece of template content without rendering it immediately.
+`ng-template` define una pieza de contenido de plantilla sin renderizarla inmediatamente.
 
-It is like storing a template fragment so it can be used later.
+Es como almacenar un fragmento de plantilla para usarlo mas tarde.
 
-This is useful when the same structure is needed conditionally or in a reusable rendering pattern.
+Esto es util cuando la misma estructura se necesita de forma condicional o dentro de un patron de renderizado reutilizable.
 
 ## `ngTemplateOutlet`
 
-`ngTemplateOutlet` renders a template reference where needed.
+`ngTemplateOutlet` renderiza una referencia de plantilla donde se necesite.
 
-This is especially helpful when a reusable component should accept a parent-defined rendering strategy.
+Esto es especialmente util cuando un componente reutilizable debe aceptar una estrategia de renderizado definida por el padre.
 
-That is a more advanced form of reuse than simply passing data through inputs.
+Esa es una forma de reutilizacion mas avanzada que simplemente pasar datos mediante inputs.
 
-## Why This Is an Important Step
+## Por que este es un paso importante
 
-Not all reuse is about extracting another ordinary child component.
+No toda reutilizacion consiste en extraer otro componente hijo normal.
 
-Sometimes the reusable thing is not a single fixed UI block.
+A veces, la pieza reutilizable no es un unico bloque fijo de UI.
 
-Sometimes it is:
+A veces es:
 
-- a layout pattern
-- a shell
-- a row rendering strategy
-- a customizable empty state
+- un patron de layout
+- un shell
+- una estrategia de renderizado de filas
+- un estado vacio personalizable
 
-Angular templates provide tools for that level of flexibility.
+Las plantillas de Angular proporcionan herramientas para ese nivel de flexibilidad.
 
-## What to Focus On
+## En que fijarte
 
-When reading the lesson, ask:
+Al leer la leccion, preguntate:
 
-- which parts of the UI are fixed by the reusable component?
-- which parts are supplied by the parent?
-- why is projection or a template outlet a better fit than plain inputs here?
+- que partes de la UI quedan fijadas por el componente reutilizable?
+- que partes son suministradas por el padre?
+- por que la proyeccion o un template outlet encajan mejor que simples inputs en este caso?
 
-Those questions help you understand the design reason, not just the syntax.
+Esas preguntas ayudan a entender la razon de diseno, no solo la sintaxis.
 
-## Common Beginner Confusion
+## Confusion habitual de principiantes
 
-This lesson often feels abstract at first.
+Esta leccion suele sentirse abstracta al principio.
 
-That is normal.
+Eso es normal.
 
-The important thing to remember is:
+Lo importante que debes recordar es:
 
-Inputs pass data.
-Content projection and templates pass pieces of UI structure.
+Los inputs pasan datos.
+La proyeccion de contenido y las plantillas pasan piezas de estructura de UI.
 
-That is the conceptual difference.
+Esa es la diferencia conceptual.
 
-## Exercises
+## Ejercicios
 
-1. Add another projected action area.
-2. Add a different parent-provided row template.
-3. Create an empty-state template for one reusable component.
-4. Replace a repeated wrapper section with a shell component.
+1. Anade otra area de acciones proyectadas.
+2. Anade una plantilla de fila distinta proporcionada por el padre.
+3. Crea una plantilla de estado vacio para un componente reutilizable.
+4. Sustituye una seccion de envoltura repetida por un componente shell.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- what content projection solves
-- why `ng-template` is useful
-- when `ngTemplateOutlet` is a better choice than another input
+- que problema resuelve la proyeccion de contenido
+- por que `ng-template` es util
+- cuando `ngTemplateOutlet` es mejor opcion que otro input
 
-The next lesson moves into directives and pipes, which are another kind of reusable Angular building block.
+La siguiente leccion pasa a directivas y pipes, que son otro tipo de bloque reutilizable en Angular.

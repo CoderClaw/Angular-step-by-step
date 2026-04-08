@@ -11,8 +11,8 @@ export class ReleaseFeedService {
   private readonly http = inject(HttpClient);
   private readonly endpoint = "/mock-api/release-feed.json";
 
-  // Angular apps usually hide HTTP details behind a service.
-  // That keeps components focused on UI state instead of request wiring.
+  // Las apps Angular suelen ocultar los detalles HTTP detras de un servicio.
+  // Eso mantiene a los componentes enfocados en el estado de UI en lugar del cableado de peticiones.
   getReleaseFeed(): Observable<ReleaseItem[]> {
     return this.http.get<ReleaseItem[]>(this.endpoint).pipe(
       delay(700),

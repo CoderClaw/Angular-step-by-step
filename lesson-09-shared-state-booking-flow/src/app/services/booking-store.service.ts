@@ -66,8 +66,8 @@ export class BookingStoreService {
     },
   ]);
 
-  // This service acts like a small store: source state, mutations, and derived state
-  // live in one place so several components can stay synchronized.
+  // Este servicio actua como un pequeno store: el estado fuente, las mutaciones y el estado derivado
+  // viven en un solo lugar para que varios componentes puedan mantenerse sincronizados.
   readonly visibleOffers = computed(() => {
     const normalizedQuery = this.query().trim().toLowerCase();
 

@@ -1,25 +1,25 @@
-# Lesson 08 Guide: Angular Signals
+# Guia de la Leccion 08: Signals de Angular
 
-This lesson introduces Angular signals, which are a modern reactive way to manage local application state.
+Esta leccion introduce los signals de Angular, que son una forma reactiva moderna de gestionar el estado local de una aplicacion.
 
-You have already seen derived state with getters and reactive streams with RxJS. Signals give Angular another tool for state that is especially good for local synchronous reactivity.
+Ya has visto estado derivado con getters y streams reactivos con RxJS. Los signals dan a Angular otra herramienta para el estado que es especialmente buena para reactividad local y sincronica.
 
-## What Signals Solve
+## Que resuelven los signals
 
-Many UI values depend on other UI values.
+Muchos valores de UI dependen de otros valores de UI.
 
-Examples:
+Ejemplos:
 
-- a selected filter
-- whether a panel is visible
-- a computed count
-- user preferences stored locally
+- un filtro seleccionado
+- si un panel es visible
+- un conteo calculado
+- preferencias del usuario almacenadas localmente
 
-These values often change in direct response to user actions. Signals make those relationships explicit.
+Estos valores suelen cambiar en respuesta directa a acciones del usuario. Los signals hacen explicitas esas relaciones.
 
-## The Main Building Blocks
+## Los bloques principales
 
-This lesson likely introduces three key functions:
+Es probable que esta leccion introduzca tres funciones clave:
 
 - `signal()`
 - `computed()`
@@ -27,102 +27,102 @@ This lesson likely introduces three key functions:
 
 ### `signal()`
 
-A signal stores a reactive value.
+Un signal almacena un valor reactivo.
 
-It is similar to a normal property, but Angular can track when it changes.
+Se parece a una propiedad normal, pero Angular puede seguir cuando cambia.
 
-This makes it useful for UI state that changes over time.
+Esto lo hace util para estado de UI que cambia con el tiempo.
 
 ### `computed()`
 
-A computed signal derives one value from other signals.
+Un signal computado deriva un valor a partir de otros signals.
 
-This is similar in spirit to a getter, but now Angular tracks the dependencies automatically.
+Se parece en espiritu a un getter, pero ahora Angular rastrea automaticamente las dependencias.
 
-That means the computed value updates when the signals it depends on change.
+Eso significa que el valor computado se actualiza cuando cambian los signals de los que depende.
 
 ### `effect()`
 
-An effect runs side-effect logic in response to signal changes.
+Un effect ejecuta logica de efectos secundarios en respuesta a cambios de signals.
 
-This is useful for things like:
+Esto es util para cosas como:
 
-- persisting preferences
-- logging
-- syncing state to browser APIs
+- persistir preferencias
+- registrar eventos
+- sincronizar estado con APIs del navegador
 
-The key point is that effects are for side effects, not for replacing every other form of logic.
+El punto clave es que los effects son para efectos secundarios, no para reemplazar cualquier otra forma de logica.
 
-## Why This Lesson Uses Preferences
+## Por que esta leccion usa preferencias
 
-Preferences are a good teaching example because they are:
+Las preferencias son un buen ejemplo didactico porque son:
 
-- local to the app
-- reactive in the UI
-- often persisted to local storage
+- locales a la app
+- reactivas en la UI
+- a menudo persistidas en local storage
 
-That makes them a natural fit for signals.
+Eso las convierte en una opcion natural para usar signals.
 
-You can see clearly how:
+Se puede ver con claridad como:
 
-- a user changes a preference
-- the signal updates
-- the UI reacts
-- the new value can be persisted
+- el usuario cambia una preferencia
+- el signal se actualiza
+- la UI reacciona
+- el nuevo valor puede persistirse
 
 ## Signals vs RxJS
 
-Signals and RxJS are both reactive, but they are not the same tool.
+Signals y RxJS son ambos reactivos, pero no son la misma herramienta.
 
-Signals are often a great fit for:
+Los signals suelen encajar muy bien para:
 
-- local synchronous UI state
-- derived values inside a component or store-like service
-- template-facing state
+- estado de UI local y sincronico
+- valores derivados dentro de un componente o servicio tipo store
+- estado expuesto a la plantilla
 
-RxJS is often a better fit for:
+RxJS suele encajar mejor para:
 
-- async streams
-- event coordination over time
-- HTTP and stream composition
+- streams asincronos
+- coordinacion de eventos a lo largo del tiempo
+- HTTP y composicion de streams
 
-This lesson is important because it helps you see where signals are a cleaner solution than a full Observable pipeline.
+Esta leccion es importante porque te ayuda a ver donde los signals son una solucion mas limpia que un pipeline completo de Observables.
 
-## The Key Mental Model
+## El modelo mental clave
 
-With signals, Angular can automatically understand:
+Con signals, Angular puede entender automaticamente:
 
-- what value changed
-- which derived values depend on it
-- which parts of the template need to update
+- que valor cambio
+- que valores derivados dependen de el
+- que partes de la plantilla necesitan actualizarse
 
-That makes signal-based code feel direct and readable for local state.
+Eso hace que el codigo basado en signals se sienta directo y legible para estado local.
 
-## How to Study This Lesson
+## Como estudiar esta leccion
 
-Read it in this order:
+Leela en este orden:
 
-1. Find the base signals.
-2. Find the computed signals that derive from them.
-3. Find the effect that persists or synchronizes values.
-4. Trace how the template reads the signal state.
+1. Encuentra los signals base.
+2. Encuentra los signals computados que derivan de ellos.
+3. Encuentra el effect que persiste o sincroniza valores.
+4. Sigue como la plantilla lee el estado de los signals.
 
-That reading order helps you see the dependency graph instead of just the syntax.
+Ese orden de lectura ayuda a ver el grafo de dependencias en lugar de solo la sintaxis.
 
-## Exercises
+## Ejercicios
 
-1. Add one more preference and persist it.
-2. Create another computed value from the existing signals.
-3. Remove one derived getter and rewrite it with `computed()`.
-4. Add a reset button that restores default preferences.
+1. Anade una preferencia mas y persiste su valor.
+2. Crea otro valor computado a partir de los signals existentes.
+3. Elimina un getter derivado y reescribelo con `computed()`.
+4. Anade un boton de reinicio que restaure las preferencias por defecto.
 
-## Before Moving On
+## Antes de continuar
 
-Make sure you understand:
+Asegurate de entender:
 
-- what a signal stores
-- what `computed()` is doing
-- why `effect()` is different from computed state
-- why preferences are a good use case for signals
+- que almacena un signal
+- que esta haciendo `computed()`
+- por que `effect()` es distinto del estado computado
+- por que las preferencias son un buen caso de uso para signals
 
-The next lesson uses shared state across components, which is where these ideas become even more useful.
+La siguiente leccion usa estado compartido entre componentes, que es donde estas ideas se vuelven aun mas utiles.

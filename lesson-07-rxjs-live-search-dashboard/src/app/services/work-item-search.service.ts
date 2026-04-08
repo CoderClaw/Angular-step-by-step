@@ -79,7 +79,7 @@ export class WorkItemSearchService {
       return matchesStatus && matchesQuery;
     });
 
-    // A small delay makes the stream behavior visible in the UI.
+    // Un pequeno retraso hace visible en la UI el comportamiento del stream.
     return of(results).pipe(delay(450));
   }
 }
